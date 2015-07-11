@@ -53,4 +53,11 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  get '/' => 'drip#index'
+  get '/drip' => 'drip#home'
+  get '/logout' => 'drip#logout'
+
+  get '/api/user' => 'api_client#user_info'
+
+  get '/auth/facebook/callback' => 'drip#facebook_callback'
 end
