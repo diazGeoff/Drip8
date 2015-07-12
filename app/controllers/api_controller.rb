@@ -2,12 +2,14 @@ class ApiController < ApplicationController
 
 
 	def new_user
-		@user = User.create(user_params)
-		bucket_info = ["who I am","what I do","what I am proud of"]
-		bucket_info.each do |name|
-			@bucket = Dripbucket.create(:name => name, :user_id => @user.id, :state => "public")
+		@user = User.find_by_email(params[:user][:email]) 		
+		if !@user					
+			@user = User.create(user_params)
+			bucket_info = ["who I am","what I do","what I am proud of"]
+			bucket_info.each do |name|
+				@bucket = Dripbucket.create(:name => name, :user_id => @user.id, :state => "public")
+			end
 		end
-
 		render json: {:status => "success" , :user => @user} ,status: :created
 	end
 
@@ -36,7 +38,27 @@ class ApiController < ApplicationController
 
 	def add_drip
 		@drip = Drip.create(drip_params)
+		if @drip.id.equal?(1)
+			@drip.featured = true
+			@drip.save
+		end
 		render json: {:status => "success" , :drip => @drip} ,status: :created
+	end
+
+	def new_featured
+		@drip = User.find_by_id(params[:user_id]).drips.where(:featured => true)
+		@drip[0].featured = false
+		@drip[0].save
+	    @new_drip = Drip.find_by_id(params[:drip_id])
+	    @new_drip.featured = true
+	    @new_drip.save
+
+		render json: {:status => "success", :drip => @new_drip}, status: :created
+	end
+
+	def read_featured_drip
+		@drip = User.find_by_id(params[:user_id]).drips.where(:featured => true)
+		render json: {:status => "success" ,:drip => @drip}, status: :created
 	end
 
 	def login
