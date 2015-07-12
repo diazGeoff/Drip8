@@ -1,44 +1,44 @@
 <div class="row" bucket>
 	<section ng-repeat="bucket in buckets" class="drip-featured-container-datas">
 		<div class="col-lg-2">
-			<h4 style="margin-top: 100%;">{{ bucket }}</h4>
+			<h4 style="margin-top: 100%;">{{ bucket.title }}</h4>
 		</div>
 		<div class="col-lg-10" style="overflow-x: auto;">
 			<div class="panel panel-default custom-panel-default drip-container-box">
 				<div class="row custom-drip-row">
 					<div class="panel-body custom-panel-board">
-						<div class="drip-create-board">
+						<div class="drip-create-board" ng-click="newDrip( bucket.id )">
 							<p data-toggle="modal" data-target="#addADrip" >
 								<i class="glyphicon glyphicon-plus-sign" style="font-size:2.5em;"></i>
 								<h4>add a drip</h4>
 							</p>
 						</div>
-					</div>
+					</div>					
 					<div class="panel-body custom-panel-board">
-						<!-- <div class="row drip-box-result">
+						<div class="row drip-box-result">
 								<h6>Places to visit</h6>
 								<div class="row">
 										<div class="col-lg-12">
-												<img src="images/1st place.jpg" style="width: inherit; height: inherit; padding: 5px;" >
+												<img src="<%= image_path '1st place.jpg' %>" style="width: inherit; height: inherit; padding: 5px;" >
 										</div>
 								</div>
 								<div class="row" style="padding: 5px;">
 										<div class="col-lg-12">
 												<div style="display: inline-block;">
-														<img src="images/2nd place.jpg" style="width: 60px; height: 50px;">
+														<img src="<%= image_path '2nd place.jpg' %>" style="width: 60px; height: 50px;">
 												</div>
 												<div style="display: inline-block;">
-														<img src="images/2nd place.jpg" style="width: 60px; height: 50px;">
+														<img src="<%= image_path '2nd place.jpg' %>" style="width: 60px; height: 50px;">
 												</div>
 												<div style="display: inline-block;">
-														<img src="images/2nd place.jpg" style="width: 60px; height: 50px;">
+														<img src="<%= image_path '2nd place.jpg' %>" style="width: 60px; height: 50px;">
 												</div>
 										</div>
 										<div class="col-lg-12">
 												<button class="btn btn-default" style="width: inherit; margin-top:2px;">Public</button>
 										</div>
 								</div>
-						</div> -->
+						</div>
 					</div>
 				</div>
 			</div>

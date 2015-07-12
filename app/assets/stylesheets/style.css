@@ -92,12 +92,11 @@ div.custom-panel-default
 div.custom-drip-row
 {
 	padding: 5px;
-	border-radius: none;
-	height: 
+	border-radius: none;	
 }
 div.drip-container-box
 {
-	min-width: 1058px;
+	min-width: 500px;
 }
 ul.custom-ul li
 {

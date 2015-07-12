@@ -5,5 +5,5 @@ $( document ).ready( function ( ) {
 
 	maxWidth( );
 
-	$(window).resize( maxWidth );
+	$(window).resize( maxWidth );	
 } );

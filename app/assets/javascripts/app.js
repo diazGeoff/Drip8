@@ -24,13 +24,58 @@ drip8
 	] );
 drip8
 	.directive( "bucket" , [
-		function directive ( ) {
+		"$rootScope",
+		function directive ( $rootScope ) {
 			return {
 				"restrict": "A",
 				"scope": true,
 				"link": function onLink ( scope , elemenet , attributeSet ) {
 
-					scope.buckets = [ "Who I am" , "What I do" , "What I am proud of" ];
+					scope.buckets = [ 
+						{
+							"title": "Who I am",
+							"id": "1"
+						} , 
+						{
+							"title": "What I do",
+							"id": "2"
+						} , 
+						{
+							"title": "What I am proud of",
+							"id": "3"
+						} 
+					];
+
+					scope.newDrip = function newDrip ( id ) {
+						$rootScope.$broadcast( "drip-new" , id );
+					};
+				}
+			}
+		}
+	] );
+drip8
+	.directive( "drip" , [
+		"$http",
+		function directive ( $http ) {
+			return {
+				"restrict": "A",
+				"scope": true,
+				"link": function onLink ( scope , element , atrributeSet ) {
+					scope.dripDetails = { 
+						"state": "public"
+					};
+
+					scope.addDrip = function addDrip ( ) {						
+						$( "#addADrip" ).modal( "hide" );						
+						scope.dripDetails = { 
+							"state": "public"
+						};
+					};
+
+					scope.$on( "drip-new" , 
+						function ( evt , bucketId ) {							
+							scope.dripDetails.dripbucket_id = bucketId;							
+						} );
 				}
 			}
 		}

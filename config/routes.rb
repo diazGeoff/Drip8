@@ -1,6 +1,4 @@
-Rails.application.routes.draw do
-
-  match ':controller(/:action(/:id(.:format)))', :via => [:get, :post, :options] 
+Rails.application.routes.draw do  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -64,4 +62,6 @@ Rails.application.routes.draw do
   get '/api/template' => 'api_client#get_temp'
 
   get '/auth/facebook/callback' => 'drip#facebook_callback'
+
+  match ':controller(/:action(/:id(.:format)))', :via => [:get, :post, :options] 
 end
