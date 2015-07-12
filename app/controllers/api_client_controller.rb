@@ -12,4 +12,8 @@ class ApiClientController < ApplicationController
 	def user_info
 		render json: { data: session[:user] }, status: :ok
 	end
+
+	def get_temp
+		render template: 'api_client/' + params[:template], :layout => false
+	end
 end

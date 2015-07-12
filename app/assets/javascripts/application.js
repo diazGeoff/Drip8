@@ -17,3 +17,5 @@
 //= require jquery.min
 //= require angular.min
 //= require app
+//= require bootstrap.min
+//= require jquery-app

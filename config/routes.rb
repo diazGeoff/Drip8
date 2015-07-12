@@ -55,9 +55,11 @@ Rails.application.routes.draw do
   #   end
   get '/' => 'drip#index'
   get '/drip' => 'drip#home'
+  get '/drip/me' => 'drip#profile'
   get '/logout' => 'drip#logout'
 
   get '/api/user' => 'api_client#user_info'
+  get '/api/template' => 'api_client#get_temp'
 
   get '/auth/facebook/callback' => 'drip#facebook_callback'
 end

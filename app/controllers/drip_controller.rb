@@ -33,7 +33,11 @@ class DripController < ApplicationController
 
 	def home
 		puts session[:user]
-		render :home
+		render :dashboard
+	end
+
+	def profile
+		render :profile
 	end
 
 	def logout

@@ -1,0 +1,30 @@
+<div class="modal fade" id="createDripBoard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" bucket>
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="row">
+			<div class="col-lg-3" style="border-right: 1px solid gray;">
+				<ul class="custom-ul" style="height: 300px; overflow: auto;">
+					<li ng-repeat="bucket in buckets">{{ bucket }}</li>
+				</ul>
+			</div>
+			<div class="col-lg-8">
+				<div class="row">
+					<div>
+						<div class="panel">
+							<div class="panel-body" style="float: left;">
+								<img src="images/1st place.jpg" style="width: 100px; height: 100px; margin-top: 2px;">								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-group pull-right" style="margin-left: 10px;">									
+						<input type="button" value="Save Changes" class="btn btn-primary" />
+						<input type="button" value="Cancel" class="btn" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div> 

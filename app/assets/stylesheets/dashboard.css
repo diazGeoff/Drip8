@@ -1,0 +1,63 @@
+header {
+	padding: 15px 0 3px;
+	background-color: #E2E1E1;
+	margin-bottom: 4px;
+}
+#main-container {
+	overflow-x: scroll;
+	max-height: 560px;	
+	overflow-y: scroll;
+}
+.drip-author {
+	position: absolute;
+	text-align: right;
+	width: 97%;
+	background: rgba(231, 83, 83, 0.8);
+	visibility: hidden;
+	color: #f8f8f8;
+	padding: 5px 10px;
+}
+.drip-vids:hover .drip-author {
+	visibility: visible;
+}
+.drip-author p {
+	margin: 0;
+}
+.drip-author p a {
+	color: #fff;
+	text-decoration: none;
+}
+.drip-author p a:hover {
+	color: #fff;
+}
+
+.drip-vids {
+	padding-right: 4px;
+	padding-left: 4px;
+	margin-bottom: 10px;
+	overflow: hidden;
+	width: 280px;
+	float: left;
+}
+.float {
+	width: 100%;
+}
+.drip-vids:hover .bottom-desc {
+	bottom: 0;
+}
+.drips-columns {
+	width: 290px;
+}
+.bottom-desc {
+	overflow: hidden;
+	padding: 10px 10px;
+	position: absolute;
+	width: 97%;
+	bottom: -180px;
+	background: rgba(0,0,0,0.8);
+	transition: all 0.3s ease;
+}
+.bottom-desc h4 {
+	color: #f8f8f8;
+	font-size: 12px;
+}
