@@ -1,18 +1,5 @@
 class ApiController < ApplicationController
 
-
-	def new_user
-		@user = User.find_by_email(params[:user][:email]) 		
-		if !@user					
-			@user = User.create(user_params)
-			bucket_info = ["who I am","what I do","what I am proud of"]
-			bucket_info.each do |name|
-				@bucket = Dripbucket.create(:name => name, :user_id => @user.id, :state => "public")
-			end
-		end
-		render json: {:status => "success" , :user => @user} ,status: :created
-	end
-
 	def read_drips_by_bucket_and_user
 
 		@drips = Drip.where(:user_id => params[:user_id]).where(:dripbucket_id => params[:dripbucket_id])
@@ -37,28 +24,27 @@ class ApiController < ApplicationController
 	end
 
 	def add_drip
-		@drip = Drip.create(drip_params)
-		if @drip.id.equal?(1)
-			@drip.featured = true
-			@drip.save
-		end
+		@drip = Drip.create(drip_params)		
 		render json: {:status => "success" , :drip => @drip} ,status: :created
 	end
 
-	def new_featured
-		@drip = User.find_by_id(params[:user_id]).drips.where(:featured => true)
-		@drip[0].featured = false
-		@drip[0].save
-	    @new_drip = Drip.find_by_id(params[:drip_id])
-	    @new_drip.featured = true
-	    @new_drip.save
+	def new_featured		
+		# if	@drip = User.find_by_id(params[:user_id]).drips.where(:featured => true)
+		# 	@drip[0].featured = false
+		# 	@drip[0].save
+		# end
 
-		render json: {:status => "success", :drip => @new_drip}, status: :created
-	end
+		# @new_drip = Drip.find_by_id(params[:drip_id])
+		# @new_drip.featured = true
+		# @new_drip.save
 
-	def read_featured_drip
-		@drip = User.find_by_id(params[:user_id]).drips.where(:featured => true)
-		render json: {:status => "success" ,:drip => @drip}, status: :created
+		# render json: {:status => "success", :drip => @new_drip}, status: :created
+		@user = User.find_by_id( params[:user_id] )
+		@link = Drip.find_by_id( params[:drip_id] ).link
+		@user.featured = @link
+		@user.save
+
+		render json: {:status => "success", :user => @user}, status: :ok
 	end
 
 	def login
@@ -68,17 +54,18 @@ class ApiController < ApplicationController
 		
 	end
 
+	def video_featured
+		@user = User.find_by_id( params[:user_id] )		
+		render json: { link: @user.featured }, status: :ok
+	end
+
 
 
 	private
 
 	def drip_params
 		params.require(:drip).permit(:link, :title, :description, :state, :user_id, :dripbucket_id)
-	end
-
-	def user_params
-		params.require(:user).permit(:email, :name, :profile_picture)
-	end
+	end	
 
 	def bucket_params
 		params.require(:bucket).permit(:user_id, :name, :state)

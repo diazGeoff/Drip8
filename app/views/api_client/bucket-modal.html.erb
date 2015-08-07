@@ -1,5 +1,5 @@
 <div class="modal fade" id="createDripBoardBox" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-<div class="modal-dialog">
+<div class="modal-dialog" bucket>
 	<div class="modal-content">
 		<div class="modal-body">
 			<div class="row">
@@ -8,15 +8,13 @@
 					Add a bucket
 					</h4>
 				</div>
-				<div class="col-md-9"style="padding-left: 0;">
-					<div class="input-group" style="margin-left: 10px;">
-						<input type="text" class="form-control input-number" placeholder="Write your bucket">
-						<span class="input-group-btn">
-							<button type="button" class="btn btn-default btn-number" >
-							<span class="glyphicon glyphicon-plus"></span>
-							</button>
-						</span>
-					</div>
+				<div class="col-md-9"style="padding-left: 0;">					
+					<input type="text" ng-model="bucket.name" class="form-control input-number" placeholder="Write your bucket"><br />
+					<select class="form-control" ng-model="bucket.state">
+						<option value="public">Public</option>
+						<option value="private">Private</option>
+					</select><br />
+					<input type="button" value="Add" class="btn btn-primary pull-right" ng-click="newBucket( bucket )" />
 				</div>
 			</div>
 		</div>

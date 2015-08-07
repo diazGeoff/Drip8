@@ -59,7 +59,7 @@ Rails.application.routes.draw do
   get '/logout' => 'drip#logout'
 
   get '/api/user' => 'api_client#user_info'
-  get '/api/template' => 'api_client#get_temp'
+  get '/api/template' => 'api_client#get_temp'  
 
   get '/auth/facebook/callback' => 'drip#facebook_callback'
 

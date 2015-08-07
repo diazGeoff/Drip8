@@ -23,16 +23,25 @@ class DripController < ApplicationController
 	end	
 
 	def facebook_callback
-		if request.env['omniauth.auth']
-			session[:user] = request.env['omniauth.auth']
+		@oauth = request.env['omniauth.auth']
+		if @oauth
+			@user = User.find_by_email( @oauth[:info][:email] )
+			if !@user
+				@user = User.create( :email => @oauth[:info][:email] , :name => @oauth[:info][:name] , :profile_picture => @oauth[:info][:image] )
+				bucket_info = ["who I am","what I do","what I am proud of"]
+				bucket_info.each do |name|
+					@bucket = Dripbucket.create(:name => name, :user_id => @user.id, :state => "public")
+				end
+			end
+			session[:user] = @user
+			session[:oauth] = request.env['omniauth.auth']			
 			redirect_to action: 'home'
 		else
 			redirect_to action: 'index'
 		end
 	end
 
-	def home
-		puts session[:user]
+	def home		
 		render :dashboard
 	end
 

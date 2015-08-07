@@ -3,7 +3,7 @@
 	<div class="col-lg-3 side-menu-bar">
 		<section class="drip-user-box">
 			<h5>				
-				<img ng-src="{{ profile.info.image }}" class="profile-image" /> {{ profile.info.name }}
+				<img ng-src="{{ profile.profile_picture }}" class="profile-image" /> {{ profile.name }}
 			</h5>
 		</section>
 	</div>
@@ -27,7 +27,7 @@
 			<section class="col-lg-10">
 				<iframe         
 					class="video-size"
-					ng-src="{{ featured( ) }}"
+					ng-src="{{ profile.featuredVideo }}"
 					frameborder="0" 
 					allowfullscreen>
 				</iframe>
@@ -42,7 +42,7 @@
 
 
 <div style="position: fixed; margin-left: 90%; margin-top: 40%;">
-<button class="btn btn-danger pull-right" data-toggle="modal" data-target="#createDripBoardBox" style="border-radius: 50%; height: 50px; width: 50px;"><i class="glyphicon glyphicon-plus"></i></button>
+	<button class="btn btn-danger pull-right" data-toggle="modal" data-target="#createDripBoardBox" style="border-radius: 50%; height: 50px; width: 50px;"><i class="glyphicon glyphicon-plus"></i></button>
 </div>
 
 <ui-template
@@ -55,4 +55,8 @@
 
 <ui-template
 	ng-template="featured-modal">
+</ui-template>
+
+<ui-template
+	ng-template="video-link">
 </ui-template>

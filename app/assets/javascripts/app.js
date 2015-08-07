@@ -25,30 +25,109 @@ drip8
 drip8
 	.directive( "bucket" , [
 		"$rootScope",
-		function directive ( $rootScope ) {
+		"$http",
+		function directive ( $rootScope , $http ) {
 			return {
 				"restrict": "A",
 				"scope": true,
 				"link": function onLink ( scope , elemenet , attributeSet ) {
+					scope.profileData = { };
 
-					scope.buckets = [ 
-						{
-							"title": "Who I am",
-							"id": "1"
-						} , 
-						{
-							"title": "What I do",
-							"id": "2"
-						} , 
-						{
-							"title": "What I am proud of",
-							"id": "3"
-						} 
-					];
+					scope.buckets = [ ];
 
 					scope.newDrip = function newDrip ( id ) {
 						$rootScope.$broadcast( "drip-new" , id );
 					};
+
+					scope.getDrip = function getDrip ( id ) {
+						$http.post( "/api/read_drips_by_bucket_and_user" , {
+							"user_id": scope.profileData.id,
+							"dripbucket_id": id
+						} )
+						.success( function ( response ) {
+							console.log( response );
+						} );
+					};
+
+					scope.newBucket = function newBucket ( bucket ) {
+						$( "#createDripBoardBox" ).modal( "hide" );
+						$http.post( "/api/add_bucket" , {
+							"bucket": {
+								"user_id": scope.profileData.id,
+								"name": bucket.name,
+								"state": bucket.state
+							}
+						} ).success( function ( response ) {							
+							window.location.reload( );
+						} );
+					};
+
+					scope.getAllBucket = function getAllBucket ( ) {						
+						$http.post( "/api/read_all_bucket_by_user" , {
+							"user_id": scope.profileData.id
+						} )
+						.success( function ( response ) {							
+							scope.buckets = response.buckets;
+						} );
+					};					
+
+					scope.$on( "profile-data" , 
+						function ( evt , profile ) {
+							scope.profileData = profile;
+							scope.getAllBucket( );
+						} );					
+				}
+			}
+		}
+	] );
+drip8
+	.directive( "dripList" , [
+		"$http",
+		"Video",
+		"$rootScope",
+		function directive ( $http , Video , $rootScope ) {
+			return {
+				"restrict": "A",
+				"scope": true,
+				"link": function onLink ( scope , element , attributeSet ) {
+
+					var ids = attributeSet.dripList.split( "-" );
+					scope.drips = [ ];	
+
+					scope.dripListing = function dripListing ( ) {
+						$http.post( "/api/read_drips_by_bucket_and_user" , {
+							"dripbucket_id": ids[0],
+							"user_id": ids[1]
+						} )
+						.success( function ( response ) {
+							scope.drips = response.drips;
+						} );
+					};
+
+					scope.linkUri = function linkUri ( link , service ) {
+						var video_id = link.split( 'v=' )[1];
+						var ampersandPosition = video_id.indexOf( '&' );
+						if ( ampersandPosition != -1 ) {
+						  video_id = video_id.substring( 0 , ampersandPosition );
+						}
+						if ( service == "thumb" ) {
+							return Video.thumbnail( video_id );
+						} else {
+							return Video.videoSource( video_id );
+						}	
+					};
+
+					scope.showVideo = function showVideo ( link ) {
+						$( "#videoLink" ).modal( "show" );
+						$rootScope.$broadcast( "video-source" , link );
+					};
+
+					scope.dripListing( );
+
+					scope.$on( "drips-reload" , 
+						function ( ) {
+							scope.dripListing( );
+						} );
 				}
 			}
 		}
@@ -56,7 +135,8 @@ drip8
 drip8
 	.directive( "drip" , [
 		"$http",
-		function directive ( $http ) {
+		"$rootScope",
+		function directive ( $http , $rootScope ) {
 			return {
 				"restrict": "A",
 				"scope": true,
@@ -65,16 +145,56 @@ drip8
 						"state": "public"
 					};
 
+					scope.profileData = { };
+
 					scope.addDrip = function addDrip ( ) {						
-						$( "#addADrip" ).modal( "hide" );						
-						scope.dripDetails = { 
-							"state": "public"
-						};
+						$( "#addADrip" ).modal( "hide" );
+						scope.dripDetails.user_id = scope.profileData.id;
+
+						$http.post( "/api/add_drip" , {
+							"drip": scope.dripDetails
+						} )
+						.success( function ( response ) {
+							$rootScope.$broadcast( "drips-reload" );
+							scope.dripDetails = { 
+								"state": "public"
+							};
+						} );						
 					};
 
 					scope.$on( "drip-new" , 
 						function ( evt , bucketId ) {							
 							scope.dripDetails.dripbucket_id = bucketId;							
+						} );
+
+					scope.$on( "profile-data" , 
+						function ( evt , profile ) {
+							scope.profileData = profile;
+						} );
+				}
+			}
+		}
+	] );
+drip8
+	.directive( "feature" , [
+		"$http",
+		function directive ( $http ) {
+			return {
+				"restrict": "A",
+				"scope": true,
+				"link": function onLink ( scope , element , attributeSet ) {					
+
+					var ids = attributeSet.feature.split( "-" );
+
+					element.bind( "click" , 
+						function ( ) {
+							$http.post( "/api/new_featured" , {
+								"user_id": ids[0],
+								"drip_id": ids[1]
+							} )
+							.success( function ( response ) {
+								window.location.reload( );
+							} );
 						} );
 				}
 			}
@@ -84,26 +204,43 @@ drip8
 	.directive( "profile" , [
 		"$http",
 		"Video",
-		function directive ( $http , Video ) {
+		"$rootScope",
+		function directive ( $http , Video , $rootScope ) {
 			return {
 				"restrict": "A",
 				"scope": true,
 				"link": function onLink ( scope , element , attributeSet ) {
-					scope.profile = { };
-					scope.featuredDrip = "1ReuOnKSi0s";
+					scope.profile = { };					
 
 					scope.getUserInfo = function getUserInfo ( ) {
 						$http.get( "/api/user" )
 						.success( function ( response ) {
 							scope.profile = response.data;
+							scope.trustUrl( );
 						} );
 					};
 
-					scope.featured = function featured ( ) {
-						return Video.videoSource( scope.featuredDrip );
+					scope.trustUrl = function trustUrl ( ) {
+						var video_id = "";
+						$http.post( "/api/video_featured" , {
+							"user_id": scope.profile.id
+						} )
+						.success( function ( response ) {
+							if ( response.link ) {
+								video_id = response.link.split( 'v=' )[1];
+								var ampersandPosition = video_id.indexOf( '&' );
+								if ( ampersandPosition != -1 ) {
+								  video_id = video_id.substring( 0 , ampersandPosition );
+								}
+							}
+
+							scope.profile.featured = response.link;
+							$rootScope.$broadcast( "profile-data" , scope.profile );
+							scope.profile.featuredVideo = Video.videoSource( video_id );							
+						} );
 					};
 
-					scope.getUserInfo( );
+					scope.getUserInfo( );					
 				}
 			}
 		}
@@ -132,6 +269,30 @@ drip8
 				"scope": true,
 				"templateUrl": function onTemplateLoad ( element , attributeSet ) {
 					return "/api/template?template=" + attributeSet.ngTemplate;
+				}
+			}
+		}
+	] );
+drip8
+	.directive( "videoLink" , [
+		function  directive ( ) {
+			return {
+				"restrict": "A",
+				"scope": true,
+				"link": function onLink ( scope , element , attributeSet ) {
+					scope.videoSource;
+
+					$( "#videoLink" ).on( "hidden.bs.modal" , 
+						function ( ) {
+							scope.$apply( function ( ) {
+								scope.videoSource = "";
+							} );
+						} );
+
+					scope.$on( "video-source" , 
+						function ( evt , src ) {							
+							scope.videoSource = src;
+						} );
 				}
 			}
 		}
