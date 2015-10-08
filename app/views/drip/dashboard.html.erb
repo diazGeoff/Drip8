@@ -26,52 +26,28 @@
   </div><!-- /.container-fluid -->
 </nav>
 <div class="main-dashboard container" drip-dashboard>
-	<div class="user">
+	<div class="user" ng-repeat="response in responsed">
 		<div class="about-user col-lg-12">
 			<div class="img col-lg-1 ">
 				<div class="img-container">
-				<img class="dripper-img" src="<%= image_path 'gabby.jpg' %>">
+				<img class="dripper-img" ng-src="{{ response.drip.user.profile_picture }}">
 			</div>
 			</div>		
 				<div class="user-info col-lg-11">
-					<small class="pull-right">1 day ago</small>
-					<p>Clark Anthony Dacoco</p>
-					<p>Project Almanac</p>
+					<p>{{ response.drip.user.name }}</p>
+					<p>{{ response.drip.title }}</p>
 				</div>
 			</div>
 		<div class="drip-description col-lg-12">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			<p>{{ response.drip.description }}</p>
 		</div>
-		<div class="drip col-lg-12">
-		
-		</div>
-		<div class="drip-actions col-lg-12">
-			<!-- <button>Subscribe</button> -->
-			<div class="pull-right">
-				<button data-toggle="modal" data-target="#myModal">See Process</button>
-				<button>React</button>
-			</div>
-		</div>
-		<div class="divider col-lg-12"></div>		
-		</div>
-	<div class="user">
-		<div class="about-user col-lg-12">
-			<div class="img col-lg-1 ">
-				<div class="img-container">
-				<img class="dripper-img" src="<%= image_path 'gabby.jpg' %>">
-			</div>
-			</div>		
-				<div class="user-info col-lg-11">
-					<small class="pull-right">1 day ago</small>
-					<p>Clark Anthony Dacoco</p>
-					<p>Project Almanac</p>
-				</div>
-			</div>
-		<div class="drip-description col-lg-12">
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		</div>
-		<div class="drip col-lg-12">
-		
+		<div class="col-lg-10" ng-src="{{ linkUri( response.drip.link , 'thumb' ) }}" video-src="response.drip.link" video-dashboard>
+			<iframe         
+				class="video-size"
+				ng-src="{{ videoSrc }}"
+				frameborder="0" 
+				allowfullscreen>
+			</iframe>
 		</div>
 		<div class="drip-actions col-lg-12">
 			<!-- <button>Subscribe</button> -->
