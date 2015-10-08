@@ -20,6 +20,16 @@ class ApiController < ApplicationController
 		
 	end
 
+	def drip_length
+		count = Drip.all.count
+		render json: {status: :success, count: count}
+	end
+
+	def drip_each
+		drip = Drip.find_by_id(params[:drip_id]).as_json(include: :user)
+		render json: {status: :success, drip: drip}
+	end
+
 	def read_all_bucket_by_user
 		@user = User.find_by_id(params[:user_id])
 		@buckets = @user.dripbuckets
