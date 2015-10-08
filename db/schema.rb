@@ -34,7 +34,16 @@ ActiveRecord::Schema.define(version: 20150712083644) do
     t.integer  "starring_drip"
   end
 
-  add_index "dripbuckets", ["user_id"], name: "index_dripbuckets_on_user_id", using: :btree
+  create_table "dripbuckets", force: :cascade do |t|
+    t.string   "name"
+    t.string   "state"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "starring_drip"
+  end
+
+  add_index "dripbuckets", ["user_id"], name: "index_dripbuckets_on_user_id"
 
   create_table "drips", force: :cascade do |t|
     t.text     "link"
