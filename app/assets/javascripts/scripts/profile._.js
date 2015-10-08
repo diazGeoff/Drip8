@@ -8,6 +8,7 @@ drip8
 				"restrict": "A",
 				"scope": true,
 				"link": function onLink ( scope , element , attributeSet ) {
+					console.log( "profile" );
 					scope.profile = { };					
 
 					scope.getUserInfo = function getUserInfo ( ) {

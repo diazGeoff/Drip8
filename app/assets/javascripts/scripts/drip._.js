@@ -41,18 +41,3 @@ drip8
 			}
 		}
 	] );
-
-drip8
-	.directive( "dripDashboard" , [
-		"$http",
-		"$rootScope",
-		function directive ( $http , $rootScope ) {
-			return {
-				"restrict": "A",
-				"scope": true,
-				"link": function onLink ( scope , element , atrributeSet ) {
-					console.log( "dashboard" );
-				}
-			}
-		}
-	] );

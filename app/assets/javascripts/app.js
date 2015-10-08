@@ -2,7 +2,7 @@ var drip8 = angular.module( "Drip8" , [ ] );
 
 window.fbAsyncInit = function ( ) {
 	FB.init( {
-		"appId"    	 : "1490365664608851",
+		"appId"    	 : "719176184895882",
 	    "status"     : true,
 	    "xfbml"      : true,
 	    "version"    : 'v2.3' // or v2.0, v2.1, v2.0
@@ -81,6 +81,37 @@ drip8
 		}
 	] );
 drip8
+	.directive( "dripDashboard" , [
+		"$http",
+		"$rootScope",
+		function directive ( $http , $rootScope ) {
+			return {
+				"restrict": "A",
+				"scope": true,
+				"compile": function compile ( element , atrributeSet ) {
+					return {
+
+						pre: function pre( scope , element , atrributeSet ){
+							scope.queryAllDrips = function queryAllDrips(){
+								$http.get( "/api/drip_length" )
+								.success( function ( response ) {
+									console.log( response )
+								} );
+							};
+							scope.queryAllDrips();
+						} , 
+
+						post: function post( scope , element , atrributeSet ){
+							scope.queryEachDrip = function queryEachDrip(){
+								//codes to query each drip here
+							}
+						}
+					}
+				}
+			}
+		}
+	] );
+drip8
 	.directive( "dripList" , [
 		"$http",
 		"Video",
@@ -128,6 +159,20 @@ drip8
 						function ( ) {
 							scope.dripListing( );
 						} );
+				}
+			}
+		}
+	] );
+drip8
+	.directive( "dripModalBucket" , [
+		"$http",
+		"$rootScope",
+		function directive ( $http , $rootScope ) {
+			return {
+				"restrict": "A",
+				"scope": true,
+				"link": function onLink ( scope , element , atrributeSet ) {
+					console.log( "drip-modal-bucket" );
 				}
 			}
 		}
@@ -210,6 +255,7 @@ drip8
 				"restrict": "A",
 				"scope": true,
 				"link": function onLink ( scope , element , attributeSet ) {
+					console.log( "profile" );
 					scope.profile = { };					
 
 					scope.getUserInfo = function getUserInfo ( ) {
