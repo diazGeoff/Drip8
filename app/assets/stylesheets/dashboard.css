@@ -61,3 +61,95 @@ header {
 	color: #f8f8f8;
 	font-size: 12px;
 }
+
+/*888888888888888*/
+.main-dashboard {
+	width: 60%;
+}
+
+.img-container {
+    width: 64px;
+    height: 64px;
+    border: 1px solid;
+    overflow: hidden; 
+    padding: 0px;   	
+}
+.drip {
+    width: 100%;
+    border: 1px solid black;
+    height: 300px;
+}
+.dripper-img {	
+	width: 100%;
+}
+.divider {
+	width: 100%;
+	background-color: #000;
+	height: 1px;
+	margin-top: 20px;
+}
+.modal-main-image {
+    width: 100%;
+    height: 300px;
+    border: 1px solid black;
+}
+.owl-modal {
+	width: 100%;
+}
+.reaction {
+	width: 80%;
+}
+.reaction-field {
+	width: 100%;
+}
+.modal-user {
+	margin-top: 50px;
+}
+.reaction-description.col-lg-12 {
+	padding-left: 0px;
+}
+.drip-actions {
+    margin-top: 15px;
+}
+.img, .user-info, .drip-actions {
+	padding: 0px;
+}
+.user-info {
+	padding-left: 20px;
+}
+.user-info.col-lg-10 {
+	padding: 0px;
+	text-align: justify;
+}
+.attempts {
+	margin-top: 10px;
+}
+.user {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+.nav-avatar{
+    width: 32px;
+    border-radius: 50%;
+}
+.nav-img {
+	display: inline;
+}
+.left-arrow {
+    width: 64px;
+    height: 64px;
+    background-color: white;
+    margin-left: -100px;
+    position: absolute;
+    margin-top: 130px;
+}
+.right-arrow {
+	width: 64px;
+    height: 64px;
+    background-color: white;
+    /* position: absolute; */
+    margin-top: 130px;
+    float: right;
+    margin-right: -100px;
+}
