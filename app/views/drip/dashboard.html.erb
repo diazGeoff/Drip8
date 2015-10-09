@@ -41,11 +41,11 @@
 		<div class="drip-description col-lg-12">
 			<p>{{ response.drip.description }}</p>
 		</div>
-		<div class="col-lg-10" ng-src="{{ linkUri( response.drip.link , 'thumb' ) }}" video-src="response.drip.link" video-dashboard>
+		<div class="col-lg-10" video-src="response.drip.link" video-dashboard>
 			<iframe         
 				class="video-size"
 				ng-src="{{ videoSrc }}"
-				frameborder="0" 
+				frameborder="0"
 				allowfullscreen>
 			</iframe>
 		</div>

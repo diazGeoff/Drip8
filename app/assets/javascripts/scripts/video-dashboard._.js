@@ -3,7 +3,7 @@ drip8
 		"$http",
 		"Video",
 		"$rootScope",
-		"$sce"
+		"$sce",
 		function directive ( $http , Video , $rootScope , $sce ) {
 			return {
 				"restrict": "A",
