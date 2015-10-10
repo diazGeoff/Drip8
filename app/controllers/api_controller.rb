@@ -14,7 +14,9 @@ class ApiController < ApplicationController
 
 
 	def drip_each
-		drip = Drip.find_by_id(params[:drip_id]).as_json(include: [:user,{dripbucket: {include: :drips}}])
+		drip = Drip.find_by_id(params[:drip_id]).as_json(include: [:user,
+			{dripbucket: {include: [{comments: {include: :user}},
+				{drips: {include: {comments: {include: :user}}}}]}}])
 		render json: {status: :success, drip: drip}
 	end
 
@@ -70,6 +72,10 @@ class ApiController < ApplicationController
 		render json: { link: @user.featured }, status: :ok
 	end
 
+	def create_comment
+		comment = Comment.create(comment_params)
+		render json: {status: :success, comment: comment}
+	end
 
 
 	private
@@ -80,5 +86,9 @@ class ApiController < ApplicationController
 
 	def bucket_params
 		params.require(:bucket).permit(:user_id, :name, :state)
+	end
+
+	def comment_params
+		params.require(:comment).permit(:user_id, :drip_id, :dripbucket_id, :facebook_id, :body)
 	end
 end
