@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712024612) do
+ActiveRecord::Schema.define(version: 20151010045527) do
 
   create_table "acknowledgements", force: :cascade do |t|
     t.integer  "dripbucket_id"
@@ -21,6 +21,20 @@ ActiveRecord::Schema.define(version: 20150712024612) do
   end
 
   add_index "acknowledgements", ["dripbucket_id"], name: "index_acknowledgements_on_dripbucket_id"
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "dripbucket_id"
+    t.integer  "drip_id"
+    t.text     "body"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "facebook_id"
+  end
+
+  add_index "comments", ["drip_id"], name: "index_comments_on_drip_id"
+  add_index "comments", ["dripbucket_id"], name: "index_comments_on_dripbucket_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "dripbuckets", force: :cascade do |t|
     t.string   "name"
