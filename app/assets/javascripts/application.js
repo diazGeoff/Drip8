@@ -16,6 +16,7 @@
 
 //= require jquery.min
 //= require angular.min
+//= require async.min
 //= require sly.min
 //= require app
 //= require bootstrap.min

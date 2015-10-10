@@ -1,17 +1,13 @@
 drip8
 	.directive( "videoDashboard" , [
 		"$http",
-		"Video",
-		"$rootScope",
-		"$sce",
-		function directive ( $http , Video , $rootScope , $sce ) {
+		"Video",		
+		function directive ( $http , Video ) {
 			return {
 				"restrict": "A",
-				"scope": {
-					"videoSrc": "="
-				},
+				"scope": true,
 				"link": function onLink ( scope , element , attributeSet ) {
-					scope.videoSrc = $sce.trustAsResourceUrl( scope.videoSrc );		
+					scope.videoSrc = Video.videoSource( attributeSet.videoSource.split( "v=" )[1] );
 				}
 			}
 		}

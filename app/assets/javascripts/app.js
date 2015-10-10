@@ -80,7 +80,7 @@ drip8
 			}
 		}
 	] );
-drip8
+/*drip8
 	.directive( "dripDashboard" , [
 		"$http",
 		"Video",
@@ -110,8 +110,7 @@ drip8
 												console.log( responsed )
 											} );
 											count++;
-										}
-										
+										}										
 									}
 								} );
 								scope.$broadcast( 'end-fetch' , scope.responsed );
@@ -144,6 +143,47 @@ drip8
 							};
 						}
 					}
+				}
+			}
+		}
+	] );*/
+
+drip8
+	.directive( "dripDashboard" , [
+		"$http",
+		function directive ( $http ) {
+			return {
+				"restrict": "A",
+				"scope": true,
+				"link": function onLink ( scope , element , attributeSet ) {
+					scope.drips = [ ];
+
+					$http.get( "/api/drip_length" )
+					.success( function ( response ) {
+						var taskArray = [ ];
+						for ( var index = response.count - 1  ; index >= ( response.count - 3 ) ; index -- ) {
+							taskArray.push( index );
+						}
+						var asyncTasks = createAsyncTask( taskArray );
+						async
+							.parallel( asyncTasks , function ( err , taskResponse ) {
+								scope.drips = taskResponse;
+							} );
+					} );
+
+
+					var createAsyncTask = function createAsyncTask ( taskArray ) {
+						var tasks = [ ];
+						taskArray.forEach( function ( e ) {
+							tasks.push( function ( callback ) {
+								$http.post( "/api/drip_each" , { "drip_id": e } )
+								.success( function ( response ) {
+									callback( null , response );
+								} );
+							} );
+						} );
+						return tasks;
+					};
 				}
 			}
 		}
@@ -319,7 +359,7 @@ drip8
 
 							scope.profile.featured = response.link;
 							$rootScope.$broadcast( "profile-data" , scope.profile );
-							scope.profile.featuredVideo = Video.videoSource( video_id );							
+							scope.profile.featuredVideo = Video.videoSource( video_id );								
 						} );
 					};
 
@@ -359,17 +399,13 @@ drip8
 drip8
 	.directive( "videoDashboard" , [
 		"$http",
-		"Video",
-		"$rootScope",
-		"$sce",
-		function directive ( $http , Video , $rootScope , $sce ) {
+		"Video",		
+		function directive ( $http , Video ) {
 			return {
 				"restrict": "A",
-				"scope": {
-					"videoSrc": "="
-				},
+				"scope": true,
 				"link": function onLink ( scope , element , attributeSet ) {
-					scope.videoSrc = $sce.trustAsResourceUrl( scope.videoSrc );		
+					scope.videoSrc = Video.videoSource( attributeSet.videoSource.split( "v=" )[1] );
 				}
 			}
 		}

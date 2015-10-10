@@ -35,7 +35,7 @@ drip8
 
 							scope.profile.featured = response.link;
 							$rootScope.$broadcast( "profile-data" , scope.profile );
-							scope.profile.featuredVideo = Video.videoSource( video_id );							
+							scope.profile.featuredVideo = Video.videoSource( video_id );								
 						} );
 					};
 
