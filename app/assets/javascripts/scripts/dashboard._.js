@@ -1,7 +1,8 @@
 drip8
 	.directive( "dripDashboard" , [
 		"$http",
-		function directive ( $http ) {
+		'$rootScope',
+		function directive ( $http , $rootScope ) {
 			return {
 				"restrict": "A",
 				"scope": true,
@@ -21,7 +22,7 @@ drip8
 							} );
 					} );
 
-
+					
 					var createAsyncTask = function createAsyncTask ( taskArray ) {
 						var tasks = [ ];
 						taskArray.forEach( function ( e ) {
@@ -34,6 +35,11 @@ drip8
 						} );
 						return tasks;
 					};
+					scope.seeBucket = function seeBucket( drip ){
+						console.log( "see Bucket" );
+						$rootScope.$broadcast( 'see-bucket' , drip );
+					};
+
 				}
 			}
 		}

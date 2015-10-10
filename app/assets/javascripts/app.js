@@ -1,4 +1,4 @@
-var drip8 = angular.module( "Drip8" , [ ] );
+var drip8 = angular.module( "Drip8" , [ 'angular-flexslider' ] );
 
 window.fbAsyncInit = function ( ) {
 	FB.init( {
@@ -80,78 +80,11 @@ drip8
 			}
 		}
 	] );
-/*drip8
-	.directive( "dripDashboard" , [
-		"$http",
-		"Video",
-		"$rootScope",
-		function directive ( $http , $rootScope , Video ) {
-			return {
-				"restrict": "A",
-				"scope": true,
-				"compile": function compile ( element , atrributeSet ) {
-					return {
-
-						pre: function pre( scope , element , atrributeSet ){
-							scope.drips = [];
-							scope.queryAllDrips = function queryAllDrips(){
-								$http.get( "/api/drip_length" )
-								.success( function ( response ) {
-									if( response.count != 0 ){
-										scope.count = response.count;
-										var count = 1;
-										scope.responsed = [];
-										for( var index = 3 ; index >= 0 ; index-- ){
-											var id = scope.count - count
-											console.log( id );
-											$http.post( "/api/drip_each" , { "drip_id": id } )
-											.success( function ( responsed ) {
-												scope.responsed.push( responsed );
-												console.log( responsed )
-											} );
-											count++;
-										}										
-									}
-								} );
-								scope.$broadcast( 'end-fetch' , scope.responsed );
-							};
-							scope.queryAllDrips();
-						} , 
-
-						post: function post( scope , element , atrributeSet ){
-							scope.queryEachDrip = function queryEachDrip(){
-								//codes to query each drip here
-							};
-							scope.linkUri = function linkUri ( link , service ) {
-								console.log( link );
-								var video_id = link.split( 'v=' )[1];
-								scope.video_id = video_id;
-								var ampersandPosition = video_id.indexOf( '&' );
-								if ( ampersandPosition != -1 ) {
-								  video_id = video_id.substring( 0 , ampersandPosition );
-								}
-								
-								// console.log( service );
-								// console.log( Video );
-								// console.log( video_id );
-								if ( service == "thumb" ) {
-
-									//return Video.thumbnail( video_id );
-								} else {
-									return Video.videoSource( video_id );
-								}	
-							};
-						}
-					}
-				}
-			}
-		}
-	] );*/
-
 drip8
 	.directive( "dripDashboard" , [
 		"$http",
-		function directive ( $http ) {
+		'$rootScope',
+		function directive ( $http , $rootScope ) {
 			return {
 				"restrict": "A",
 				"scope": true,
@@ -171,7 +104,7 @@ drip8
 							} );
 					} );
 
-
+					
 					var createAsyncTask = function createAsyncTask ( taskArray ) {
 						var tasks = [ ];
 						taskArray.forEach( function ( e ) {
@@ -184,10 +117,28 @@ drip8
 						} );
 						return tasks;
 					};
+					scope.seeBucket = function seeBucket( drip ){
+						console.log( "see Bucket" );
+						$rootScope.$broadcast( 'see-bucket' , drip );
+					};
+
 				}
 			}
 		}
 	] );
+
+
+// async
+// 	.parallel( [
+// 		function ( callback ) {
+
+// 		},
+// 		function ( callback ) {
+
+// 		}, 
+// 	] , function doSomething ( err , arr ) {
+
+// 	} );
 drip8
 	.directive( "dripList" , [
 		"$http",
@@ -244,12 +195,35 @@ drip8
 	.directive( "dripModalBucket" , [
 		"$http",
 		"$rootScope",
-		function directive ( $http , $rootScope ) {
+		'Video',
+		function directive ( $http , $rootScope , Video ) {
 			return {
 				"restrict": "A",
 				"scope": true,
 				"link": function onLink ( scope , element , atrributeSet ) {
 					console.log( "drip-modal-bucket" );
+					$rootScope.$on( 'see-bucket' , function( evt , data ){
+						scope.directDrip = Video.videoSource( data.drip.link.split( "v=" )[1] );
+						scope.dripBucketDetails = data;
+						for( var index = 0 ; index <= data.drip.dripbucket.drips.length-1 ; index++ ){
+							var video_id = scope.dripBucketDetails.drip.dripbucket.drips[ index ].link.split( "v=" )[1];
+							console.log( video_id );
+							scope.dripBucketDetails.drip.dripbucket.drips[ index ].thumb = Video.thumbnail( video_id );
+							console.log( scope.dripBucketDetails.drip.dripbucket.drips[ index ].thumb );
+							console.log( scope.dripBucketDetails.drip.dripbucket.drips[ index ].link );
+
+						}
+						console.log( scope.dripBucketDetails );
+					} );
+
+
+					scope.changeVideo = function changeVideo( data ){
+						scope.$broadcast( 'change-video' , data )
+					}
+
+					scope.$on( 'change-video' , function( evt , data ){
+						scope.directDrip = Video.videoSource( data.split( "v=" )[1] );
+					} )
 				}
 			}
 		}

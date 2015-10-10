@@ -1,4 +1,4 @@
-var drip8 = angular.module( "Drip8" , [ ] );
+var drip8 = angular.module( "Drip8" , [ 'angular-flexslider' ] );
 
 window.fbAsyncInit = function ( ) {
 	FB.init( {

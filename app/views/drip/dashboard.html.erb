@@ -51,7 +51,7 @@
 		</div>
 		<div class="drip-actions col-lg-12">			
 			<div class="pull-right">
-				<button data-toggle="modal" data-target="#myModal">See Process</button>
+				<button data-toggle="modal" data-target="#myModal" ng-click="seeBucket( drip )">see bucket</button>
 				<button>React</button>
 			</div>
 		</div>
@@ -75,9 +75,14 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div> -->
       <div class="modal-body">
-        <h4 class="modal-title">Our Second Attempt</h4>
+        <h4 class="modal-title">{{ dripBucketDetails.drip.dripbucket.name }}</h4>
         	<div class="modal-main-image">
-        		
+        		<iframe         
+              class="video-size"
+              ng-src="{{ directDrip }}"
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
         	</div>
         <div class="process-supp-details">
         	<div class="attempts">
@@ -89,15 +94,10 @@
           				<div class="row">
            				 <div class="span12">
 
-              				<div id="owl-demo" class="owl-carousel">
-                				<div class="item"><img src="<%= image_path 'clark.jpg' %>" alt="Owl Image"></div>
-                				<div class="item"><img src="<%= image_path 'clark.jpg' %>" alt="Owl Image"></div>
-                				<div class="item"><img src="<%= image_path 'clark.jpg' %>" alt="Owl Image"></div>
-                				<div class="item"><img src="<%= image_path 'clark.jpg' %>" alt="Owl Image"></div>
-                				<div class="item"><img src="<%= image_path 'clark.jpg' %>" alt="Owl Image"></div>
-                				<div class="item"><img src="<%= image_path 'clark.jpg' %>" alt="Owl Image"></div>
-                				<div class="item"><img src="<%= image_path 'clark.jpg' %>" alt="Owl Image"></div>
-                				<div class="item"><img src="<%= image_path 'clark.jpg' %>" alt="Owl Image"></div>
+              				<div>
+                				<flex-slider slide="drip in dripBucketDetails.drip.dripbucket.drips track by $index" class="carousel" animation="slide" animation-loop="false" item-width="210" item-margin="5">
+                            <li ng-click="changeVideo( drip.link )"><img ng-src="{{drip.thumb}}" alt="Owl Image"></li>
+                        </flex-slider>
               				</div>
               
             				</div>
@@ -115,7 +115,7 @@
 						<div class="about-user modal-user">
 							<div class="img col-lg-2">
 								<div class="img-container">
-									<img class="dripper-img" src="<%= image_path 'clark.jpg' %>">
+									<img class="dripper-img" src="">
 								</div>
 							</div>
 								<div class="user-info col-lg-10">
@@ -140,31 +140,3 @@
   </div>
 </div>
 
-
-      <script src="assets/owl.carousel.js"></script>
-
-
-
-     <style>
-    #owl-demo .item{
-        margin: 3px;
-    }
-    #owl-demo .item img{
-        display: block;
-        width: 100%;
-        height: auto;
-    }
-    </style>
-
-
-    <script>
-    $(document).ready(function() {
-      $("#owl-demo").owlCarousel({
-/*        autoPlay: 3000,*/
-        items : 4,
-        itemsDesktop : [1199,3],
-        itemsDesktopSmall : [979,3]
-      });
-
-    });
-    </script>
