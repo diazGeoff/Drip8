@@ -14,7 +14,7 @@ class ApiController < ApplicationController
 
 
 	def drip_each
-		drip = Drip.find_by_id(params[:drip_id]).as_json(include: [:user,{include: :comments{include: :user}},
+		drip = Drip.find_by_id(params[:drip_id]).as_json(include: [:user,{comments: {include: :user}},
 			{dripbucket: {include: [{comments: {include: :user}},
 				{drips: {include: {comments: {include: :user}}}}]}}])
 		render json: {status: :success, drip: drip}
