@@ -109,24 +109,24 @@
         <div class="reactions-head">
         		<p>7 Reactions</p>
         		<div class="reaction">  
-        				<textarea class="reaction-field"></textarea>
-        			<button class="pull-right">React</button>
-        			<div class="reaction-users">
-						<div class="about-user modal-user">
-							<div class="img col-lg-2">
-								<div class="img-container">
-									<img class="dripper-img" src="">
-								</div>
-							</div>
-								<div class="user-info col-lg-10">
-									<!-- <small>1 day ago</small> -->
-									<p>Clark Anthony Dacoco</p>
-									<!-- <p>Project Almanac</p> -->
-									<p class="reaction-description">
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.										
-									</p>									
-								</div>		
-							</div>
+        			<textarea class="reaction-field" ng-model="dripComment"></textarea>
+        			<button class="pull-right" ng-click="react( dripComment )" >React</button>
+        			  <div class="reaction-users">
+      						<div class="about-user modal-user">
+      							<div class="img col-lg-2">
+      								<div class="img-container">
+      									<img class="dripper-img" src="">
+      								</div>
+      							</div>
+    								<div class="user-info col-lg-10">
+    									<!-- <small>1 day ago</small> -->
+    									<p>Clark Anthony Dacoco</p>
+    									<!-- <p>Project Almanac</p> -->
+    									<p class="reaction-description">
+    										Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.										
+    									</p>									
+    								</div>		
+      						</div>
 
         				</div>
         		</div>

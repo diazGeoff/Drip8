@@ -3,7 +3,8 @@ drip8
 		"$http",
 		"$rootScope",
 		'Video',
-		function directive ( $http , $rootScope , Video ) {
+		'profileService',
+		function directive ( $http , $rootScope , Video , profileService ) {
 			return {
 				"restrict": "A",
 				"scope": true,
@@ -26,11 +27,32 @@ drip8
 
 					scope.changeVideo = function changeVideo( data ){
 						scope.$broadcast( 'change-video' , data )
-					}
+					};
 
 					scope.$on( 'change-video' , function( evt , data ){
 						scope.directDrip = Video.videoSource( data.split( "v=" )[1] );
-					} )
+					} );
+
+					scope.react = function react( comment ){
+						var user = profileService.setProfile();
+						var fbId = user.profile_picture.split( "/" )[3];
+						console.log( scope.dripBucketDetails );
+						console.log( user.profile_picture.split( "/" ) )
+						
+						$http.post( "/api/create_comment" , {
+								"comment":{
+									"user_id"		: user.id ,
+									"drip_id"		: scope.dripBucketDetails.drip.id ,
+									"dripbucket_id"	: "" ,
+									"facebook_id"	: fbId ,
+									"body"			: comment
+								}
+								} )
+								.success( function ( response ) {
+									console.log( response );
+								} );
+					}
+
 				}
 			}
 		}

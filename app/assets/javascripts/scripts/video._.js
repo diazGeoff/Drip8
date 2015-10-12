@@ -7,7 +7,7 @@ drip8
 			};
 
 			this.videoSource = function videoSource ( youtubeId ) {
-				return $sce.trustAsResourceUrl( "https://www.youtube.com/embed/" + youtubeId + "?rel=0&nologo=1&showinfo=0&modestbranding=1&iv_load_policy=3" );
+				return $sce.trustAsResourceUrl( "http://www.youtube.com/embed/" + youtubeId + "?rel=0&nologo=1&showinfo=0&modestbranding=1&iv_load_policy=3" );
 			};
 
 			return this;

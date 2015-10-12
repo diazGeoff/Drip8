@@ -3,7 +3,8 @@ drip8
 		"$http",
 		"Video",
 		"$rootScope",
-		function directive ( $http , Video , $rootScope ) {
+		'profileService',
+		function directive ( $http , Video , $rootScope , profileService ) {
 			return {
 				"restrict": "A",
 				"scope": true,
@@ -38,7 +39,13 @@ drip8
 							scope.profile.featuredVideo = Video.videoSource( video_id );								
 						} );
 					};
-
+					scope.$watch( 'profile' , function( newValue , oldValue ){
+						if( newValue != oldValue ){
+							scope.profile.newValue;
+							console.log( scope.profile );
+							profileService.setProfile( scope.profile );
+						}
+					} )
 					scope.getUserInfo( );					
 				}
 			}
