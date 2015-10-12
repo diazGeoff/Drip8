@@ -11,8 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20151010045527) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "acknowledgements", force: :cascade do |t|
     t.integer  "dripbucket_id"
@@ -22,15 +24,6 @@ ActiveRecord::Schema.define(version: 20151010045527) do
   end
 
   add_index "acknowledgements", ["dripbucket_id"], name: "index_acknowledgements_on_dripbucket_id", using: :btree
-
-  create_table "dripbuckets", force: :cascade do |t|
-    t.string   "name"
-    t.string   "state"
-    t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "starring_drip"
-  end
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -42,9 +35,9 @@ ActiveRecord::Schema.define(version: 20151010045527) do
     t.string   "facebook_id"
   end
 
-  add_index "comments", ["drip_id"], name: "index_comments_on_drip_id"
-  add_index "comments", ["dripbucket_id"], name: "index_comments_on_dripbucket_id"
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+  add_index "comments", ["drip_id"], name: "index_comments_on_drip_id", using: :btree
+  add_index "comments", ["dripbucket_id"], name: "index_comments_on_dripbucket_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "dripbuckets", force: :cascade do |t|
     t.string   "name"
@@ -55,7 +48,7 @@ ActiveRecord::Schema.define(version: 20151010045527) do
     t.integer  "starring_drip"
   end
 
-  add_index "dripbuckets", ["user_id"], name: "index_dripbuckets_on_user_id"
+  add_index "dripbuckets", ["user_id"], name: "index_dripbuckets_on_user_id", using: :btree
 
   create_table "drips", force: :cascade do |t|
     t.text     "link"
