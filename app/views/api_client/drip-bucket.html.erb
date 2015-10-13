@@ -19,7 +19,7 @@
 							<div class="row drip-box-result">
 								<p class="pull-right" feature="{{profileData.id}}-{{drip.id}}" ng-show="drip.link != profileData.featured"><i class="glyphicon glyphicon-film" style="font-size: 1.5em"></i></p>
 								<h6>{{ drip.title }}</h6>								
-								<div class="row" ng-click="showVideo( linkUri( drip.link , 'video' ) )">
+								<div class="row" ng-click="showVideo( linkUri( drip.link , 'video' ), drip.id )">
 									<div class="col-lg-12">
 										<img ng-src="{{ linkUri( drip.link , 'thumb' ) }}" style="width: inherit; height: inherit; padding: 5px;"/>										
 									</div>

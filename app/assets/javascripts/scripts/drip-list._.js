@@ -35,9 +35,9 @@ drip8
 						}	
 					};
 
-					scope.showVideo = function showVideo ( link ) {
+					scope.showVideo = function showVideo ( link , id ) {
 						$( "#videoLink" ).modal( "show" );
-						$rootScope.$broadcast( "video-source" , link );
+						$rootScope.$broadcast( "video-source" , link , id );
 					};
 
 					scope.dripListing( );

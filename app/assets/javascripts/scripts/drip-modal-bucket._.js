@@ -13,6 +13,7 @@ drip8
 					$rootScope.$on( 'see-bucket' , function( evt , data ){
 						scope.directDrip = Video.videoSource( data.drip.link.split( "v=" )[1] );
 						scope.dripBucketDetails = data;
+						scope.comments = scope.dripBucketDetails.drip.comments;
 						for( var index = 0 ; index <= data.drip.dripbucket.drips.length-1 ; index++ ){
 							var video_id = scope.dripBucketDetails.drip.dripbucket.drips[ index ].link.split( "v=" )[1];
 							console.log( video_id );
@@ -22,6 +23,7 @@ drip8
 
 						}
 						console.log( scope.dripBucketDetails );
+						scope.drip = scope.dripBucketDetails.drip;
 					} );
 
 
@@ -30,7 +32,10 @@ drip8
 					};
 
 					scope.$on( 'change-video' , function( evt , data ){
-						scope.directDrip = Video.videoSource( data.split( "v=" )[1] );
+						scope.directDrip = Video.videoSource( data.link.split( "v=" )[1] );
+						scope.comments = data.comments;
+						scope.drip = data;
+						console.log( data );
 					} );
 
 					scope.react = function react( comment ){
@@ -42,15 +47,18 @@ drip8
 						$http.post( "/api/create_comment" , {
 								"comment":{
 									"user_id"		: user.id ,
-									"drip_id"		: scope.dripBucketDetails.drip.id ,
+									"drip_id"		: scope.drip.id ,
 									"dripbucket_id"	: "" ,
 									"facebook_id"	: fbId ,
 									"body"			: comment
 								}
 								} )
 								.success( function ( response ) {
-									console.log( response );
+									var comment = response.comment;
+									comment.user = user;
+									scope.comments.push( comment );
 								} );
+						scope.dripComment = "";
 					}
 
 				}

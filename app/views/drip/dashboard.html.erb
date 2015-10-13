@@ -96,7 +96,7 @@
 
               				<div>
                 				<flex-slider slide="drip in dripBucketDetails.drip.dripbucket.drips track by $index" class="carousel" animation="slide" animation-loop="false" item-width="210" item-margin="5">
-                            <li ng-click="changeVideo( drip.link )"><img ng-src="{{drip.thumb}}" alt="Owl Image"></li>
+                            <li ng-click="changeVideo( drip )"><img ng-src="{{drip.thumb}}" alt="Owl Image"></li>
                         </flex-slider>
               				</div>
               
@@ -111,24 +111,25 @@
         		<div class="reaction">  
         			<textarea class="reaction-field" ng-model="dripComment"></textarea>
         			<button class="pull-right" ng-click="react( dripComment )" >React</button>
-        			  <div class="reaction-users">
+      			  <div class="reaction-users" ng-repeat="comment in comments">
       						<div class="about-user modal-user">
       							<div class="img col-lg-2">
       								<div class="img-container">
-      									<img class="dripper-img" src="">
+      									<img class="dripper-img" ng-src="{{comment.user.profile_picture}}">
       								</div>
       							</div>
+
     								<div class="user-info col-lg-10">
     									<!-- <small>1 day ago</small> -->
-    									<p>Clark Anthony Dacoco</p>
+    									<p>{{comment.user.name}}</p>
     									<!-- <p>Project Almanac</p> -->
     									<p class="reaction-description">
-    										Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.										
+    										{{comment.body}}
     									</p>									
     								</div>		
       						</div>
 
-        				</div>
+      				</div>
         		</div>
         </div>
       </div>
