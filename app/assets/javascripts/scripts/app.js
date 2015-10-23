@@ -1,4 +1,4 @@
-var drip8 = angular.module( "Drip8" , [ 'angular-flexslider' ] );
+var drip8 = angular.module( "Drip8" , [ 'angular-flexslider' , 'infinite-scroll' ] );
 
 window.fbAsyncInit = function ( ) {
 	FB.init( {

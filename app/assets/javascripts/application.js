@@ -17,6 +17,7 @@
 //= require jquery.min
 //= require jquery.flexslider
 //= require angular.min
+//= require ng-infinite-scroll.min
 //= require angular-flexslider
 //= require async.min
 //= require sly.min

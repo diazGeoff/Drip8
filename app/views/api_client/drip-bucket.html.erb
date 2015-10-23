@@ -17,6 +17,18 @@
 					<section drip-list="{{bucket.id}}-{{profileData.id}}">
 						<div class="panel-body custom-panel-board" ng-repeat="drip in drips">
 							<div class="row drip-box-result">
+								<div class="dropdown">
+								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								    
+								    <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								    <li><a href="#">Action</a></li>
+								    <li><a href="#">Another action</a></li>
+								    <li><a href="#">Something else here</a></li>
+								    <li><a href="#">Separated link</a></li>
+								  </ul>
+								</div>
 								<p class="pull-right" feature="{{profileData.id}}-{{drip.id}}" ng-show="drip.link != profileData.featured"><i class="glyphicon glyphicon-film" style="font-size: 1.5em"></i></p>
 								<h6>{{ drip.title }}</h6>								
 								<div class="row" ng-click="showVideo( linkUri( drip.link , 'video' ), drip.id )">
@@ -29,6 +41,7 @@
 										<button class="btn btn-default" style="width: inherit; margin-top:2px;">{{ drip.state }}</button>
 									</div>
 								</div>
+
 							</div>
 						</div>
 					</section>

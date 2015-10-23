@@ -1,4 +1,4 @@
-var drip8 = angular.module( "Drip8" , [ 'angular-flexslider' ] );
+var drip8 = angular.module( "Drip8" , [ 'angular-flexslider' , 'infinite-scroll' ] );
 
 window.fbAsyncInit = function ( ) {
 	FB.init( {
@@ -34,7 +34,7 @@ drip8
 					scope.profileData = { };
 
 					scope.buckets = [ ];
-
+					console.log( localStorage.userProfile );
 					scope.newDrip = function newDrip ( id ) {
 						$rootScope.$broadcast( "drip-new" , id );
 					};
@@ -73,7 +73,9 @@ drip8
 
 					scope.$on( "profile-data" , 
 						function ( evt , profile ) {
-							scope.profileData = profile;
+							scope.profileData = JSON.parse( localStorage.userProfile );
+							console.log( "profile data below" )
+							console.log( scope.profileData )
 							scope.getAllBucket( );
 						} );					
 				}
@@ -90,24 +92,28 @@ drip8
 				"scope": true,
 				"link": function onLink ( scope , element , attributeSet ) {
 					scope.drips = [ ];
-
+					scope.lastId = "dont stop";
 					$http.get( "/api/drip_length" )
 					.success( function ( response ) {
 						var taskArray = [ ];
-						for ( var index = response.count - 1  ; index >= ( response.count - 3 ) ; index -- ) {
+						for ( var index = response.count  ; index >= ( response.count - 3 ) ; index -- ) {
 							taskArray.push( index );
 						}
 						var asyncTasks = createAsyncTask( taskArray );
 						async
 							.parallel( asyncTasks , function ( err , taskResponse ) {
 								scope.drips = taskResponse;
+								console.log( scope.drips );
 							} );
 					} );
-
+					scope.passProfile = function passProfile( profile ){
+						localStorage.setItem("userProfile", JSON.stringify( profile ) );
+					};
 					
 					var createAsyncTask = function createAsyncTask ( taskArray ) {
 						var tasks = [ ];
 						taskArray.forEach( function ( e ) {
+							console.log( e )
 							tasks.push( function ( callback ) {
 								$http.post( "/api/drip_each" , { "drip_id": e } )
 								.success( function ( response ) {
@@ -120,6 +126,26 @@ drip8
 					scope.seeBucket = function seeBucket( drip ){
 						console.log( "see Bucket" );
 						$rootScope.$broadcast( 'see-bucket' , drip );
+					};
+
+					scope.loadMore = function loadMore() {
+					    var last = scope.drips[scope.drips.length - 1];
+					    var lastId = last.drip.id;
+					    var idLoad = lastId - 1;
+					    if( lastId >= 0 && scope.lastId != 'stop' ){
+					    	$http.post( "/api/drip_each" , { "drip_id": idLoad } )
+								.success( function ( response ) {
+									//callback( null , response );
+									console.log( response );
+									if( response.drip != null ){
+										scope.drips.push( response );
+									}
+									if( lastId == 0 ){
+										scope.lastId = 'stop';
+									}
+								} );
+					    }
+					    
 					};
 
 				}

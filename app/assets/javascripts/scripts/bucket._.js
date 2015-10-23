@@ -10,7 +10,7 @@ drip8
 					scope.profileData = { };
 
 					scope.buckets = [ ];
-
+					console.log( localStorage.userProfile );
 					scope.newDrip = function newDrip ( id ) {
 						$rootScope.$broadcast( "drip-new" , id );
 					};
@@ -49,7 +49,9 @@ drip8
 
 					scope.$on( "profile-data" , 
 						function ( evt , profile ) {
-							scope.profileData = profile;
+							scope.profileData = JSON.parse( localStorage.userProfile );
+							console.log( "profile data below" )
+							console.log( scope.profileData )
 							scope.getAllBucket( );
 						} );					
 				}
