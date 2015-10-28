@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712024612) do
+ActiveRecord::Schema.define(version: 20151028093605) do
 
   create_table "acknowledgements", force: :cascade do |t|
     t.integer  "dripbucket_id"
@@ -22,8 +22,17 @@ ActiveRecord::Schema.define(version: 20150712024612) do
 
   add_index "acknowledgements", ["dripbucket_id"], name: "index_acknowledgements_on_dripbucket_id"
 
-# Could not dump table "dripbuckets" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "dripbuckets", force: :cascade do |t|
+    t.string   "name"
+    t.string   "state"
+    t.integer  "user_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "starring_drip"
+    t.string   "status",        default: "Public"
+  end
+
+  add_index "dripbuckets", ["user_id"], name: "index_dripbuckets_on_user_id"
 
   create_table "drips", force: :cascade do |t|
     t.text     "link"
@@ -32,9 +41,10 @@ ActiveRecord::Schema.define(version: 20150712024612) do
     t.string   "state"
     t.integer  "user_id"
     t.integer  "dripbucket_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.boolean  "featured"
+    t.string   "status",        default: "Public"
   end
 
   add_index "drips", ["dripbucket_id"], name: "index_drips_on_dripbucket_id"
