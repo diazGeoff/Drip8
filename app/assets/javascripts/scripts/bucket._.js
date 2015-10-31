@@ -45,7 +45,16 @@ drip8
 						.success( function ( response ) {							
 							scope.buckets = response.buckets;
 						} );
-					};					
+					};
+					scope.rename = function rename ( drip , target ) {						
+						console.log( drip , target );
+					};
+					scope.setting = function setting ( drip , setting , target ) {						
+						console.log( drip , setting , target );
+					};
+					scope.deleteDrip = function deleteDrip ( drip , target ) {						
+						console.log( drip , target );
+					};				
 
 					scope.$on( "profile-data" , 
 						function ( evt , profile ) {

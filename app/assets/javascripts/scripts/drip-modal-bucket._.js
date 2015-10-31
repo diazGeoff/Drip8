@@ -38,6 +38,10 @@ drip8
 						console.log( data );
 					} );
 
+					scope.passProfile = function passProfile( profile ){
+						localStorage.setItem("userProfile", JSON.stringify( profile ) );
+					};
+					
 					scope.react = function react( comment ){
 						var user = profileService.setProfile();
 						var fbId = user.profile_picture.split( "/" )[3];

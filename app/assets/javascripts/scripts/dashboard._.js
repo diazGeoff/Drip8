@@ -18,8 +18,14 @@ drip8
 						var asyncTasks = createAsyncTask( taskArray );
 						async
 							.parallel( asyncTasks , function ( err , taskResponse ) {
+								for( var index = 0 ; index < taskResponse.length ; index++ ){
+									if( taskResponse[ index ].drip == null ){
+										taskResponse.splice( index , 1 );
+									}
+									console.log( taskResponse[ index ].drip );
+								}
 								scope.drips = taskResponse;
-								console.log( scope.drips );
+								console.log( taskResponse );
 							} );
 					} );
 					scope.passProfile = function passProfile( profile ){
@@ -53,7 +59,7 @@ drip8
 								.success( function ( response ) {
 									//callback( null , response );
 									console.log( response );
-									if( response.drip != null ){
+									if( response.drip != null && response.drip.state == 'public' ){
 										scope.drips.push( response );
 									}
 									if( lastId == 0 ){

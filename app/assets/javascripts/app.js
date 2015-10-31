@@ -69,7 +69,16 @@ drip8
 						.success( function ( response ) {							
 							scope.buckets = response.buckets;
 						} );
-					};					
+					};
+					scope.rename = function rename ( drip , target ) {						
+						console.log( drip , target );
+					};
+					scope.setting = function setting ( drip , setting , target ) {						
+						console.log( drip , setting , target );
+					};
+					scope.deleteDrip = function deleteDrip ( drip , target ) {						
+						console.log( drip , target );
+					};				
 
 					scope.$on( "profile-data" , 
 						function ( evt , profile ) {
@@ -102,8 +111,14 @@ drip8
 						var asyncTasks = createAsyncTask( taskArray );
 						async
 							.parallel( asyncTasks , function ( err , taskResponse ) {
+								for( var index = 0 ; index < taskResponse.length ; index++ ){
+									if( taskResponse[ index ].drip == null ){
+										taskResponse.splice( index , 1 );
+									}
+									console.log( taskResponse[ index ].drip );
+								}
 								scope.drips = taskResponse;
-								console.log( scope.drips );
+								console.log( taskResponse );
 							} );
 					} );
 					scope.passProfile = function passProfile( profile ){
@@ -137,7 +152,7 @@ drip8
 								.success( function ( response ) {
 									//callback( null , response );
 									console.log( response );
-									if( response.drip != null ){
+									if( response.drip != null && response.drip.state == 'public' ){
 										scope.drips.push( response );
 									}
 									if( lastId == 0 ){
@@ -257,6 +272,10 @@ drip8
 						console.log( data );
 					} );
 
+					scope.passProfile = function passProfile( profile ){
+						localStorage.setItem("userProfile", JSON.stringify( profile ) );
+					};
+					
 					scope.react = function react( comment ){
 						var user = profileService.setProfile();
 						var fbId = user.profile_picture.split( "/" )[3];

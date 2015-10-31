@@ -5,6 +5,18 @@
 		</div>
 		<div class="col-lg-10" style="overflow-x: auto;">
 			<div class="panel panel-default custom-panel-default drip-container-box">
+				<div class="dropdown">
+				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				    
+				    <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				    <li><a ng-click="rename( bucket , 'bucket' )">rename</a></li>
+				    <li><a ng-click="setting( bucket , 'public' , 'bucket' )">set to public</a></li>
+				    <li><a ng-click="setting( bucket , 'profile only' , 'bucket' )">set to profile only</a></li>
+				    <li><a ng-click="deleteDrip( bucket , 'bucket' )">delete</a></li>
+				  </ul>
+				</div>
 				<div class="row custom-drip-row">
 					<div class="panel-body custom-panel-board">
 						<div class="drip-create-board" ng-click="newDrip( bucket.id )">
@@ -23,10 +35,10 @@
 								    <span class="caret"></span>
 								  </button>
 								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-								    <li><a href="#">Action</a></li>
-								    <li><a href="#">Another action</a></li>
-								    <li><a href="#">Something else here</a></li>
-								    <li><a href="#">Separated link</a></li>
+								    <li><a ng-click="rename( drip , 'drip' )">rename</a></li>
+								    <li><a ng-click="setting( drip , 'public' , 'drip' )">set to public</a></li>
+								    <li><a ng-click="setting( drip , 'profile only' , 'drip' )">set to profile only</a></li>
+								    <li><a ng-click="deleteDrip( drip , 'drip' )">delete</a></li>
 								  </ul>
 								</div>
 								<p class="pull-right" feature="{{profileData.id}}-{{drip.id}}" ng-show="drip.link != profileData.featured"><i class="glyphicon glyphicon-film" style="font-size: 1.5em"></i></p>
@@ -49,4 +61,5 @@
 			</div>
 		</div>
 	</section>
+
 </div>

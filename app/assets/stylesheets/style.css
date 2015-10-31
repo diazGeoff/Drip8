@@ -118,3 +118,7 @@ button.nav
 	width: 550px;
 	height: 300px;
 }
+
+.flex-control-nav{
+	display: none; !important
+}

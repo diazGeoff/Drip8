@@ -116,14 +116,14 @@
       			  <div class="reaction-users" ng-repeat="comment in comments">
       						<div class="about-user modal-user">
       							<div class="img col-lg-2">
-      								<div class="img-container">
+      								<div class="img-container" to="/drip/profile/" ng-click="passProfile( comment.user )">{{comment.user.name}}>
       									<img class="dripper-img" ng-src="{{comment.user.profile_picture}}">
       								</div>
       							</div>
 
     								<div class="user-info col-lg-10">
     									<!-- <small>1 day ago</small> -->
-    									<p>{{comment.user.name}}</p>
+    									<p to="/drip/profile/" ng-click="passProfile( comment.user )">{{comment.user.name}}</p>
     									<!-- <p>Project Almanac</p> -->
     									<p class="reaction-description">
     										{{comment.body}}
