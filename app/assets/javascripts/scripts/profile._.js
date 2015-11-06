@@ -19,7 +19,9 @@ drip8
 							scope.trustUrl( );
 						} );
 					};
-
+					scope.passProfile = function passProfile( profile ){
+						localStorage.setItem("userProfile", JSON.stringify( profile ) );
+					};
 					scope.trustUrl = function trustUrl ( ) {
 						var video_id = "";
 						$http.post( "/api/video_featured" , {
@@ -42,7 +44,7 @@ drip8
 					scope.$watch( 'profile' , function( newValue , oldValue ){
 						if( newValue != oldValue ){
 							scope.profile.newValue;
-							console.log( scope.profile );
+							console.log( "Profile****" , scope.profile );
 							profileService.setProfile( scope.profile );
 						}
 					} )

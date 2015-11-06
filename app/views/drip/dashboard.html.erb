@@ -19,7 +19,7 @@
           <input type="text" class="form-control" placeholder="Search">
         </div>
 				<div class="nav-img">
-					<img to="/drip/profile/" ng-click="passProfile( drip.drip.user )" ng-src="{{ profile.profile_picture }}" class="nav-avatar">
+					<img to="/drip/profile/" ng-click="passProfile( profile )" ng-src="{{ profile.profile_picture }}" class="nav-avatar">
 				</div>      
 		</form>
     </div><!-- /.navbar-collapse -->
@@ -88,9 +88,10 @@
         	</div>
         <div class="process-supp-details">
         	<div class="attempts">
-        		<p class="pull-right">2/7</p>
-        			<p>7 Attempts</p>
-			</div>
+        		<p class="pull-right"></p>
+        			<p ng-if=" dripBucketDetails.drip.dripbucket.drips.length > 1 ">{{ dripBucketDetails.drip.dripbucket.drips.length }} drips</p>
+              <p ng-if=" dripBucketDetails.drip.dripbucket.drips.length <= 1 ">{{ dripBucketDetails.drip.dripbucket.drips.length }} drip</p>
+			    </div>
       				<div id="demo">
         				<div class="container owl-modal">
           				<div class="row">
@@ -109,7 +110,8 @@
     			<!-- <div class="divider"></div>  -->	
         </div>
         <div class="reactions-head">
-        		<p>7 Reactions</p>
+        		<p ng-if=" dripBucketDetails.drip.comments.length <= 1 ">{{ dripBucketDetails.drip.comments.length }} reaction</p>
+            <p ng-if=" dripBucketDetails.drip.comments.length > 1 ">{{ dripBucketDetails.drip.comments.length }} reactions</p>
         		<div class="reaction">  
         			<textarea class="reaction-field" ng-model="dripComment"></textarea>
         			<button class="pull-right" ng-click="react( dripComment )" >React</button>

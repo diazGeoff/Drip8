@@ -80,6 +80,22 @@ drip8
 						console.log( drip , target );
 					};				
 
+					scope.settingDropdown = function settingDropdown( name ){
+						switch( name ){
+
+							case 'who I am':
+								return false;
+								break;
+							case 'what I do':
+								return false;
+								break;
+							case 'what I am proud of':
+								return false;
+								break;
+							default:
+								return true;
+						}
+					};
 					scope.$on( "profile-data" , 
 						function ( evt , profile ) {
 							scope.profileData = JSON.parse( localStorage.userProfile );
@@ -408,7 +424,9 @@ drip8
 							scope.trustUrl( );
 						} );
 					};
-
+					scope.passProfile = function passProfile( profile ){
+						localStorage.setItem("userProfile", JSON.stringify( profile ) );
+					};
 					scope.trustUrl = function trustUrl ( ) {
 						var video_id = "";
 						$http.post( "/api/video_featured" , {
@@ -431,7 +449,7 @@ drip8
 					scope.$watch( 'profile' , function( newValue , oldValue ){
 						if( newValue != oldValue ){
 							scope.profile.newValue;
-							console.log( scope.profile );
+							console.log( "Profile****" , scope.profile );
 							profileService.setProfile( scope.profile );
 						}
 					} )

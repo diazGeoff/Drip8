@@ -56,6 +56,22 @@ drip8
 						console.log( drip , target );
 					};				
 
+					scope.settingDropdown = function settingDropdown( name ){
+						switch( name ){
+
+							case 'who I am':
+								return false;
+								break;
+							case 'what I do':
+								return false;
+								break;
+							case 'what I am proud of':
+								return false;
+								break;
+							default:
+								return true;
+						}
+					};
 					scope.$on( "profile-data" , 
 						function ( evt , profile ) {
 							scope.profileData = JSON.parse( localStorage.userProfile );
