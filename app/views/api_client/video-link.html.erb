@@ -1,0 +1,44 @@
+<div class="modal fade" id="videoLink" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div class="modal-dialog" video-link>
+	<div class="modal-content">
+		<div class="modal-body">
+			<div class="row">
+				<center>
+					<iframe         
+						class="video-size"
+						src="{{ videoSource }}"
+						frameborder="0" 
+						allowfullscreen>
+					</iframe>
+				</center>
+			</div>
+			<div class="reactions-head">
+        		<p>7 Reactions</p>
+        		<div class="reaction">  
+        			<textarea class="reaction-field" ng-model="dripComment"></textarea>
+        			<button class="pull-right" ng-click="react( dripComment )" >React</button>
+	      			<div class="reaction-users" ng-repeat="comment in comments">
+	      				<div class="about-user modal-user">
+	      					<div class="img col-lg-2">
+	      						<div class="img-container">
+	      							<img class="dripper-img" ng-src="{{comment.user.profile_picture}}">
+	      						</div>
+	      					</div>
+
+	    					<div class="user-info col-lg-10">
+	    						<!-- <small>1 day ago</small> -->
+	    						<p>{{comment.user.name}}</p>
+	    						<!-- <p>Project Almanac</p> -->
+	    						<p class="reaction-description">
+	    						{{comment.body}}
+	    						</p>									
+	    					</div>		
+	      				</div>
+
+	      			</div>
+        		</div>
+        	</div>
+		</div>
+	</div>
+</div>
+</div>

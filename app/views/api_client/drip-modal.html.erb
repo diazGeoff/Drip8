@@ -1,0 +1,31 @@
+<div class="modal fade" id="addADrip" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div class="modal-dialog" drip>
+	<div class="modal-content">
+		<div class="modal-body">
+			<div class="row">
+				<div class="col-md-3">
+					<h4>
+					Add a drip
+					</h4>
+				</div>
+				<div class="col-md-9"style="padding-left: 0;">
+					<input type="hidden" ng-model="dripDetails.dripbucket_id" />					
+					<input type="text" class="form-control" placeholder="Title" ng-model="dripDetails.title">
+					<br />
+					<input type="text" class="form-control input-number" placeholder="Link..." ng-model="dripDetails.link">
+					<br />
+					<textarea placeholder="Description" class="form-control custom-control" rows="4" style="resize:none" ng-model="dripDetails.description"></textarea>
+					<br /> 
+					<select class="form-control" ng-model="dripDetails.state">
+						<option value="public">Public</option>
+						<option value="private">Private</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary pull-right" ng-click="addDrip( )">Add</button>
+		</div>
+	</div>
+</div>
+</div>

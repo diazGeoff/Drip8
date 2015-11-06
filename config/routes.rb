@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :drippers
   match ':controller(/:action(/:id(.:format)))', :via => [:get, :post, :options] 
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -56,4 +57,15 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  get '/' => 'drip#index'
+  get '/drip' => 'drip#home'
+  get '/drip/me' => 'drip#profile'
+  get '/logout' => 'drip#logout'
+
+  get '/api/user' => 'api_client#user_info'
+  get '/api/template' => 'api_client#get_temp'  
+
+  get '/auth/facebook/callback' => 'drip#facebook_callback'
+
+  match ':controller(/:action(/:id(.:format)))', :via => [:get, :post, :options] 
 end

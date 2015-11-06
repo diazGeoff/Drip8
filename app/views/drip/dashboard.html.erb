@@ -1,0 +1,147 @@
+<nav class="navbar navbar-default" profile>
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+				<div class="nav-img">
+					<img to="/drip/profile/" ng-click="passProfile( profile )" ng-src="{{ profile.profile_picture }}" class="nav-avatar">
+				</div>      
+		</form>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="main-dashboard container" drip-dashboard>
+  <div infinite-scroll='loadMore()'>
+  	<div class="user" ng-repeat="drip in drips">
+  		<div class="about-user col-lg-12">
+  			<div class="img col-lg-1 ">
+  				<div class="img-container">
+  				<img class="dripper-img" ng-src="{{ drip.drip.user.profile_picture }}" to="/drip/profile/" ng-click="passProfile( drip.drip.user )">
+  			</div>
+  			</div>		
+  				<div class="user-info col-lg-11">
+  					<p to="/drip/profile/" ng-click="passProfile( drip.drip.user )">{{ drip.drip.user.name }}</p>
+  					<p>{{ drip.drip.title }}</p>
+  				</div>
+  			</div>
+  		<div class="drip-description col-lg-12">
+  			<p>{{ drip.drip.description }}</p>
+  		</div>
+  		<div class="col-lg-10" video-source="{{ drip.drip.link }}" video-dashboard>			
+  			<iframe         
+  				class="video-size"
+  				ng-src="{{ videoSrc }}"
+  				frameborder="0" 
+  				allowfullscreen>
+  			</iframe>
+  		</div>
+  		<div class="drip-actions col-lg-12">			
+  			<div class="pull-right">
+  				<button data-toggle="modal" data-target="#myModal" ng-click="seeBucket( drip )">see bucket</button>
+  				<button>React</button>
+  			</div>
+  		</div>
+  		<div class="divider col-lg-12"></div>		
+  		</div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog" drip-modal-bucket>
+  <div class="modal-dialog">
+		<div class="left-arrow">
+			
+		</div>
+		<div class="right-arrow">
+			
+		</div>
+    <!-- Modal content-->
+    <div class="modal-content row">
+<!--       <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div> -->
+      <div class="modal-body">
+        <h4 class="modal-title">{{ dripBucketDetails.drip.dripbucket.name }}</h4>
+        	<div class="modal-main-image">
+        		<iframe         
+              class="video-size"
+              ng-src="{{ directDrip }}"
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+        	</div>
+        <div class="process-supp-details">
+        	<div class="attempts">
+        		<p class="pull-right"></p>
+        			<p ng-if=" dripBucketDetails.drip.dripbucket.drips.length > 1 ">{{ dripBucketDetails.drip.dripbucket.drips.length }} drips</p>
+              <p ng-if=" dripBucketDetails.drip.dripbucket.drips.length <= 1 ">{{ dripBucketDetails.drip.dripbucket.drips.length }} drip</p>
+			    </div>
+      				<div id="demo">
+        				<div class="container owl-modal">
+          				<div class="row">
+           				 <div class="span12">
+
+              				<div>
+                				<flex-slider slide="drip in dripBucketDetails.drip.dripbucket.drips track by $index" class="carousel" animation="slide" animation-loop="false" item-width="210" item-margin="5">
+                            <li ng-click="changeVideo( drip )"><img ng-src="{{drip.thumb}}" alt="Owl Image"></li>
+                        </flex-slider>
+              				</div>
+              
+            				</div>
+          				</div>
+       				 </div>
+    				</div>
+    			<!-- <div class="divider"></div>  -->	
+        </div>
+        <div class="reactions-head">
+        		<p ng-if=" dripBucketDetails.drip.comments.length <= 1 ">{{ dripBucketDetails.drip.comments.length }} reaction</p>
+            <p ng-if=" dripBucketDetails.drip.comments.length > 1 ">{{ dripBucketDetails.drip.comments.length }} reactions</p>
+        		<div class="reaction">  
+        			<textarea class="reaction-field" ng-model="dripComment"></textarea>
+        			<button class="pull-right" ng-click="react( dripComment )" >React</button>
+      			  <div class="reaction-users" ng-repeat="comment in comments">
+      						<div class="about-user modal-user">
+      							<div class="img col-lg-2">
+      								<div class="img-container" to="/drip/profile/" ng-click="passProfile( comment.user )">{{comment.user.name}}>
+      									<img class="dripper-img" ng-src="{{comment.user.profile_picture}}">
+      								</div>
+      							</div>
+
+    								<div class="user-info col-lg-10">
+    									<!-- <small>1 day ago</small> -->
+    									<p to="/drip/profile/" ng-click="passProfile( comment.user )">{{comment.user.name}}</p>
+    									<!-- <p>Project Almanac</p> -->
+    									<p class="reaction-description">
+    										{{comment.body}}
+    									</p>									
+    								</div>		
+      						</div>
+
+      				</div>
+        		</div>
+        </div>
+      </div>
+<!--       <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+
+  </div>
+</div>
+

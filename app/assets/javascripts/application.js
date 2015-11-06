@@ -13,4 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+
+//= require jquery.min
+//= require jquery.flexslider
+//= require angular.min
+//= require ng-infinite-scroll.min
+//= require angular-flexslider
+//= require async.min
+//= require sly.min
+//= require app
+//= require bootstrap.min
+//= require jquery-app
