@@ -51,6 +51,13 @@ drip8
 					};
 					scope.setting = function setting ( drip , setting , target ) {						
 						console.log( drip , setting , target );
+						$http.post( '/api/update_drip_state' , {
+							"drip_id": drip.id,
+							"state": setting 
+						})
+						.success( function( response ){
+							console.log( response );
+						} )
 					};
 					scope.deleteDrip = function deleteDrip ( drip , target ) {						
 						console.log( drip , target );

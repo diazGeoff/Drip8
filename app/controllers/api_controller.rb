@@ -7,6 +7,30 @@ class ApiController < ApplicationController
 		
 	end
 
+	def update_drip_state
+		if @drip = Drip.find_by_id(params[:drip_id])
+			if @drip.update_attributes(:state => params[:state])
+				render json: { :status => "Success", :drip => @drip }
+			else
+				render json: { :status => "Failed" }	
+			end
+		else
+			render json: { :status => "Bucket not exist" }
+		end
+	end
+
+	def update_drip_bucket_state
+		if @drip = Dripbucket.find_by_id(params[:drip_id])
+			if @drip.update_attributes(:state => params[:state])
+				render json: { :status => "Success", :drip => @drip }
+			else
+				render json: { :status => "Failed" }	
+			end
+		else
+			render json: { :status => "Bucket not exist" }
+		end
+	end
+
 	def drip_length
 		count = Drip.all.count
 		render json: {status: :success, count: count}
