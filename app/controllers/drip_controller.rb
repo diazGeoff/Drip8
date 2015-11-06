@@ -30,7 +30,7 @@ class DripController < ApplicationController
 				@user = User.create( :email => @oauth[:info][:email] , :name => @oauth[:info][:name] , :profile_picture => @oauth[:info][:image] )
 				bucket_info = ["who I am","what I do","what I am proud of"]
 				bucket_info.each do |name|
-					@bucket = Dripbucket.create(:name => name, :user_id => @user.id, :state => "public")
+					@bucket = Dripbucket.create(:name => name, :user_id => @user.id, :state => "profile only")
 				end
 			end
 			session[:user] = @user
