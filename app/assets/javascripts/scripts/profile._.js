@@ -9,7 +9,7 @@ drip8
 				"restrict": "A",
 				"scope": true,
 				"link": function onLink ( scope , element , attributeSet ) {
-					console.log( "profile" );
+					//console.log( "profile" );
 					scope.profile = { };					
 
 					scope.getUserInfo = function getUserInfo ( ) {
@@ -44,11 +44,12 @@ drip8
 					scope.$watch( 'profile' , function( newValue , oldValue ){
 						if( newValue != oldValue ){
 							scope.profile.newValue;
-							console.log( "Profile****" , scope.profile );
+							//console.log( "Profile****" , scope.profile );
 							profileService.setProfile( scope.profile );
 						}
 					} )
-					scope.getUserInfo( );					
+					scope.getUserInfo( );	
+					scope.profileData = JSON.parse( localStorage.userProfile );				
 				}
 			}
 		}

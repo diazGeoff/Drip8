@@ -1,8 +1,11 @@
 <div class="modal fade" id="videoLink" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 <div class="modal-dialog" video-link>
 	<div class="modal-content">
+		
 		<div class="modal-body">
+			
 			<div class="row">
+			{{ drip.title }}
 				<center>
 					<iframe         
 						class="video-size"
@@ -11,12 +14,15 @@
 						allowfullscreen>
 					</iframe>
 				</center>
+
+			
 			</div>
+			<section> {{ drip.description }} </section>
 			<div class="reactions-head">
         		<p>7 Reactions</p>
         		<div class="reaction">  
-        			<textarea class="reaction-field" ng-model="dripComment"></textarea>
-        			<button class="pull-right" ng-click="react( dripComment )" >React</button>
+        			<textarea class="reaction-field" placeholder="say something..." ng-model="dripComment"></textarea>
+        			<button class="pull-right" ng-click="react( dripComment )" >say it</button>
 	      			<div class="reaction-users" ng-repeat="comment in comments">
 	      				<div class="about-user modal-user">
 	      					<div class="img col-lg-2">

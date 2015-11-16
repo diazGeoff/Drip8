@@ -6,7 +6,7 @@ drip8
 				setProfile: function setProfile( credentials ){
 					if( credentials ){
 						profile = credentials;
-						console.log( profile );
+						//console.log( profile );
 					} else {
 						return profile;
 					}

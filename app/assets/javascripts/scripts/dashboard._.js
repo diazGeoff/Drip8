@@ -55,6 +55,7 @@ drip8
 					    var lastId = last.drip.id;
 					    var idLoad = lastId - 1;
 					    if( lastId >= 0 && scope.lastId != 'stop' ){
+					    	console.log( scope.lastId );
 					    	$http.post( "/api/drip_each" , { "drip_id": idLoad } )
 								.success( function ( response ) {
 									//callback( null , response );
@@ -64,6 +65,7 @@ drip8
 									}
 									if( lastId == 0 ){
 										scope.lastId = 'stop';
+										console.log( scope.lastId );
 									}
 								} );
 					    }

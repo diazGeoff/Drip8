@@ -11,10 +11,10 @@
 				    <span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				    <li><a ng-click="rename( bucket , 'bucket' )">rename</a></li>
-				    <li><a ng-click="setting( bucket , 'public' , 'bucket' )">set to public</a></li>
+				    <li><a ng-click="rename( bucket , 'bucket' )">edit</a></li>
+				    <li><a ng-click="setting( drips , 'public' , 'bucket' )">set to public</a></li>
 				    <li><a ng-click="setting( bucket , 'profile only' , 'bucket' )">set to profile only</a></li>
-				    <li><a ng-click="deleteDrip( bucket , 'bucket' )">delete</a></li>
+				    <li><a ng-click="setting( bucket , 'deleted' , 'bucket' )">delete</a></li>
 				  </ul>
 				</div>
 				<div class="row custom-drip-row">
@@ -35,13 +35,13 @@
 								    <span class="caret"></span>
 								  </button>
 								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-								    <li><a ng-click="rename( drip , 'drip' )">rename</a></li>
+								    <li><a ng-click="rename( drip , 'drip' )">edit</a></li>
 								    <li><a ng-click="setting( drip , 'public' , 'drip' )">set to public</a></li>
 								    <li><a ng-click="setting( drip , 'profile only' , 'drip' )">set to profile only</a></li>
-								    <li><a ng-click="deleteDrip( drip , 'drip' )">delete</a></li>
+								    <li><a ng-click="setting( drip , 'deleted' , 'drip' )">delete</a></li>
 								  </ul>
 								</div>
-								<p class="pull-right" feature="{{profileData.id}}-{{drip.id}}" ng-show="drip.link != profileData.featured"><i class="glyphicon glyphicon-film" style="font-size: 1.5em"></i></p>
+								<!-- <p class="pull-right" feature="{{profileData.id}}-{{drip.id}}" ng-show="drip.link != profileData.featured"><i class="glyphicon glyphicon-film" style="font-size: 1.5em"></i></p> -->
 								<h6>{{ drip.title }}</h6>								
 								<div class="row" ng-click="showVideo( linkUri( drip.link , 'video' ), drip.id )">
 									<div class="col-lg-12">

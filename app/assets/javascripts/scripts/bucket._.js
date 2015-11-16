@@ -10,7 +10,7 @@ drip8
 					scope.profileData = { };
 
 					scope.buckets = [ ];
-					console.log( localStorage.userProfile );
+					//console.log( localStorage.userProfile );
 					scope.newDrip = function newDrip ( id ) {
 						$rootScope.$broadcast( "drip-new" , id );
 					};
@@ -47,17 +47,26 @@ drip8
 						} );
 					};
 					scope.rename = function rename ( drip , target ) {						
-						console.log( drip , target );
+						//console.log( drip , target );
 					};
-					scope.setting = function setting ( drip , setting , target ) {						
-						console.log( drip , setting , target );
-						$http.post( '/api/update_drip_state' , {
-							"drip_id": drip.id,
-							"state": setting 
-						})
-						.success( function( response ){
-							console.log( response );
-						} )
+					scope.setting = function setting ( drips , setting , target ) {						
+						console.log( drips , setting , target );
+
+						switch( target ){
+
+							case 'drip':
+								$http.post( '/api/update_drip_state' , {
+									"drip_id": drip.id,
+									"state": setting 
+								})
+								.success( function( response ){
+									console.log( drips );
+								} )
+								break;
+							case 'bucket':
+								console.log( scope.drips );
+						}
+						
 					};
 					scope.deleteDrip = function deleteDrip ( drip , target ) {						
 						console.log( drip , target );
@@ -82,8 +91,8 @@ drip8
 					scope.$on( "profile-data" , 
 						function ( evt , profile ) {
 							scope.profileData = JSON.parse( localStorage.userProfile );
-							console.log( "profile data below" )
-							console.log( scope.profileData )
+							//console.log( "profile data below" )
+							//console.log( scope.profileData )
 							scope.getAllBucket( );
 						} );					
 				}

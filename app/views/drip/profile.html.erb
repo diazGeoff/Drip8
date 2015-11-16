@@ -1,35 +1,33 @@
 <div class="col-lg-12" profile>
+<div class="container-fluid" style="background-color: #3F51B5;">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <form class="navbar-form navbar-right" role="search">
+        <!-- <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div> -->
+				<div class="nav-img">
+					<img to="/drip/profile/" ng-click="passProfile( profile )" ng-src="{{ profile.profile_picture }}" class="nav-avatar">
+				</div>      
+		</form>
+    </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
 <div class="row">
 	<div class="col-lg-3 side-menu-bar">
 		<section class="drip-user-box">
 			<h5>				
-				<img ng-src="{{ profile.profile_picture }}" class="profile-image" /> {{ profile.name }}
+				<img ng-src="{{ profileData.profile_picture }}" class="profile-image" /> {{ profileData.name }}
 			</h5>
 		</section>
 	</div>
 	<div class="col-lg-8" style="border-left: 1px solid #CFD8DC;">
-		<div class="row" style="background-color: #3F51B5;">
-			<section class="drip-top-links">
-				<ul style="overflow:hidden;float:right; width: 100%;">
-					<li><input type="text" class="form-control pull-left" placeholder="Search here..." style="width: 550px;"></li>
-					<li><a href to="/drip" style="color: white;">Dashboard</a></li>
-				</ul>
-			</section>
-		</div>
-		<!-- <div class="row">
-			<section class="drip-featured col-lg-2">
-				<h4>Featured Drip</h4>				
-			</section>
-			<br />
-			<section class="col-lg-10">
-				<iframe         
-					class="video-size"
-					ng-src="{{ profile.featuredVideo }}"
-					frameborder="0" 
-					allowfullscreen>
-				</iframe>
-			</section>
-		</div> -->
 		<ui-template
 			ng-template="drip-bucket">
 		</ui-template>
