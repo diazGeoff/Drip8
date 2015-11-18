@@ -26,7 +26,8 @@ drip8
 	.directive( "bucket" , [
 		"$rootScope",
 		"$http",
-		function directive ( $rootScope , $http ) {
+		'profileService', 
+		function directive ( $rootScope , $http , profileService ) {
 			return {
 				"restrict": "A",
 				"scope": true,
@@ -35,8 +36,8 @@ drip8
 
 					scope.buckets = [ ];
 					//console.log( localStorage.userProfile );
-					scope.newDrip = function newDrip ( id ) {
-						$rootScope.$broadcast( "drip-new" , id );
+					scope.newDrip = function newDrip ( id , bucketName ) {
+						$rootScope.$broadcast( "drip-new" , id , bucketName );
 					};
 
 					scope.getDrip = function getDrip ( id ) {
@@ -49,6 +50,7 @@ drip8
 						} );
 					};
 
+					
 					scope.newBucket = function newBucket ( bucket ) {
 						$( "#createDripBoardBox" ).modal( "hide" );
 						$http.post( "/api/add_bucket" , {
@@ -68,6 +70,12 @@ drip8
 						} )
 						.success( function ( response ) {							
 							scope.buckets = response.buckets;
+							var profile = profileService.setProfile();
+							if( scope.profileData.id == '1' || profile.id == '1' ){
+								scope.buckets.splice( 0 , 3 );
+								//console.log( scope.buckets );
+							}
+							
 						} );
 					};
 					scope.rename = function rename ( drip , target ) {						
@@ -97,26 +105,33 @@ drip8
 					};				
 
 					scope.settingDropdown = function settingDropdown( name ){
-						switch( name ){
+						var profile = profileService.setProfile() // actual profile
+						if( scope.profileData.id != profile.id ){
+							return false;
+						}else{
+							switch( name ){
 
-							case 'who I am':
-								return false;
-								break;
-							case 'what I do':
-								return false;
-								break;
-							case 'what I am proud of':
-								return false;
-								break;
-							default:
-								return true;
+								case 'who I am':
+									return false;
+									break;
+								case 'what I do':
+									return false;
+									break;
+								case 'what I am proud of':
+									return false;
+									break;
+								default:
+									return true;
+							}
 						}
 					};
+
+
 					scope.$on( "profile-data" , 
 						function ( evt , profile ) {
-							scope.profileData = JSON.parse( localStorage.userProfile );
-							//console.log( "profile data below" )
-							//console.log( scope.profileData )
+							scope.profileData = JSON.parse( localStorage.userProfile );// visited profile 
+							console.log( "profile data below" )
+							console.log( scope.profileData )
 							scope.getAllBucket( );
 						} );					
 				}
@@ -137,6 +152,7 @@ drip8
 					$http.get( "/api/drip_length" )
 					.success( function ( response ) {
 						var taskArray = [ ];
+						
 						for ( var index = response.count  ; index >= ( response.count - 3 ) ; index -- ) {
 							taskArray.push( index );
 						}
@@ -144,7 +160,7 @@ drip8
 						async
 							.parallel( asyncTasks , function ( err , taskResponse ) {
 								for( var index = 0 ; index < taskResponse.length ; index++ ){
-									if( taskResponse[ index ].drip == null ){
+									if( taskResponse[ index ].drip == null || taskResponse[ index ].drip.state != 'public' ){
 										taskResponse.splice( index , 1 );
 									}
 									console.log( taskResponse[ index ].drip );
@@ -152,6 +168,9 @@ drip8
 								scope.drips = taskResponse;
 								console.log( taskResponse );
 							} );
+					
+						
+						
 					} );
 					scope.passProfile = function passProfile( profile ){
 						localStorage.setItem("userProfile", JSON.stringify( profile ) );
@@ -176,23 +195,28 @@ drip8
 					};
 
 					scope.loadMore = function loadMore() {
+						console.log( " ***************  " )
+						console.log( scope.drips );
+						console.log( scope.drips[scope.drips.length - 1] );
 					    var last = scope.drips[scope.drips.length - 1];
-					    var lastId = last.drip.id;
-					    var idLoad = lastId - 1;
-					    if( lastId >= 0 && scope.lastId != 'stop' ){
-					    	console.log( scope.lastId );
-					    	$http.post( "/api/drip_each" , { "drip_id": idLoad } )
-								.success( function ( response ) {
-									//callback( null , response );
-									console.log( response );
-									if( response.drip != null && response.drip.state == 'public' ){
-										scope.drips.push( response );
-									}
-									if( lastId == 0 ){
-										scope.lastId = 'stop';
-										console.log( scope.lastId );
-									}
-								} );
+					    if( last != null ){
+					    	var lastId = last.drip.id;
+						    var idLoad = lastId - 1;
+						    if( lastId >= 0 && scope.lastId != 'stop' ){
+						    	console.log( scope.lastId );
+						    	$http.post( "/api/drip_each" , { "drip_id": idLoad } )
+									.success( function ( response ) {
+										//callback( null , response );
+										console.log( response );
+										if( response.drip != null && response.drip.state == 'public' ){
+											scope.drips.push( response );
+										}
+										if( lastId == 0 ){
+											scope.lastId = 'stop';
+											console.log( scope.lastId );
+										}
+									} );
+						    }
 					    }
 					    
 					};
@@ -347,7 +371,7 @@ drip8
 				"scope": true,
 				"link": function onLink ( scope , element , atrributeSet ) {
 					scope.dripDetails = { 
-						"state": "public"
+						"state": "profile only"
 					};
 
 					scope.profileData = { };
@@ -368,8 +392,16 @@ drip8
 					};
 
 					scope.$on( "drip-new" , 
-						function ( evt , bucketId ) {							
-							scope.dripDetails.dripbucket_id = bucketId;							
+						function ( evt , bucketId , bucketName ) {							
+							scope.dripDetails.dripbucket_id = bucketId;
+							scope.bucketName = bucketName;
+							scope.dripState = function dripState(){
+								if( scope.bucketName == 'who I am' || scope.bucketName == 'what I do' || scope.bucketName == 'what I am proud of' ){
+									return false;
+								}else{
+									return true;
+								}
+							}		
 						} );
 
 					scope.$on( "profile-data" , 
@@ -467,12 +499,13 @@ drip8
 					scope.$watch( 'profile' , function( newValue , oldValue ){
 						if( newValue != oldValue ){
 							scope.profile.newValue;
-							//console.log( "Profile****" , scope.profile );
+							console.log( "Profile****" , scope.profile );
 							profileService.setProfile( scope.profile );
 						}
 					} )
 					scope.getUserInfo( );	
-					scope.profileData = JSON.parse( localStorage.userProfile );				
+					scope.profileData = JSON.parse( localStorage.userProfile );
+					console.log( scope.profileData );
 				}
 			}
 		}

@@ -8,7 +8,7 @@ drip8
 				"scope": true,
 				"link": function onLink ( scope , element , atrributeSet ) {
 					scope.dripDetails = { 
-						"state": "public"
+						"state": "profile only"
 					};
 
 					scope.profileData = { };
@@ -29,8 +29,16 @@ drip8
 					};
 
 					scope.$on( "drip-new" , 
-						function ( evt , bucketId ) {							
-							scope.dripDetails.dripbucket_id = bucketId;							
+						function ( evt , bucketId , bucketName ) {							
+							scope.dripDetails.dripbucket_id = bucketId;
+							scope.bucketName = bucketName;
+							scope.dripState = function dripState(){
+								if( scope.bucketName == 'who I am' || scope.bucketName == 'what I do' || scope.bucketName == 'what I am proud of' ){
+									return false;
+								}else{
+									return true;
+								}
+							}		
 						} );
 
 					scope.$on( "profile-data" , 

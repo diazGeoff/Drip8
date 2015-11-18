@@ -17,8 +17,8 @@
 					<textarea placeholder="Description" class="form-control custom-control" rows="4" style="resize:none" ng-model="dripDetails.description"></textarea>
 					<br /> 
 					<select class="form-control" ng-model="dripDetails.state">
-						<option value="public">Public</option>
-						<option value="private">Private</option>
+						<option value="public" ng-if="dripState()">Public</option>
+						<option value="profile only">Profile Only</option>
 					</select>
 				</div>
 			</div>

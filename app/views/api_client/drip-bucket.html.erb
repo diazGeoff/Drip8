@@ -19,7 +19,7 @@
 				</div>
 				<div class="row custom-drip-row">
 					<div class="panel-body custom-panel-board">
-						<div class="drip-create-board" ng-click="newDrip( bucket.id )">
+						<div class="drip-create-board" ng-click="newDrip( bucket.id , bucket.name )">
 							<p data-toggle="modal" data-target="#addADrip" >
 								<i class="glyphicon glyphicon-plus-sign" style="font-size:2.5em;"></i>
 								<h4>add a drip</h4>
@@ -29,7 +29,7 @@
 					<section drip-list="{{bucket.id}}-{{profileData.id}}">
 						<div class="panel-body custom-panel-board" ng-repeat="drip in drips">
 							<div class="row drip-box-result">
-								<div class="dropdown">
+								<div class="dropdown" ng-if="settingDropdown( bucket.name )">
 								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 								    
 								    <span class="caret"></span>
