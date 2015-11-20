@@ -50,6 +50,7 @@ drip8
 						} );
 					};
 
+					
 					scope.newBucket = function newBucket ( bucket ) {
 						$( "#createDripBoardBox" ).modal( "hide" );
 						$http.post( "/api/add_bucket" , {
@@ -150,6 +151,7 @@ drip8
 					$http.get( "/api/drip_length" )
 					.success( function ( response ) {
 						var taskArray = [ ];
+						
 						for ( var index = response.count  ; index >= ( response.count - 3 ) ; index -- ) {
 							taskArray.push( index );
 						}
@@ -165,6 +167,9 @@ drip8
 								scope.drips = taskResponse;
 								console.log( taskResponse );
 							} );
+					
+						
+						
 					} );
 					scope.passProfile = function passProfile( profile ){
 						localStorage.setItem("userProfile", JSON.stringify( profile ) );
@@ -189,6 +194,9 @@ drip8
 					};
 
 					scope.loadMore = function loadMore() {
+						console.log( " ***************  " )
+						console.log( scope.drips );
+						console.log( scope.drips[scope.drips.length - 1] );
 					    var last = scope.drips[scope.drips.length - 1];
 					    if( last != null ){
 					    	var lastId = last.drip.id;
@@ -361,7 +369,7 @@ drip8
 				"scope": true,
 				"link": function onLink ( scope , element , atrributeSet ) {
 					scope.dripDetails = { 
-						"state": "public"
+						"state": "profile only"
 					};
 
 					scope.profileData = { };
@@ -382,8 +390,16 @@ drip8
 					};
 
 					scope.$on( "drip-new" , 
-						function ( evt , bucketId ) {							
-							scope.dripDetails.dripbucket_id = bucketId;							
+						function ( evt , bucketId , bucketName ) {							
+							scope.dripDetails.dripbucket_id = bucketId;
+							scope.bucketName = bucketName;
+							scope.dripState = function dripState(){
+								if( scope.bucketName == 'who I am' || scope.bucketName == 'what I do' || scope.bucketName == 'what I am proud of' ){
+									return false;
+								}else{
+									return true;
+								}
+							}		
 						} );
 
 					scope.$on( "profile-data" , 
@@ -481,12 +497,13 @@ drip8
 					scope.$watch( 'profile' , function( newValue , oldValue ){
 						if( newValue != oldValue ){
 							scope.profile.newValue;
-							//console.log( "Profile****" , scope.profile );
+							console.log( "Profile****" , scope.profile );
 							profileService.setProfile( scope.profile );
 						}
 					} )
 					scope.getUserInfo( );	
-					scope.profileData = JSON.parse( localStorage.userProfile );				
+					scope.profileData = JSON.parse( localStorage.userProfile );
+					console.log( scope.profileData );
 				}
 			}
 		}

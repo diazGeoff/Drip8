@@ -12,6 +12,7 @@ drip8
 					$http.get( "/api/drip_length" )
 					.success( function ( response ) {
 						var taskArray = [ ];
+						
 						for ( var index = response.count  ; index >= ( response.count - 3 ) ; index -- ) {
 							taskArray.push( index );
 						}
@@ -27,6 +28,9 @@ drip8
 								scope.drips = taskResponse;
 								console.log( taskResponse );
 							} );
+					
+						
+						
 					} );
 					scope.passProfile = function passProfile( profile ){
 						localStorage.setItem("userProfile", JSON.stringify( profile ) );
@@ -51,6 +55,9 @@ drip8
 					};
 
 					scope.loadMore = function loadMore() {
+						console.log( " ***************  " )
+						console.log( scope.drips );
+						console.log( scope.drips[scope.drips.length - 1] );
 					    var last = scope.drips[scope.drips.length - 1];
 					    if( last != null ){
 					    	var lastId = last.drip.id;

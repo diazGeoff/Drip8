@@ -44,12 +44,13 @@ drip8
 					scope.$watch( 'profile' , function( newValue , oldValue ){
 						if( newValue != oldValue ){
 							scope.profile.newValue;
-							//console.log( "Profile****" , scope.profile );
+							console.log( "Profile****" , scope.profile );
 							profileService.setProfile( scope.profile );
 						}
 					} )
 					scope.getUserInfo( );	
-					scope.profileData = JSON.parse( localStorage.userProfile );				
+					scope.profileData = JSON.parse( localStorage.userProfile );
+					console.log( scope.profileData );
 				}
 			}
 		}

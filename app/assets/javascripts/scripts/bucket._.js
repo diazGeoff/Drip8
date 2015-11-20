@@ -26,6 +26,7 @@ drip8
 						} );
 					};
 
+					
 					scope.newBucket = function newBucket ( bucket ) {
 						$( "#createDripBoardBox" ).modal( "hide" );
 						$http.post( "/api/add_bucket" , {
