@@ -19,7 +19,7 @@ drip8
 						async
 							.parallel( asyncTasks , function ( err , taskResponse ) {
 								for( var index = 0 ; index < taskResponse.length ; index++ ){
-									if( taskResponse[ index ].drip == null ){
+									if( taskResponse[ index ].drip == null || taskResponse[ index ].drip.state != 'public' ){
 										taskResponse.splice( index , 1 );
 									}
 									console.log( taskResponse[ index ].drip );
@@ -52,24 +52,25 @@ drip8
 
 					scope.loadMore = function loadMore() {
 					    var last = scope.drips[scope.drips.length - 1];
-					    var lastId = last.drip.id;
-					    var idLoad = lastId - 1;
-					    if( lastId >= 0 && scope.lastId != 'stop' ){
-					    	console.log( scope.lastId );
-					    	$http.post( "/api/drip_each" , { "drip_id": idLoad } )
-								.success( function ( response ) {
-									//callback( null , response );
-									console.log( response );
-									if( response.drip != null && response.drip.state == 'public' ){
-										scope.drips.push( response );
-									}
-									if( lastId == 0 ){
-										scope.lastId = 'stop';
-										console.log( scope.lastId );
-									}
-								} );
+					    if( last != null ){
+					    	var lastId = last.drip.id;
+						    var idLoad = lastId - 1;
+						    if( lastId >= 0 && scope.lastId != 'stop' ){
+						    	console.log( scope.lastId );
+						    	$http.post( "/api/drip_each" , { "drip_id": idLoad } )
+									.success( function ( response ) {
+										//callback( null , response );
+										console.log( response );
+										if( response.drip != null && response.drip.state == 'public' ){
+											scope.drips.push( response );
+										}
+										if( lastId == 0 ){
+											scope.lastId = 'stop';
+											console.log( scope.lastId );
+										}
+									} );
+						    }
 					    }
-					    
 					};
 
 				}
