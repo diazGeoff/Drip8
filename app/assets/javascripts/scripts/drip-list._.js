@@ -1,15 +1,35 @@
 drip8
+	.service( "dripListService" , [
+			function(){
+				var dripList = [];
+
+				return {
+					// takes id of dripBucket and sets drips in
+					setDripList: function setDripList( id , credentials ){
+						if( credentials ){
+							dripList[ id ] = credentials;
+						}else{
+							return dripList
+						}
+					}
+				}
+			}
+		] );
+
+drip8
 	.directive( "dripList" , [
 		"$http",
 		"Video",
 		"$rootScope",
-		function directive ( $http , Video , $rootScope ) {
+		'dripListService',
+		function directive ( $http , Video , $rootScope , dripListService ) {
 			return {
 				"restrict": "A",
 				"scope": true,
 				"link": function onLink ( scope , element , attributeSet ) {
 
 					var ids = attributeSet.dripList.split( "-" );
+					console.log( ids[ 2 ] );
 					scope.drips = [ ];	
 
 					scope.dripListing = function dripListing ( ) {
@@ -19,6 +39,8 @@ drip8
 						} )
 						.success( function ( response ) {
 							scope.drips = response.drips;
+							dripListService.setDripList( ids[ 2 ] , scope.drips );
+							console.log( dripListService.setDripList() );
 						} );
 					};
 

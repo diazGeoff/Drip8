@@ -3,7 +3,8 @@ drip8
 		"$rootScope",
 		"$http",
 		'profileService',
-		function directive ( $rootScope , $http , profileService ) {
+		'dripListService',
+		function directive ( $rootScope , $http , profileService , dripListService ) {
 			return {
 				"restrict": "A",
 				"scope": true,
@@ -56,22 +57,56 @@ drip8
 					scope.rename = function rename ( drip , target ) {						
 						//console.log( drip , target );
 					};
-					scope.setting = function setting ( drips , setting , target ) {						
-						console.log( drips , setting , target );
+					
+					var createAsyncTask = function createAsyncTask ( taskArray , setting ) {
+						var tasks = [ ];
+
+						taskArray.forEach( function ( e ) {
+							console.log( e )
+							if( setting == 'public' ){
+								setting = e.state
+							}else{
+								setting = 'profile only'
+							}
+							tasks.push( function ( callback ) {
+								$http.post( "/api/update_drip_state" , { 
+									"drip_id": e.id,
+									"state": setting  
+								} )
+								.success( function ( response ) {
+									callback( null , response );
+								} );
+							} );
+						} );
+						return tasks;
+					};
+
+					scope.setting = function setting ( drips , setting , target , id ) {						
+						//console.log( drips , setting , target );
 
 						switch( target ){
 
 							case 'drip':
 								$http.post( '/api/update_drip_state' , {
-									"drip_id": drip.id,
+									"drip_id": drips.id,
 									"state": setting 
 								})
 								.success( function( response ){
-									console.log( drips );
+									//console.log( "New" , response );
+									scope.$broadcast( "drips-reload" );
 								} )
 								break;
 							case 'bucket':
-								console.log( scope.drips );
+								console.log( id );
+								var dripList = dripListService.setDripList();
+								var list = dripList[ id ];
+
+								var asyncTasks = createAsyncTask( list , setting );
+								async
+									.parallel( asyncTasks , function ( err , taskResponse ) {
+										console.log( taskResponse );
+										scope.$broadcast( "drips-reload" );
+									} );
 						}
 						
 					};

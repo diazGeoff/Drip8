@@ -12,8 +12,8 @@
 				  </button>
 				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 				    <li><a ng-click="rename( bucket , 'bucket' )">edit</a></li>
-				    <li><a ng-click="setting( drips , 'public' , 'bucket' )">set to public</a></li>
-				    <li><a ng-click="setting( bucket , 'profile only' , 'bucket' )">set to profile only</a></li>
+				    <li><a ng-click="setting( bucket , 'public' , 'bucket' , $index )">set to public</a></li>
+				    <li><a ng-click="setting( bucket , 'profile only' , 'bucket' , $index )">set to profile only</a></li>
 				    <li><a ng-click="setting( bucket , 'deleted' , 'bucket' )">delete</a></li>
 				  </ul>
 				</div>
@@ -26,7 +26,7 @@
 							</p>
 						</div>
 					</div>
-					<section drip-list="{{bucket.id}}-{{profileData.id}}">
+					<section drip-list="{{bucket.id}}-{{profileData.id}}-{{$index}}">
 						<div class="panel-body custom-panel-board" ng-repeat="drip in drips">
 							<div class="row drip-box-result">
 								<div class="dropdown" ng-if="settingDropdown( bucket.name )">

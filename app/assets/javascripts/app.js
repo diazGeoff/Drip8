@@ -27,7 +27,8 @@ drip8
 		"$rootScope",
 		"$http",
 		'profileService',
-		function directive ( $rootScope , $http , profileService ) {
+		'dripListService',
+		function directive ( $rootScope , $http , profileService , dripListService ) {
 			return {
 				"restrict": "A",
 				"scope": true,
@@ -80,22 +81,56 @@ drip8
 					scope.rename = function rename ( drip , target ) {						
 						//console.log( drip , target );
 					};
-					scope.setting = function setting ( drips , setting , target ) {						
-						console.log( drips , setting , target );
+					
+					var createAsyncTask = function createAsyncTask ( taskArray , setting ) {
+						var tasks = [ ];
+
+						taskArray.forEach( function ( e ) {
+							console.log( e )
+							if( setting == 'public' ){
+								setting = e.state
+							}else{
+								setting = 'profile only'
+							}
+							tasks.push( function ( callback ) {
+								$http.post( "/api/update_drip_state" , { 
+									"drip_id": e.id,
+									"state": setting  
+								} )
+								.success( function ( response ) {
+									callback( null , response );
+								} );
+							} );
+						} );
+						return tasks;
+					};
+
+					scope.setting = function setting ( drips , setting , target , id ) {						
+						//console.log( drips , setting , target );
 
 						switch( target ){
 
 							case 'drip':
 								$http.post( '/api/update_drip_state' , {
-									"drip_id": drip.id,
+									"drip_id": drips.id,
 									"state": setting 
 								})
 								.success( function( response ){
-									console.log( drips );
+									//console.log( "New" , response );
+									scope.$broadcast( "drips-reload" );
 								} )
 								break;
 							case 'bucket':
-								console.log( scope.drips );
+								console.log( id );
+								var dripList = dripListService.setDripList();
+								var list = dripList[ id ];
+
+								var asyncTasks = createAsyncTask( list , setting );
+								async
+									.parallel( asyncTasks , function ( err , taskResponse ) {
+										console.log( taskResponse );
+										scope.$broadcast( "drips-reload" );
+									} );
 						}
 						
 					};
@@ -237,17 +272,37 @@ drip8
 
 // 	} );
 drip8
+	.service( "dripListService" , [
+			function(){
+				var dripList = [];
+
+				return {
+					// takes id of dripBucket and sets drips in
+					setDripList: function setDripList( id , credentials ){
+						if( credentials ){
+							dripList[ id ] = credentials;
+						}else{
+							return dripList
+						}
+					}
+				}
+			}
+		] );
+
+drip8
 	.directive( "dripList" , [
 		"$http",
 		"Video",
 		"$rootScope",
-		function directive ( $http , Video , $rootScope ) {
+		'dripListService',
+		function directive ( $http , Video , $rootScope , dripListService ) {
 			return {
 				"restrict": "A",
 				"scope": true,
 				"link": function onLink ( scope , element , attributeSet ) {
 
 					var ids = attributeSet.dripList.split( "-" );
+					console.log( ids[ 2 ] );
 					scope.drips = [ ];	
 
 					scope.dripListing = function dripListing ( ) {
@@ -257,6 +312,8 @@ drip8
 						} )
 						.success( function ( response ) {
 							scope.drips = response.drips;
+							dripListService.setDripList( ids[ 2 ] , scope.drips );
+							console.log( dripListService.setDripList() );
 						} );
 					};
 
