@@ -20,7 +20,7 @@ drip8
 						async
 							.parallel( asyncTasks , function ( err , taskResponse ) {
 								for( var index = 0 ; index < taskResponse.length ; index++ ){
-									if( taskResponse[ index ].drip == null || taskResponse[ index ].drip.state != 'public' ){
+									if( taskResponse[ index ].drip == null || taskResponse[ index ].drip.state != 'public' || taskResponse[ index ].drip.state != 'deleted' ){
 										taskResponse.splice( index , 1 );
 									}
 									console.log( taskResponse[ index ].drip );

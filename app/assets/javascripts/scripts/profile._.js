@@ -22,6 +22,11 @@ drip8
 					scope.passProfile = function passProfile( profile ){
 						localStorage.setItem("userProfile", JSON.stringify( profile ) );
 					};
+
+					scope.profileName = function profileName( name ){
+						var name = name.split( " " );
+						return name[ 0 ];
+					};
 					scope.trustUrl = function trustUrl ( ) {
 						var video_id = "";
 						$http.post( "/api/video_featured" , {

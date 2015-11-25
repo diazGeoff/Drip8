@@ -1,0 +1,344 @@
+body {
+    font-family:'helvetica','Open Sans', Arial, sans-serif;
+	font-size:15px;
+	font-weight:500;
+	line-height:1.6em;
+    color: #414a53;
+    background-color: #fcfcfc;
+}
+h2, h3, h5 {
+    font-weight: bold;
+    padding: 5px 0;
+    margin: 0;
+}
+.navbar .nav > li > a {
+    color: #414a53;
+    text-shadow: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+.navbar .nav a:hover {
+	background:none;
+	color: #D03838 !important;
+}
+.navbar .nav > .active > a:active,.navbar .nav > .active > a:focus {
+	background:none;
+	outline:0;
+	font-weight:700;
+}
+.navbar .nav li .dropdown-menu {
+	z-index:2000;
+    left:-53px;
+}
+header .navbar {
+    margin-bottom: 0;
+    z-index: 9;
+}
+.navbar-default {
+    border: none;
+    color:#222;
+}
+header ul.navbar-nav {
+    float: right;
+    margin-right: 0;
+}
+div#bs-example-navbar-collapse-1 {
+    padding: 0px;
+}
+header .navbar {
+min-height: 70px;
+padding: 9px 0 0;
+background: #fcfcfc;
+border-bottom: 1px #CACACA solid;
+}
+header .nav li a:hover,
+header .nav li a:focus,
+header .nav li.active a,
+header .nav li.active a:hover,
+header .nav li a.dropdown-toggle:hover,
+header .nav li a.dropdown-toggle:focus,
+header .nav li.active ul.dropdown-menu li a:hover,
+header .nav li.active ul.dropdown-menu li.active a{
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+header .navbar-default .navbar-nav > .open > a,
+header .navbar-default .navbar-nav > .open > a:hover,
+header .navbar-default .navbar-nav > .open > a:focus {
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+a.navbar-brand {
+    margin-left: 9px;
+    color: #222 !important;
+    font-weight: 700;
+    padding-left: 55px;
+}
+.modal-header {
+    padding-top: 11px;
+    padding-right: 12px;
+    border: 0;
+}
+.modal-content {
+    width: 50%;
+    margin: 20px auto;
+    border-radius: 4px;
+    display: block;
+    position: inherit;
+}
+.container {
+    padding-top: 20px;
+    width: 90%;
+}
+.containerx {
+    float:right;
+    margin: 20px 25px 0 0;
+}
+.xbtn {
+    border: none;
+}
+.basket {
+    margin: 0px auto;
+}
+.thumbnail {
+    border: none;
+    border-radius: 1px;
+    background-color: #fcfcfc;
+}
+section#join{
+    background-color: #EEF2F3;
+}
+img {
+    text-align: center;
+    width: 100%;
+}
+.footer {
+    text-align: center;
+    font-size: 12px;
+}
+.footer p {
+    margin: 0;
+}
+.theader {
+    width: 6%;
+    padding: 0;
+}
+.theader2 {
+    width: 13%;
+    padding: 0;
+}
+.ttitle {
+    padding-left: 7px;
+}
+.title2 {
+    padding: 0 6px;
+}
+.user-name {
+    font-size: 18px;
+    font-weight: 700;
+}
+.mtitle {
+    margin-left: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.mtitle2 {
+    margin: 5px 0 0;
+    font-weight: bold;
+    padding: 0;
+}
+.caption p {
+    margin: 0;
+    margin-top: 7px;
+}
+.caption.col-md-4 {
+    padding: 0;
+}
+.panel-body {
+    padding: 10px;
+    padding-bottom: 0px;
+}
+.panel-body.col-md-4 {
+    padding: 10px 0 0 0;
+}
+.col-lg-8.col-md-8.col-sm-12 {
+    padding-right: 0;
+}
+.time {
+    margin-left:16px;
+    font-size: 12px;
+    display: block;
+    color: #A9A9A9;
+    padding: 0px;
+    text-align: right;
+}
+.bucket {
+   background-color: #C3173F;
+    color:#fff;
+    border: 1px #C3173F solid;
+}
+button.btn.btn-default {
+    font-weight: 600;
+}
+.video {
+    padding: 0 15px 0 2px;
+}
+.videolist {
+    margin: 4px 0 0;
+    padding: 0 12px;
+}
+.list {
+    padding: 0;
+}
+.publish {
+    padding-top: 5px;
+    padding-left: 0;
+    margin-bottom: 0;
+    font-size: 13px;
+}
+.status {
+    font-size: 13px;
+    display: inline-block;
+    float: left;
+    list-style: none;
+    padding-left: 0;
+    border-bottom: 1px #DCDFE0 solid;
+}
+.see {
+    text-align: right;
+    margin: 0;
+    margin-right: 15px;
+}
+.center {
+    text-align: center;
+    font-weight: 600;
+}
+.desc {
+    padding-bottom: 5px;
+}
+.capt {
+    width: 32%;
+    max-height: 300px;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+.status li {
+    display: inline;
+}
+.btn-twitter {
+    background: #00acee;
+    border-radius: 0;
+    color: #fff
+}
+.btn-twitter:link, .btn-twitter:visited {
+    color: #fff
+}
+.btn-twitter:active, .btn-twitter:hover {
+    background: #0087bd;
+    color: #fff
+}
+.btn-facebook {
+    background: #3b5998;
+    border-radius: 0;
+    color: #fff
+}
+.btn-facebook:link, .btn-facebook:visited {
+    color: #fff
+}
+.btn-facebook:active, .btn-facebook:hover {
+    background: #30477a;
+    color: #fff
+}
+.social {
+    float: right;
+}
+.right {
+    display: block;
+    margin: auto;
+}
+
+<!-- Comment Box -->
+@import url(//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css);
+
+.detailBox {
+    width:320px;
+    border:1px solid #bbb;
+    margin:50px;
+}
+.titleBox {
+    background-color:#fdfdfd;
+    padding:10px;
+}
+.titleBox label{
+  color:#444;
+  margin:0;
+  display:inline-block;
+}
+
+.commentBox {
+    padding:10px;
+    border-top:1px dotted #bbb;
+}
+.commentBox .form-group:first-child, .actionBox .form-group:first-child {
+    width:80%;
+}
+.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
+    width:18%;
+}
+.actionBox .form-group * {
+    width:100%;
+}
+.taskDescription {
+    margin-top:10px 0;
+}
+.commentList {
+    padding:0;
+    list-style:none;
+    max-height:200px;
+    overflow:auto;
+}
+.commentList li {
+    margin:0;
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage {
+    width:30px;
+    margin-right:5px;
+    height:100%;
+    float:left;
+}
+.commenterImage img {
+    width:100%;
+    border-radius:50%;
+}
+.commentText p {
+    margin:0;
+}
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+.actionBox {
+    border-top:1px dotted #bbb;
+    padding:10px;
+}
+
+nav.navbar.navbar-default {
+    border: none;
+}
+.copyright {
+    font-weight: 600;
+}
+.modal-dialog{
+    width: 90% !important; 
+}

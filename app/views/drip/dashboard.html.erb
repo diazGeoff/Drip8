@@ -1,142 +1,235 @@
+<link href="stylesheet/bootstrap.min.css" rel="stylesheet" />
+<link href="stylesheet/dripstyle.css" rel="stylesheet"/>
 <nav class="navbar navbar-default" profile>
-  <div class="container-fluid" style="background-color: #3F51B5;">
+  <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      
-      <a class="navbar-brand" href="#">Brand</a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">DRIP8</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-      <form class="navbar-form navbar-right" role="search">
-        <!-- <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div> -->
-				<div class="nav-img">
-					<img to="/drip/profile/" ng-click="passProfile( profile )" ng-src="{{ profile.profile_picture }}" class="nav-avatar">
-				</div>      
-		</form>
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <img ng-src="{{ profile.profile_picture }}" class="nav-avatar"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-bind="profileName( profile.name )"><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a to="/drip/profile/" ng-click="passProfile( profile )">Profile</a></li>
+            <!-- <li><a href="#">Message</a></li>
+            <li><a href="#">Privacy Settings</a></li> -->
+            <li role="separator" class="divider"></li> 
+            <li><a href="#">Logout</a></li>
+            <!-- <li role="separator" class="divider"></li> -->
+          </ul>
+        </li>
+      </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div class="main-dashboard container" drip-dashboard>
-  <div infinite-scroll='loadMore()'>
-  	<div class="user" ng-repeat="drip in drips">
-  		<div class="about-user col-lg-12">
-  			<div class="img col-lg-1 ">
-  				<div class="img-container">
-  				<img class="dripper-img" ng-src="{{ drip.drip.user.profile_picture }}" to="/drip/profile/" ng-click="passProfile( drip.drip.user )">
-  			</div>
-  			</div>		
-  				<div class="user-info col-lg-11">
-  					<p to="/drip/profile/" ng-click="passProfile( drip.drip.user )">{{ drip.drip.user.name }}</p>
-  					<p>{{ drip.drip.title }}</p>
-  				</div>
-  			</div>
-  		<div class="drip-description col-lg-12">
-  			<p>{{ drip.drip.description }}</p>
-  		</div>
-  		<div class="col-lg-10" video-source="{{ drip.drip.link }}" video-dashboard>			
-  			<iframe         
-  				class="video-size"
-  				ng-src="{{ videoSrc }}"
-  				frameborder="0" 
-  				allowfullscreen>
-  			</iframe>
-  		</div>
-  		<div class="drip-actions col-lg-12">			
-  			<div class="pull-right">
-  				<button data-toggle="modal" data-target="#myModal" ng-click="seeBucket( drip )">see bucket</button>
-  				<button>React</button>
-  			</div>
-  		</div>
-  		<div class="divider col-lg-12"></div>		
-  		</div>
-  </div>
-</div>
-
+<section class="intro-callaction" id="join" drip-dashboard>
+        <div class="container">  
+            <div class="row">
+                <div class="col-sm-6 col-md-9 basket" ng-repeat="drip in drips">
+                        <div class="thumbnail">
+                            <div class="panel-body">
+                                <div class="col-lg-4 col-md-4 col-sm-12 theader">
+                                    <div class="profile-avatar">
+                                        <img class="img-responsive" ng-src="{{ drip.drip.user.profile_picture }}" to="/drip/profile/" ng-click="passProfile( drip.drip.user )" alt="profile picture">
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-sm-12 ttitle">
+                                    <div class="user-name" ng-bind="drip.drip.user.name"></div>
+                                    <div class="user-information">
+                                        <p ng-bind="drip.drip.dripbucket.name"></p>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-lg-2 time">Yesterday 9:00pm</div> -->
+                            </div>
+                            <div class="mtitle"><h4 ng-bind="drip.drip.title"></h4></div>
+                            <div class="embed-responsive embed-responsive-16by9" video-source="{{ drip.drip.link }}" video-dashboard>     
+                              <iframe         
+                                class="video-size"
+                                ng-src="{{ videoSrc }}"
+                                frameborder="0" 
+                                allowfullscreen>
+                              </iframe>
+                            </div>
+                            <div class="caption">
+                                <p class="desc" ng-bind="drip.description"></p>
+                                <div class="row">
+                                    <div class="btn-group col-md-12" role="group" aria-label="...">
+                                        <!-- <button type="button" class="btn btn-default col-md-2" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Love
+                                        </button>
+                                        <button type="button" class="btn btn-default col-md-2" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment
+                                        </button> -->
+                                        <button data-toggle="modal" data-target="#myModal" ng-click="seeBucket( drip )" type="button" class="btn btn-default bucket col-md-2" aria-label="Left Align">
+                                            See Bucket
+                                        </button>
+                                        <div class="social">
+                                            <!-- Twitter -->
+                                            <!-- <a href="http://twitter.com/home?status=" title="Share on Twitter" target="_blank" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a> -->
+                                         <!-- Facebook -->
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u=" title="Share on Facebook" target="_blank" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+</section>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog" drip-modal-bucket>
   <div class="modal-dialog">
-		<div class="left-arrow">
-			
-		</div>
-		<div class="right-arrow">
-			
-		</div>
-    <!-- Modal content-->
-    <div class="modal-content row">
-<!--       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div> -->
-      <div class="modal-body">
-        <h4 class="modal-title">{{ dripBucketDetails.drip.dripbucket.name }}</h4>
-        	<div class="modal-main-image">
-        		<iframe         
-              class="video-size"
-              ng-src="{{ directDrip }}"
-              frameborder="0" 
-              allowfullscreen>
-            </iframe>
-        	</div>
-        <div class="process-supp-details">
-        	<div class="attempts">
-        		<p class="pull-right"></p>
-        			<p ng-if=" dripBucketDetails.drip.dripbucket.drips.length > 1 ">{{ dripBucketDetails.drip.dripbucket.drips.length }} drips</p>
-              <p ng-if=" dripBucketDetails.drip.dripbucket.drips.length <= 1 ">{{ dripBucketDetails.drip.dripbucket.drips.length }} drip</p>
-			    </div>
-      				<div id="demo">
-        				<div class="container owl-modal">
-          				<div class="row">
-           				 <div class="span12">
-
-              				<div>
-                				<flex-slider slide="drip in dripBucketDetails.drip.dripbucket.drips track by $index" class="carousel" animation="slide" animation-loop="false" item-width="210" item-margin="5">
-                            <li ng-click="changeVideo( drip )"><img ng-src="{{drip.thumb}}" alt="Owl Image"></li>
-                        </flex-slider>
-              				</div>
-              
-            				</div>
-          				</div>
-       				 </div>
-    				</div>
-    			<!-- <div class="divider"></div>  -->	
+  <section class="intro-callaction" id="join">
+        <div class="containerx">
+            <!-- <button type="button" class="btn btn-default xbtn" aria-label="Left Align">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button> -->
         </div>
-        <div class="reactions-head">
-        		<p ng-if=" dripBucketDetails.drip.comments.length <= 1 ">{{ dripBucketDetails.drip.comments.length }} reaction</p>
-            <p ng-if=" dripBucketDetails.drip.comments.length > 1 ">{{ dripBucketDetails.drip.comments.length }} reactions</p>
-        		<div class="reaction">  
-        			<textarea class="reaction-field" ng-model="dripComment"></textarea>
-        			<button class="pull-right" ng-click="react( dripComment )" >React</button>
-      			  <div class="reaction-users" ng-repeat="comment in comments">
-      						<div class="about-user modal-user">
-      							<div class="img col-lg-2">
-      								<div class="img-container" to="/drip/profile/" ng-click="passProfile( comment.user )">{{comment.user.name}}>
-      									<img class="dripper-img" ng-src="{{comment.user.profile_picture}}">
-      								</div>
-      							</div>
+        <div class="container">  
+            <div class="row">
+                      <div class="col-sm-12 col-md-12 basket">
+                        <div class="thumbnail">
+                            <div class="video col-md-8">
+                            <div class="embed-responsive embed-responsive-4by3">
+                              <iframe
+                                ng-src="{{ directDrip }}"
+                                frameborder="0" 
+                                allowfullscreen>
+                              </iframe>
+                            </div>
+                            </div>
+                            <div class="panel-body col-md-4">
+                                <div class="col-lg-4 col-md-4 col-sm-12 theader2">
+                                    <div class="profile-avatar">
+                                        <img class="img-responsive" ng-src="{{dripBucketDetails.drip.user.profile_picture}}" alt="profile picture">
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 col-md-8 col-sm-12 title2">
+                                    <div class="user-name" to="/drip/profile/" ng-click="passProfile( comment.user )" ng-bind="dripBucketDetails.drip.user.name">
+                                    </div>
+                                    <div class="user-information">
+                                        <p ng-bind="dripBucketDetails.drip.dripbucket.name"></p>
+                                    </div>
+                                </div>
+                                <div class="mtitle2 col-md-12"><h3 ng-bind="dripBucketDetails.drip.title"></h3></div>
+                            </div>
+                            <div class="caption capt col-md-4">
+                              <p ng-bind="dripBucketDetails.drip.description"></p>
+                            </div>
+                            <p class="see"><a href="#" ng-if="dripBucketDetails.drip.description!=null">See more</a></p>
+                            <!-- <p class="col-md-4 publish">Published in January 1, 2015</p> -->
+                            <ul class="col-md-4 status">
+                                <li ng-if=" dripBucketDetails.drip.dripbucket.drips.length > 1 ">{{ dripBucketDetails.drip.dripbucket.drips.length }} drips</li>
+                                <li ng-if=" dripBucketDetails.drip.dripbucket.drips.length <= 1 ">{{ dripBucketDetails.drip.dripbucket.drips.length }} drip</li>
+                                <li ng-if=" dripBucketDetails.drip.comments.length <= 1 ">{{ dripBucketDetails.drip.comments.length }} reaction</li>
+                                <li ng-if=" dripBucketDetails.drip.comments.length > 1 ">{{ dripBucketDetails.drip.comments.length }} reactions</li>
+                                <!-- <li>4 shares</li> -->
+                            </ul>
+                            <ul class="nav nav-pills col-md-4">
+                              <!-- <li role="presentation" class="active"><a href="#">Like</a></li> -->
+                              <li role="presentation"><a href="#">Share</a></li>
+                              <!-- <li role="presentation"><a href="#">Message</a></li> -->
+                            </ul>
+                            <!-- Video list -->
+                            <div class="row">
+                                <div class="videolist col-md-12">
+                                <div class="col-xs-6 col-md-3 list">
+                                    <a href="#" class="thumbnail">
+                                      <div class="embed-responsive embed-responsive-4by3">
+                                        <iframe src="https://www.youtube.com/embed/BeGIw9DDZ5s" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                    </a>
+                                  </div>
+                                <div class="col-xs-6 col-md-3 list">
+                                    <a href="#" class="thumbnail">
+                                      <div class="embed-responsive embed-responsive-4by3">
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/GyN2RhbhiEU" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                    </a>
+                                  </div>
+                                <div class="col-xs-6 col-md-3 list">
+                                    <a href="#" class="thumbnail">
+                                      <div class="embed-responsive embed-responsive-4by3">
+                                        <iframe src="https://www.youtube.com/watch?v=ztax2Sk_Oiw" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                    </a>
+                                  </div>
+                                <div class="col-xs-6 col-md-3 list">
+                                    <a href="#" class="thumbnail">
+                                      <div class="embed-responsive embed-responsive-4by3">
+                                        <iframe src="https://www.youtube.com/embed/UtBsl3j0YRQ" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                    </a>
+                                  </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="center" ng-if=" dripBucketDetails.drip.dripbucket.drips.length > 1 ">{{ dripBucketDetails.drip.dripbucket.drips.length }} drips</p>
+                                    <p class="center" ng-if=" dripBucketDetails.drip.dripbucket.drips.length <= 1 ">{{ dripBucketDetails.drip.dripbucket.drips.length }} drip</p>
+                                </div>
+                                <!-- Comment Box -->
+                                <div class="detailBox col-md-12">
+                                <div class="commentBox">
 
-    								<div class="user-info col-lg-10">
-    									<!-- <small>1 day ago</small> -->
-    									<p to="/drip/profile/" ng-click="passProfile( comment.user )">{{comment.user.name}}</p>
-    									<!-- <p>Project Almanac</p> -->
-    									<p class="reaction-description">
-    										{{comment.body}}
-    									</p>									
-    								</div>		
-      						</div>
+                                    <p class="taskDescription" ng-if=" dripBucketDetails.drip.comments.length <= 1 ">{{ dripBucketDetails.drip.comments.length }} reaction</p >
+                                    <p class="taskDescription" ng-if=" dripBucketDetails.drip.comments.length > 1 ">{{ dripBucketDetails.drip.comments.length }} reactions</p >
+                                </div>
+                                <div class="actionBox">
+                                    <ul class="commentList">
+                                        <li>
+                                            <div class="commenterImage">
+                                              <img src="http://lorempixel.com/50/50/people/6" />
+                                            </div>
+                                            <div class="commentText">
+                                                <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
 
-      				</div>
-        		</div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="commenterImage">
+                                              <img src="http://lorempixel.com/50/50/people/7" />
+                                            </div>
+                                            <div class="commentText">
+                                                <p class="">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
+
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="commenterImage">
+                                              <img src="http://lorempixel.com/50/50/people/9" />
+                                            </div>
+                                            <div class="commentText">
+                                                <p class="">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
+
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <form class="form-inline" role="form">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Your comments" />
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-default">Send</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+            </div>
         </div>
-      </div>
-<!--       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div> -->
+    </section>
     </div>
-
-  </div>
 </div>
 

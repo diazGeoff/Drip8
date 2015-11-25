@@ -30,7 +30,18 @@ drip8
 
 					var ids = attributeSet.dripList.split( "-" );
 					console.log( ids[ 2 ] );
-					scope.drips = [ ];	
+					scope.drips = [ ];
+
+					var dripFilter = function dripFilter ( array ){
+						var newDripArray = [];
+
+						array.forEach( function( e ) {
+							if( e.state != 'deleted' ){
+								newDripArray.push( e );
+							}
+						} );
+						return newDripArray;
+					};
 
 					scope.dripListing = function dripListing ( ) {
 						$http.post( "/api/read_drips_by_bucket_and_user" , {
@@ -40,7 +51,9 @@ drip8
 						.success( function ( response ) {
 							scope.drips = response.drips;
 							dripListService.setDripList( ids[ 2 ] , scope.drips );
-							console.log( dripListService.setDripList() );
+							console.log( scope.drips );
+
+							scope.drips = dripFilter( scope.drips );
 						} );
 					};
 
