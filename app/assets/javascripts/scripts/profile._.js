@@ -8,54 +8,73 @@ drip8
 			return {
 				"restrict": "A",
 				"scope": true,
-				"link": function onLink ( scope , element , attributeSet ) {
-					//console.log( "profile" );
-					scope.profile = { };					
+				"compile": function compile ( element , attributeSet ){
+					return{
 
-					scope.getUserInfo = function getUserInfo ( ) {
-						$http.get( "/api/user" )
-						.success( function ( response ) {
-							scope.profile = response.data;
-							scope.trustUrl( );
-						} );
-					};
-					scope.passProfile = function passProfile( profile ){
-						localStorage.setItem("userProfile", JSON.stringify( profile ) );
-					};
-
-					scope.profileName = function profileName( name ){
-						var name = name.split( " " );
-						return name[ 0 ];
-					};
-					scope.trustUrl = function trustUrl ( ) {
-						var video_id = "";
-						$http.post( "/api/video_featured" , {
-							"user_id": scope.profile.id
-						} )
-						.success( function ( response ) {
-							if ( response.link ) {
-								video_id = response.link.split( 'v=' )[1];
-								var ampersandPosition = video_id.indexOf( '&' );
-								if ( ampersandPosition != -1 ) {
-								  video_id = video_id.substring( 0 , ampersandPosition );
+						pre: function pre( scope , element , attributeSet ){
+							scope.count = 0;
+							scope.profileName = function profileName( name ){
+								if( name != undefined ){
+									scope.count += 1;
+									if( scope.count == 1 ){
+										var name = name.split( " " );
+										console.log( scope.count );
+										console.log( name );
+										return name[ 0 ];
+									}
+									
 								}
-							}
+								
+							};
+						},
 
-							scope.profile.featured = response.link;
-							$rootScope.$broadcast( "profile-data" , scope.profile );
-							scope.profile.featuredVideo = Video.videoSource( video_id );								
-						} );
-					};
-					scope.$watch( 'profile' , function( newValue , oldValue ){
-						if( newValue != oldValue ){
-							scope.profile.newValue;
-							console.log( "Profile****" , scope.profile );
-							profileService.setProfile( scope.profile );
+						post: function post( scope , element , attributeSet ){
+							//console.log( "profile" );
+							scope.profile = { };					
+							
+							scope.getUserInfo = function getUserInfo ( ) {
+								$http.get( "/api/user" )
+								.success( function ( response ) {
+									scope.profile = response.data;
+									scope.trustUrl( );
+								} );
+							};
+							scope.passProfile = function passProfile( profile ){
+								localStorage.setItem("userProfile", JSON.stringify( profile ) );
+							};
+
+							
+							scope.trustUrl = function trustUrl ( ) {
+								var video_id = "";
+								$http.post( "/api/video_featured" , {
+									"user_id": scope.profile.id
+								} )
+								.success( function ( response ) {
+									if ( response.link ) {
+										video_id = response.link.split( 'v=' )[1];
+										var ampersandPosition = video_id.indexOf( '&' );
+										if ( ampersandPosition != -1 ) {
+										  video_id = video_id.substring( 0 , ampersandPosition );
+										}
+									}
+
+									scope.profile.featured = response.link;
+									$rootScope.$broadcast( "profile-data" , scope.profile );
+									scope.profile.featuredVideo = Video.videoSource( video_id );								
+								} );
+							};
+							scope.$watch( 'profile' , function( newValue , oldValue ){
+								if( newValue != oldValue ){
+									scope.profile.newValue;
+									console.log( "Profile****" , scope.profile );
+									profileService.setProfile( scope.profile );
+								}
+							} )
+							scope.getUserInfo( );	
+							scope.profileData = JSON.parse( localStorage.userProfile );
+							console.log( scope.profileData );
 						}
-					} )
-					scope.getUserInfo( );	
-					scope.profileData = JSON.parse( localStorage.userProfile );
-					console.log( scope.profileData );
+					}
 				}
 			}
 		}

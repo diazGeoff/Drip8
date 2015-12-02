@@ -119,6 +119,15 @@ button.nav
 	height: 300px;
 }
 
-.flex-control-nav{
-	display: none; !important
+.flex-control-nav
+{
+	display: none !important;
+}
+
+.navbar-brand
+{
+   	/*border-bottom: 1px solid red;*/
+   	position: absolute;
+   	cursor: pointer !important;
+   	pointer-events: auto;
 }
