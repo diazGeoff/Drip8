@@ -447,7 +447,7 @@ drip8
 					scope.addDrip = function addDrip ( ) {						
 						$( "#addADrip" ).modal( "hide" );
 						scope.dripDetails.user_id = scope.profileData.id;
-
+						//console.log( scope.dripDetails.link.split( ":" ) )
 						$http.post( "/api/add_drip" , {
 							"drip": scope.dripDetails
 						} )
@@ -457,6 +457,17 @@ drip8
 								"state": "public"
 							};
 						} );						
+					};
+					/**
+						 * JavaScript function to match (and return) the video Id 
+						 * of any valid Youtube Url, given as input string.
+						 * @author: Stephan Schmitz <eyecatchup@gmail.com>
+						 * @url: http://stackoverflow.com/a/10315969/624466
+					*/
+
+					scope.linkPattern = function ytVidId(url) {
+					    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+					        return (url.match(p)) ? RegExp.$1 : false;
 					};
 
 					scope.$on( "drip-new" , 
