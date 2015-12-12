@@ -1,23 +1,22 @@
-<div class="modal fade" id="createDripBoardBox" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-<div class="modal-dialog" bucket>
-	<div class="modal-content">
-		<div class="modal-body">
-			<div class="row">
-				<div class="col-md-3">
-					<h4>
-					Add a bucket
-					</h4>
-				</div>
-				<div class="col-md-9"style="padding-left: 0;">					
-					<input type="text" ng-model="bucket.name" class="form-control input-number" placeholder="Name your bucket" maxlength="50"><br />
-					<select class="form-control" ng-model="bucket.state">
-						<option value="public">Public</option>
-						<option value="profile only">Profile Only</option>
-					</select><br />
-					<input type="button" value="Add" class="btn btn-primary pull-right" ng-click="newBucket( bucket )" />
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<div class="col-md-12 modal fade" id="createDripBoardBox" tabindex="-1" role="dialog" aria-labelledby="modallogin" aria-hidden="true">
+    <div class="modal-login" role="document" bucket>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+                </div>
+            <div class="modal-body modal-body-bucket">
+            	<form name="bucketDetail" novalidate>
+                <h3>Add a bucket</h3>
+                <input type="text" ng-model="bucket.name" class="addinput col-md-12" type="text" name="title" placeholder="Name your bucket" maxlength="50" required><br />
+				<select class="addinput col-md-12" type="text" name="state"  ng-model="bucket.state" required>
+					<option value="public">Public</option>
+					<option value="profile only">Profile Only</option>
+				</select><br />
+				<input type="button" value="Add" class="btn btn-primary pull-right" ng-click="newBucket( bucket )" ng-disabled="bucketDetail.$invalid"/>
+            	</form>
+            </div> 
+        </div>
+    </div>
 </div>

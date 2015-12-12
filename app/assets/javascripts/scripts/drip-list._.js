@@ -51,9 +51,9 @@ drip8
 						.success( function ( response ) {
 							scope.drips = response.drips;
 							dripListService.setDripList( ids[ 2 ] , scope.drips );
-							console.log( scope.drips );
-
+							
 							scope.drips = dripFilter( scope.drips );
+							$("#welcome").modal("hide");
 						} );
 					};
 

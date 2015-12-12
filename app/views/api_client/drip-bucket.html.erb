@@ -1,69 +1,56 @@
-<link href="jquery.carouFredSel-6.0.4-packed.js"/>
-<link href="javascripts/carousel.js"/>
-<link href="stylesheets/carousel.css" rel="stylesheet"/>
+<section class="intro-callaction col-xs-12" id="join" bucket>
+	<div ng-repeat="bucket in buckets" class="containerprof">
+            <h3 class="float">{{ bucket.name }}</h3>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav righty">
+	                <li class="dropdown">
+	                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></a>
+	                  <ul class="dropdown-menu">
+	                    <li><a ng-click="setting( bucket , 'public' , 'bucket' , $index )">set to public</a></li>
+	                    <li><a ng-click="setting( bucket , 'profile only' , 'bucket' , $index )">set to profile only</a></li>
+	                    <li><a ng-click="setting( bucket , 'deleted' , 'bucket' )">delete</a></li>
+	                  </ul>
+	                </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+            <div class="row brace">
+                    <div class="col-sm-6 col-md-3 divide" ng-click="newDrip( bucket.id , bucket.name )" data-toggle="modal" data-target="#welcome">
+	                    <a href="#">
+	                    	<div class="thumbnailprofadd">
+		                      	<div class="newbucket">
+			                        <span class="glyphicon glyphicon-plus plus" aria-hidden="true"></span>
+			                        <h4>new drip</h4>
+			                     </div>
+		                    </div>
+		                </a>
+	                </div>
+	                <div drip-list="{{bucket.id}}-{{profileData.id}}-{{$index}}">
+	                    <div href="#" ng-repeat="drip in drips">
+	                        <div class="col-sm-6 col-md-3 divide">
+			                    <div class="thumbnailprof">
+				                    <div class="caption">
+				                        <h4 class="float">{{drip.title | limitTo:"40"}}{{drip.title.length > 40 ? ' ...' : ''}}</h4>
+							            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							                <ul class="nav navbar-nav righty">
+							                	<li class="dropdown">
+							                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></a>
+							                  		<ul class="dropdown-menu">
+									                    <li><a ng-click="setting( bucket , 'public' , 'bucket' , $index )">set to public</a></li>
+							                    		<li><a ng-click="setting( bucket , 'profile only' , 'bucket' , $index )">set to profile only</a></li>
+							                    		<li><a ng-click="setting( bucket , 'deleted' , 'bucket' )">delete</a></li>
+							                  		</ul>
+							                	</li>
+							              	</ul>
+							            </div><!-- /.navbar-collapse -->
+				                        <p class="lo" ng-if="description(drip.description)">{{drip.description | limitTo:"40"}}{{drip.description.length > 40 ? ' ...' : ''}}
+				                        </p>
+				                    </div>
+				                    <img ng-src="{{ linkUri( drip.link , 'thumb' ) }}" alt="lorde" ng-click="showVideo( linkUri( drip.link , 'video' ), drip.id )">
+				                </div>
+	                    	</div>
+	                    </div>
+                    </div>
+            </div>
+    </div>
 
-<div class="row" bucket>
-	<section ng-repeat="bucket in buckets" class="drip-featured-container-datas">
-		<div class="col-lg-2">
-			<h4 style="margin-top: 100%;">{{ bucket.name }}</h4>
-		</div>
-		<div class="col-lg-10" style="overflow-x: auto;">
-			<div class="panel panel-default custom-panel-default drip-container-box">
-				<div class="dropdown" ng-if="settingDropdown( bucket.name )">
-				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-				    
-				    <span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				    <!-- <li><a ng-click="rename( bucket , 'bucket' )">edit</a></li> -->
-				    <li><a ng-click="setting( bucket , 'public' , 'bucket' , $index )">set to public</a></li>
-				    <li><a ng-click="setting( bucket , 'profile only' , 'bucket' , $index )">set to profile only</a></li>
-				    <li><a ng-click="setting( bucket , 'deleted' , 'bucket' )">delete</a></li>
-				  </ul>
-				</div>
-				<div class="row custom-drip-row">
-					<div class="panel-body custom-panel-board">
-						<div class="drip-create-board" ng-click="newDrip( bucket.id , bucket.name )">
-							<p data-toggle="modal" data-target="#addADrip" >
-								<i class="glyphicon glyphicon-plus-sign" style="font-size:2.5em;"></i>
-								<h4>add a drip</h4>
-							</p>
-						</div>
-					</div>
-					<section drip-list="{{bucket.id}}-{{profileData.id}}-{{$index}}">
-						<div class="panel-body custom-panel-board" ng-repeat="drip in drips">
-							<div class="row drip-box-result">
-								<div class="dropdown" ng-if="settingDropdown( bucket.name )">
-								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-								    
-								    <span class="caret"></span>
-								  </button>
-								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-								    <!-- <li><a ng-click="rename( drip , 'drip' )">edit</a></li> -->
-								    <li><a ng-click="setting( drip , 'public' , 'drip' )">set to public</a></li>
-								    <li><a ng-click="setting( drip , 'profile only' , 'drip' )">set to profile only</a></li>
-								    <li><a ng-click="setting( drip , 'deleted' , 'drip' )">delete</a></li>
-								  </ul>
-								</div>
-								<!-- <p class="pull-right" feature="{{profileData.id}}-{{drip.id}}" ng-show="drip.link != profileData.featured"><i class="glyphicon glyphicon-film" style="font-size: 1.5em"></i></p> -->
-								<h6>{{ drip.title }}</h6>								
-								<div class="row" ng-click="showVideo( linkUri( drip.link , 'video' ), drip.id )">
-									<div class="col-lg-12">
-										<img ng-src="{{ linkUri( drip.link , 'thumb' ) }}" style="width: inherit; height: inherit; padding: 5px;"/>										
-									</div>
-								</div>
-								<div class="row" style="padding: 5px;">
-									<div class="col-lg-12">
-										<button class="btn btn-default" style="width: inherit; margin-top:2px;">{{ drip.state }}</button>
-									</div>
-								</div>
-
-							</div>
-						</div>
-					</section>
-				</div>
-			</div>
-		</div>
-	</section>
-
-</div>
+</section>

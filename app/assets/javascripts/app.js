@@ -51,7 +51,9 @@ drip8
 						} );
 					};
 
-					
+					scope.description= function description( desc ){
+						return desc != null;
+					};
 					scope.newBucket = function newBucket ( bucket ) {
 						$( "#createDripBoardBox" ).modal( "hide" );
 						$http.post( "/api/add_bucket" , {
@@ -72,10 +74,10 @@ drip8
 						.success( function ( response ) {							
 							scope.buckets = response.buckets;
 							var profile = profileService.setProfile();
-							if( scope.profileData.id == '1' || profile.id == '1' ){
-								scope.buckets.splice( 0 , 3 );
-								//console.log( scope.buckets );
-							}
+							// if( scope.profileData.id == '1' || profile.id == '1' ){
+							// 	scope.buckets.splice( 0 , 3 );
+							// 	console.log( scope.buckets );
+							// }
 						} );
 					};
 					scope.rename = function rename ( drip , target ) {						
@@ -325,9 +327,9 @@ drip8
 						.success( function ( response ) {
 							scope.drips = response.drips;
 							dripListService.setDripList( ids[ 2 ] , scope.drips );
-							console.log( scope.drips );
-
+							
 							scope.drips = dripFilter( scope.drips );
+							$("#welcome").modal("hide");
 						} );
 					};
 

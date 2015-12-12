@@ -101,7 +101,7 @@ a.navbar-brand {
 .containerprof {
     width: 100%;
     padding: 15px;
-    margin: 0 auto;
+    margin: 15px auto;
     background-color: #fff;
 }
 .containerx {
@@ -599,4 +599,8 @@ a.navbar-brand.whites {
     .maintitle.col-md-5.whites {
         margin-top: 0;
     }
+}
+
+.modal-body-bucket{
+    height: 157px;
 }
