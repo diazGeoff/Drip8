@@ -213,10 +213,6 @@ drip8
 						localStorage.setItem("userProfile", JSON.stringify( profile ) );
 					};
 					
-					scope.exit = function exit(){
-						$("#myModal").modal("hide");
-					};
-
 					var createAsyncTask = function createAsyncTask ( taskArray ) {
 						var tasks = [ ];
 						taskArray.forEach( function ( e ) {
@@ -245,14 +241,33 @@ drip8
 						    var idLoad = lastId - 1;
 						    if( lastId >= 0 && scope.lastId != 'stop' ){
 						    	console.log( scope.lastId );
+						    	console.log( lastId );
 						    	$http.post( "/api/drip_each" , { "drip_id": idLoad } )
 									.success( function ( response ) {
 										//callback( null , response );
 										console.log( response );
+										if( response.drip.state == 'deleted' ){
+											$http.post( "/api/drip_each" , { "drip_id": response.drip.id-1 } )
+												.success( function ( response ) {
+													//callback( null , response );
+													console.log( response );
+													if( response.drip != null && response.drip.state == 'public' ){
+														scope.drips.push( response );
+														console.log( "pushed" )
+													}
+													if( lastId == 0 ){
+														console.log( "stop na" )
+														scope.lastId = 'stop';
+														console.log( scope.lastId );
+													}
+												} );
+										}
 										if( response.drip != null && response.drip.state == 'public' ){
 											scope.drips.push( response );
+											console.log( "pushed" )
 										}
 										if( lastId == 0 ){
+											console.log( "stop na" )
 											scope.lastId = 'stop';
 											console.log( scope.lastId );
 										}
@@ -394,6 +409,9 @@ drip8
 						scope.drip = scope.dripBucketDetails.drip;
 					} );
 
+					scope.exit = function exit(){
+						$("#myModal").modal("hide");
+					};
 
 					scope.changeVideo = function changeVideo( data ){
 						scope.$broadcast( 'change-video' , data )
