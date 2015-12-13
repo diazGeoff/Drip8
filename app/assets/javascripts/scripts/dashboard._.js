@@ -37,10 +37,6 @@ drip8
 						localStorage.setItem("userProfile", JSON.stringify( profile ) );
 					};
 					
-					scope.exit = function exit(){
-						$("#myModal").modal("hide");
-					};
-
 					var createAsyncTask = function createAsyncTask ( taskArray ) {
 						var tasks = [ ];
 						taskArray.forEach( function ( e ) {

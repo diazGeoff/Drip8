@@ -50,10 +50,10 @@ drip8
 						.success( function ( response ) {							
 							scope.buckets = response.buckets;
 							var profile = profileService.setProfile();
-							// if( scope.profileData.id == '1' || profile.id == '1' ){
-							// 	scope.buckets.splice( 0 , 3 );
-							// 	console.log( scope.buckets );
-							// }
+							if( scope.profileData.id == '1' || profile.id == '1' ){
+								scope.buckets.splice( 0 , 3 );
+								console.log( scope.buckets );
+							}
 						} );
 					};
 					scope.rename = function rename ( drip , target ) {						
@@ -94,7 +94,7 @@ drip8
 									"state": setting 
 								})
 								.success( function( response ){
-									//console.log( "New" , response );
+									console.log( "New" , response );
 									scope.$broadcast( "drips-reload" );
 								} )
 								break;

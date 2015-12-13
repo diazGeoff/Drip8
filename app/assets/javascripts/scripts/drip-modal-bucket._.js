@@ -27,6 +27,9 @@ drip8
 						scope.drip = scope.dripBucketDetails.drip;
 					} );
 
+					scope.exit = function exit(){
+						$("#myModal").modal("hide");
+					};
 
 					scope.changeVideo = function changeVideo( data ){
 						scope.$broadcast( 'change-video' , data )
