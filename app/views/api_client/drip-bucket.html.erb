@@ -35,9 +35,9 @@
 							                	<li class="dropdown">
 							                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></a>
 							                  		<ul class="dropdown-menu">
-									                    <li><a ng-click="setting( bucket , 'public' , 'bucket' , $index )">set to public</a></li>
-							                    		<li><a ng-click="setting( bucket , 'profile only' , 'bucket' , $index )">set to profile only</a></li>
-							                    		<li><a ng-click="setting( bucket , 'deleted' , 'bucket' )">delete</a></li>
+									                    <li><a ng-click="setting( bucket , 'public' , 'drip' , $index )">set to public</a></li>
+							                    		<li><a ng-click="setting( bucket , 'profile only' , 'drip' , $index )">set to profile only</a></li>
+							                    		<li><a ng-click="setting( bucket , 'deleted' , 'drip' , $index )">delete</a></li>
 							                  		</ul>
 							                	</li>
 							              	</ul>
@@ -45,7 +45,7 @@
 				                        <p class="lo" ng-if="description(drip.description)">{{drip.description | limitTo:"40"}}{{drip.description.length > 40 ? ' ...' : ''}}
 				                        </p>
 				                    </div>
-				                    <img ng-src="{{ linkUri( drip.link , 'thumb' ) }}" alt="lorde" ng-click="showVideo( linkUri( drip.link , 'video' ), drip.id )">
+				                    <img ng-src="{{ linkUri( drip.link , 'thumb' ) }}" alt="lorde" ng-click="showVideo( linkUri( drip.link , 'video' ), drip )">
 				                </div>
 	                    	</div>
 	                    </div>

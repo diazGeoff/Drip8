@@ -213,6 +213,10 @@ drip8
 						localStorage.setItem("userProfile", JSON.stringify( profile ) );
 					};
 					
+					scope.exit = function exit(){
+						$("#myModal").modal("hide");
+					};
+
 					var createAsyncTask = function createAsyncTask ( taskArray ) {
 						var tasks = [ ];
 						taskArray.forEach( function ( e ) {
@@ -346,9 +350,9 @@ drip8
 						}	
 					};
 
-					scope.showVideo = function showVideo ( link , id ) {
+					scope.showVideo = function showVideo ( link , drip ) {
 						$( "#videoLink" ).modal( "show" );
-						$rootScope.$broadcast( "video-source" , link , id );
+						$rootScope.$broadcast( "video-source" , link , drip );
 					};
 
 					scope.dripListing( );
@@ -374,6 +378,7 @@ drip8
 				"link": function onLink ( scope , element , atrributeSet ) {
 					console.log( "drip-modal-bucket" );
 					$rootScope.$on( 'see-bucket' , function( evt , data ){
+						console.log( data )
 						scope.directDrip = Video.videoSource( data.drip.link.split( "v=" )[1] );
 						scope.dripBucketDetails = data;
 						scope.comments = scope.dripBucketDetails.drip.comments;
@@ -599,13 +604,13 @@ drip8
 							};
 							scope.$watch( 'profile' , function( newValue , oldValue ){
 								if( newValue != oldValue ){
-									scope.profile.newValue;
+									scope.profile = newValue;
 									console.log( "Profile****" , scope.profile );
-									profileService.setProfile( scope.profile );
+									profileService.setProfile( scope.profile );// own profile
 								}
 							} )
 							scope.getUserInfo( );	
-							scope.profileData = JSON.parse( localStorage.userProfile );
+							scope.profileData = JSON.parse( localStorage.userProfile ); //visited profile
 							console.log( scope.profileData );
 						}
 					}
@@ -659,7 +664,8 @@ drip8
 	.directive( "videoLink" , [
 		'$http',
 		'profileService',
-		function  directive ( $http , profileService ) {
+		'Video',
+		function  directive ( $http , profileService , Video ) {
 			return {
 				"restrict": "A",
 				"scope": true,
@@ -672,15 +678,20 @@ drip8
 								scope.videoSource = "";
 							} );
 						} );
-
+					scope.exit = function exit(){
+						$("#videoLink").modal("hide");
+					};
 					scope.$on( "video-source" , 
-						function ( evt , src , id ) {							
+						function ( evt , src , drip ) {							
 							scope.videoSource = src;
-							$http.post( "/api/drip_each" , { "drip_id": id } )
+							console.log( drip );
+							scope.directDrip = Video.videoSource( drip.link.split( "v=" )[1] );
+							$http.post( "/api/drip_each" , { "drip_id": drip.id } )
 								.success( function ( response ) {
 									console.log( response );
 									scope.comments = response.drip.comments;
 									scope.drip = response.drip;
+									
 								} );
 						} );
 					scope.react = function react( comment ){

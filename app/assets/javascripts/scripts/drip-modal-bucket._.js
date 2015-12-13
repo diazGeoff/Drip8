@@ -11,6 +11,7 @@ drip8
 				"link": function onLink ( scope , element , atrributeSet ) {
 					console.log( "drip-modal-bucket" );
 					$rootScope.$on( 'see-bucket' , function( evt , data ){
+						console.log( data )
 						scope.directDrip = Video.videoSource( data.drip.link.split( "v=" )[1] );
 						scope.dripBucketDetails = data;
 						scope.comments = scope.dripBucketDetails.drip.comments;

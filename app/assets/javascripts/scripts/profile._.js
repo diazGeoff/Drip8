@@ -65,13 +65,13 @@ drip8
 							};
 							scope.$watch( 'profile' , function( newValue , oldValue ){
 								if( newValue != oldValue ){
-									scope.profile.newValue;
+									scope.profile = newValue;
 									console.log( "Profile****" , scope.profile );
-									profileService.setProfile( scope.profile );
+									profileService.setProfile( scope.profile );// own profile
 								}
 							} )
 							scope.getUserInfo( );	
-							scope.profileData = JSON.parse( localStorage.userProfile );
+							scope.profileData = JSON.parse( localStorage.userProfile ); //visited profile
 							console.log( scope.profileData );
 						}
 					}

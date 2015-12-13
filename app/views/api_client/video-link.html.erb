@@ -1,50 +1,99 @@
-<div class="modal fade" id="videoLink" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-<div class="modal-dialog" video-link>
-	<div class="modal-content">
-		
-		<div class="modal-body">
-			
-			<div class="row">
-			{{ drip.title }}
-				<center>
-					<iframe         
-						class="video-size"
-						src="{{ videoSource }}"
-						frameborder="0" 
-						allowfullscreen>
-					</iframe>
-				</center>
+<link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
+<link href="stylesheets/dripstyle.css" rel="stylesheet"/>
 
-			
-			</div>
-			<section> {{ drip.description }} </section>
-			<div class="reactions-head">
-        		<p>7 Reactions</p>
-        		<div class="reaction">  
-        			<textarea class="reaction-field" placeholder="say something..." ng-model="dripComment"></textarea>
-        			<button class="pull-right" ng-click="react( dripComment )" >say it</button>
-	      			<div class="reaction-users" ng-repeat="comment in comments">
-	      				<div class="about-user modal-user">
-	      					<div class="img col-lg-2">
-	      						<div class="img-container">
-	      							<img class="dripper-img" ng-src="{{comment.user.profile_picture}}">
-	      						</div>
-	      					</div>
+<link href="jquery.carouFredSel-6.0.4-packed.js"/>
+<link href="javascripts/carousel.js"/>
+<link href="stylesheets/carousel.css" rel="stylesheet"/>
+<div id="videoLink" class="modal fade" role="dialog" video-link>
+  <div class="modal-dialog">
+  <section class="intro-callaction" id="join">
+        <div class="containerx">
+            <button ng-click-"exit()" type="button" class="btn btn-default xbtn" aria-label="Left Align">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div class="container">  
+            <div class="row">
+                      <div class="col-sm-12 col-md-12 basket">
+                        <div class="thumbnail">
+                            <div class="video col-md-8">
+                            <div class="embed-responsive embed-responsive-4by3">
+                              <iframe
+                                ng-src="{{ directDrip }}"
+                                frameborder="0" 
+                                allowfullscreen>
+                              </iframe>
+                            </div>
+                            </div>
+                            <div class="panel-body col-md-4">
+                                <div class="col-lg-4 col-md-4 col-sm-12 theader2">
+                                    <div class="profile-avatar">
+                                        <img class="img-responsive" ng-src="{{ drip.user.profile_picture }}" alt="profile picture">
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 col-md-8 col-sm-12 title2">
+                                    <div class="user-name" to="/drip/profile/" ng-click="passProfile( comment.user )" ng-bind="drip.user.name">
+                                    </div>
+                                    <div class="user-information">
+                                        <p ng-bind="{{ drip.user.name }}"></p>
+                                    </div>
+                                </div>
+                                <div class="mtitle2 col-md-12"><h3 ng-bind="drip.title"></h3></div>
+                            </div>
+                            <div class="caption capt col-md-4">
+                              <p ng-bind="drip.description"></p>
+                            </div>
+                            <!-- <p class="see"><a href="#" ng-if="drip.description!=null && drip.">See more</a></p> -->
+                            <!-- <p class="col-md-4 publish">Published in January 1, 2015</p> -->
+                            <ul class="col-md-4 status">
+                                <li ng-if=" drip.dripbucket.drips.length > 1 ">{{ drip.dripbucket.drips.length }} drips</li>
+                                <li ng-if=" drip.dripbucket.drips.length <= 1 ">{{ drip.dripbucket.drips.length }} drip</li>
+                                <li ng-if=" drip.comments.length <= 1 ">{{ drip.comments.length }} reaction</li>
+                                <li ng-if=" drip.comments.length > 1 ">{{ drip.comments.length }} reactions</li>
+                                <!-- <li>4 shares</li> -->
+                            </ul>
+                            <ul class="nav nav-pills col-md-4">
+                              <!-- <li role="presentation" class="active"><a href="#">Like</a></li> -->
+                              <li role="presentation"><a href="#">Share</a></li>
+                              <!-- <li role="presentation"><a href="#">Message</a></li> -->
+                            </ul>
+                            <!-- Video list -->
+                            <div class="row">
+                                <!-- Comment Box -->
+                                <div class="detailBox col-md-12">
+                                <div class="commentBox">
 
-	    					<div class="user-info col-lg-10">
-	    						<!-- <small>1 day ago</small> -->
-	    						<p>{{comment.user.name}}</p>
-	    						<!-- <p>Project Almanac</p> -->
-	    						<p class="reaction-description">
-	    						{{comment.body}}
-	    						</p>									
-	    					</div>		
-	      				</div>
+                                    <p class="taskDescription" ng-if=" drip.comments.length <= 1 ">{{ drip.comments.length }} reaction</p >
+                                    <p class="taskDescription" ng-if=" drip.comments.length > 1 ">{{ drip.comments.length }} reactions</p >
+                                </div>
+                                <div class="actionBox">
+                                    <ul class="commentList" ng-repeat="comment in comments">
+                                        <li>
+                                            <div class="commenterImage">
+                                              <img src="{{ comment.user.profile_picture }}" />
+                                              
+                                            </div>
+                                            <div class="commentText">
+                                                 <p class="">{{ comment.user.name }}</p> <span class="date sub-text">{{ comment.body }}</span>
 
-	      			</div>
-        		</div>
-        	</div>
-		</div>
-	</div>
-</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <form class="form-inline" role="form">
+                                        <div class="form-group">
+                                            <textarea class="reaction-field" ng-model="dripComment" placeholder="say something..."></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-default" ng-click="react( dripComment )">react</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+            </div>
+        </div>
+    </section>
+    </div>
 </div>

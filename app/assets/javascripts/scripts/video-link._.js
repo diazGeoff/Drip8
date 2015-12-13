@@ -2,7 +2,8 @@ drip8
 	.directive( "videoLink" , [
 		'$http',
 		'profileService',
-		function  directive ( $http , profileService ) {
+		'Video',
+		function  directive ( $http , profileService , Video ) {
 			return {
 				"restrict": "A",
 				"scope": true,
@@ -15,15 +16,20 @@ drip8
 								scope.videoSource = "";
 							} );
 						} );
-
+					scope.exit = function exit(){
+						$("#videoLink").modal("hide");
+					};
 					scope.$on( "video-source" , 
-						function ( evt , src , id ) {							
+						function ( evt , src , drip ) {							
 							scope.videoSource = src;
-							$http.post( "/api/drip_each" , { "drip_id": id } )
+							console.log( drip );
+							scope.directDrip = Video.videoSource( drip.link.split( "v=" )[1] );
+							$http.post( "/api/drip_each" , { "drip_id": drip.id } )
 								.success( function ( response ) {
 									console.log( response );
 									scope.comments = response.drip.comments;
 									scope.drip = response.drip;
+									
 								} );
 						} );
 					scope.react = function react( comment ){
