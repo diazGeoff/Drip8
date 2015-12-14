@@ -130,6 +130,7 @@ a.navbar-brand {
     margin: 10px;
     padding: 15px;
     width: 93%;
+    min-height: 405.215px !important;
 }
 .thumbnailprof:hover {
     background-color: #EEF2F3;
@@ -203,6 +204,8 @@ img {
 .user-name {
     font-size: 18px;
     font-weight: 700;
+    cursor: pointer !important;
+    cursor: hand !important;
 }
 .mtitle {
     margin-left: 10px;
@@ -603,4 +606,9 @@ a.navbar-brand.whites {
 
 .modal-body-bucket{
     height: 157px;
+}
+
+.profile-avatar{
+    cursor: pointer !important;
+    cursor: hand !important;
 }

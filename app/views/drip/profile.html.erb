@@ -1,5 +1,15 @@
 <link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
 <link href="stylesheets/index-style.css" 	rel="stylesheet"/>
+
+<script type="text/javascript">
+(function(d, s, id){
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) {return;}
+js = d.createElement(s); js.id = id;
+js.src = "https://connect.facebook.net/en_US/sdk.js#version=v1.0&appId=1490365664608851&status=true&cookie=true&xfbml=true";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 <div profile>
 	<header>
         <nav class="navbar navbar-default">
@@ -10,7 +20,7 @@
             </div>
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ profileData.name }} <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ profile.name }} <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="#">Profile</a></li>
                     <li role="separator" class="divider"></li>
@@ -38,7 +48,7 @@
 	                                     {{ profileData.name }}
 	                                </div>
 	                            </div>
-	                            <div class="time">
+	                            <div class="time" ng-if="profileData.id == profile.id">
 	                                <a class="page-scroll" href="" data-toggle="modal" data-target="#createDripBoardBox">
 	                                    <button type="button" class="btn btn-default col-md-2 addbuck" aria-label="Left Align">
 	                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> addbucket

@@ -10,7 +10,7 @@
 var js, fjs = d.getElementsByTagName(s)[0];
 if (d.getElementById(id)) {return;}
 js = d.createElement(s); js.id = id;
-js.src = "https://connect.facebook.net/en_US/sdk.js#version=v2.2&appId=1490365664608851&status=true&cookie=true&xfbml=true";
+js.src = "https://connect.facebook.net/en_US/sdk.js#version=v1.0&appId=1490365664608851&status=true&cookie=true&xfbml=true";
 fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 </script>
@@ -126,9 +126,9 @@ fjs.parentNode.insertBefore(js, fjs);
                                     </div>
                                 </div>
                                 <div class="col-lg-7 col-md-8 col-sm-12 title2">
-                                    <div class="user-name" to="/drip/profile/" ng-click="passProfile( comment.user )" ng-bind="dripBucketDetails.drip.user.name">
+                                    <div class="user-name" to="/drip/profile/" ng-click="passProfile( dripBucketDetails.drip.user )" ng-bind="dripBucketDetails.drip.user.name">
                                     </div>
-                                    <div class="user-information">
+                                    <div class="user-information" to="/drip/profile/" ng-click="passProfile( dripBucketDetails.drip.user )">
                                         <p ng-bind="dripBucketDetails.drip.dripbucket.name"></p>
                                     </div>
                                 </div>
@@ -153,6 +153,10 @@ fjs.parentNode.insertBefore(js, fjs);
                             </ul>
                             <!-- Video list -->
                             <div class="row">
+                                <div class="col-md-12">
+                                    <p class="center" ng-if=" dripBucketDetails.drip.dripbucket.drips.length > 1 ">{{ dripBucketDetails.drip.dripbucket.name }}</p>
+                                    
+                                </div>
                                 <div class="videolist col-md-12">
                                     <flex-slider slide="drip in dripBucketDetails.drip.dripbucket.drips track by $index" class="carousel" animation="slide" animation-loop="false" item-width="210" item-margin="5">
                                         <li ng-click="changeVideo( drip )"><img ng-src="{{drip.thumb}}" alt="Owl Image"></li>
@@ -174,11 +178,11 @@ fjs.parentNode.insertBefore(js, fjs);
                                     <ul class="commentList" ng-repeat="comment in comments">
                                         <li>
                                             <div class="commenterImage">
-                                              <img src="http://lorempixel.com/50/50/people/6" />
-                                              {{ comment.user.name }}
+                                              <img ng-src="{{comment.user.profile_picture}}" />
+                                              
                                             </div>
                                             <div class="commentText">
-                                                <p class="">{{ comment.body }}</p> <span class="date sub-text">on March 5th, 2014</span>
+                                                <p class="">{{ comment.user.name }}</p> <p class="caption">{{ comment.body }}</p>
 
                                             </div>
                                         </li>

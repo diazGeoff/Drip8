@@ -14,7 +14,7 @@
                 </ul>
             </div><!-- /.navbar-collapse -->
             <div class="row brace">
-                    <div class="col-sm-6 col-md-3 divide" ng-click="newDrip( bucket.id , bucket.name )" data-toggle="modal" data-target="#welcome">
+                    <div ng-if="profileData.id == profile.id" class="col-sm-6 col-md-3 divide" ng-click="newDrip( bucket.id , bucket.name )" data-toggle="modal" data-target="#welcome">
 	                    <a href="#">
 	                    	<div class="thumbnailprofadd">
 		                      	<div class="newbucket">
@@ -29,7 +29,7 @@
 	                        <div class="col-sm-6 col-md-3 divide">
 			                    <div class="thumbnailprof">
 				                    <div class="caption">
-				                        <h4 class="float">{{drip.title | limitTo:"40"}}{{drip.title.length > 40 ? ' ...' : ''}}</h4>
+				                        <h4 class="float">{{drip.title | limitTo:"20"}}{{drip.title.length > 20 ? ' ...' : ''}}</h4>
 							            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							                <ul class="nav navbar-nav righty">
 							                	<li class="dropdown">
