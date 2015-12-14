@@ -491,19 +491,22 @@ drip8
 						$( "#addADrip" ).modal( "hide" );
 						scope.dripDetails.user_id = scope.profileData.id;
 						var http = scope.dripDetails.link.slice( 0 , 5 );
-						if( http == "https" )
-						var link = scope.dripDetails.link.replace( 'https' , 'http' );
+						if( http == "https" ){
+							var link = scope.dripDetails.link.replace( 'https' , 'http' );
+							scope.dripDetails.link = link;
+						}
 						
-						//console.log( scope.dripDetails.link.split( ":" ) )
-						// $http.post( "/api/add_drip" , {
-						// 	"drip": scope.dripDetails
-						// } )
-						// .success( function ( response ) {
-						// 	$rootScope.$broadcast( "drips-reload" );
-						// 	scope.dripDetails = { 
-						// 		"state": "public"
-						// 	};
-						// } );
+
+						console.log( scope.dripDetails.link.split( ":" ) )
+						$http.post( "/api/add_drip" , {
+							"drip": scope.dripDetails
+						} )
+						.success( function ( response ) {
+							$rootScope.$broadcast( "drips-reload" );
+							scope.dripDetails = { 
+								"state": "public"
+							};
+						} );
 						console.log( link );			
 					};
 					/**
