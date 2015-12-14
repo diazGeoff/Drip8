@@ -5,6 +5,15 @@
 <link href="javascripts/carousel.js"/>
 <link href="stylesheets/carousel.css" rel="stylesheet"/>
 
+<script type="text/javascript">
+(function(d, s, id){
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) {return;}
+js = d.createElement(s); js.id = id;
+js.src = "https://connect.facebook.net/en_US/sdk.js#version=v2.2&appId=1490365664608851&status=true&cookie=true&xfbml=true";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 
 <nav class="navbar navbar-default" profile>
   <div class="container-fluid">
@@ -77,7 +86,7 @@
                                             <!-- Twitter -->
                                             <!-- <a href="http://twitter.com/home?status=" title="Share on Twitter" target="_blank" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a> -->
                                          <!-- Facebook -->
-                                            <a href="https://www.facebook.com/sharer/sharer.php?u=" title="Share on Facebook" target="_blank" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
+                                            <a title="Share on Facebook" target="_blank" class="btn btn-facebook" ng-click="fbShare( drip.drip.link )"><i class="fa fa-facebook"></i> Facebook</a>
                                         </div>
                                     </div>
                                 </div>
@@ -139,7 +148,7 @@
                             </ul>
                             <ul class="nav nav-pills col-md-4">
                               <!-- <li role="presentation" class="active"><a href="#">Like</a></li> -->
-                              <li role="presentation"><a href="#">Share</a></li>
+                              <li role="presentation" class="active" ng-click="fbShare( drip.link )"><a href="#">Share</a></li>
                               <!-- <li role="presentation"><a href="#">Message</a></li> -->
                             </ul>
                             <!-- Video list -->

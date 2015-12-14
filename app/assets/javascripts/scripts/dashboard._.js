@@ -37,6 +37,14 @@ drip8
 						localStorage.setItem("userProfile", JSON.stringify( profile ) );
 					};
 					
+					scope.fbShare = function fbShare( link ){
+						FB.ui({
+						  method: 'share',
+						  href: link,
+						  caption: "www.drip8.com",
+						}, function(response){});
+						console.log( link );
+					};
 					var createAsyncTask = function createAsyncTask ( taskArray ) {
 						var tasks = [ ];
 						taskArray.forEach( function ( e ) {

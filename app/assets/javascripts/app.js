@@ -1,13 +1,13 @@
 var drip8 = angular.module( "Drip8" , [ 'angular-flexslider' , 'infinite-scroll' ] );
 
-window.fbAsyncInit = function ( ) {
-	FB.init( {
-		"appId"    	 : "719176184895882",
-	    "status"     : true,
-	    "xfbml"      : true,
-	    "version"    : 'v2.3' // or v2.0, v2.1, v2.0
-	} );
-};
+// window.fbAsyncInit = function ( ) {
+// 	FB.init( {
+// 		"appId"    	 : "1490365664608851",
+// 	    "status"     : true,
+// 	    "xfbml"      : true,
+// 	    "version"    : 'v2.1' // or v2.0, v2.1, v2.2, v2.3
+// 	} );
+// };
 drip8
 	.directive( "auth" , [		
 		function directive ( ) {
@@ -213,6 +213,14 @@ drip8
 						localStorage.setItem("userProfile", JSON.stringify( profile ) );
 					};
 					
+					scope.fbShare = function fbShare( link ){
+						FB.ui({
+						  method: 'share',
+						  href: link,
+						  caption: "www.drip8.com",
+						}, function(response){});
+						console.log( link );
+					};
 					var createAsyncTask = function createAsyncTask ( taskArray ) {
 						var tasks = [ ];
 						taskArray.forEach( function ( e ) {
@@ -413,6 +421,15 @@ drip8
 						$("#myModal").modal("hide");
 					};
 
+					scope.fbShare = function fbShare( link ){
+						FB.ui({
+						  method: 'share',
+						  href: link,
+						  caption: "www.drip8.com",
+						}, function(response){});
+						console.log( link );
+					};
+					
 					scope.changeVideo = function changeVideo( data ){
 						scope.$broadcast( 'change-video' , data )
 					};
@@ -473,16 +490,21 @@ drip8
 					scope.addDrip = function addDrip ( ) {						
 						$( "#addADrip" ).modal( "hide" );
 						scope.dripDetails.user_id = scope.profileData.id;
+						var http = scope.dripDetails.link.slice( 0 , 5 );
+						if( http == "https" )
+						var link = scope.dripDetails.link.replace( 'https' , 'http' );
+						
 						//console.log( scope.dripDetails.link.split( ":" ) )
-						$http.post( "/api/add_drip" , {
-							"drip": scope.dripDetails
-						} )
-						.success( function ( response ) {
-							$rootScope.$broadcast( "drips-reload" );
-							scope.dripDetails = { 
-								"state": "public"
-							};
-						} );						
+						// $http.post( "/api/add_drip" , {
+						// 	"drip": scope.dripDetails
+						// } )
+						// .success( function ( response ) {
+						// 	$rootScope.$broadcast( "drips-reload" );
+						// 	scope.dripDetails = { 
+						// 		"state": "public"
+						// 	};
+						// } );
+						console.log( link );			
 					};
 					/**
 						 * JavaScript function to match (and return) the video Id 

@@ -31,6 +31,15 @@ drip8
 						$("#myModal").modal("hide");
 					};
 
+					scope.fbShare = function fbShare( link ){
+						FB.ui({
+						  method: 'share',
+						  href: link,
+						  caption: "www.drip8.com",
+						}, function(response){});
+						console.log( link );
+					};
+					
 					scope.changeVideo = function changeVideo( data ){
 						scope.$broadcast( 'change-video' , data )
 					};
