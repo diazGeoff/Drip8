@@ -1,30 +1,21 @@
 <link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
 <link href="stylesheets/index-style.css" 	rel="stylesheet"/>
 
-<script type="text/javascript">
-(function(d, s, id){
-var js, fjs = d.getElementsByTagName(s)[0];
-if (d.getElementById(id)) {return;}
-js = d.createElement(s); js.id = id;
-js.src = "https://connect.facebook.net/en_US/sdk.js#version=v1.0&appId=1490365664608851&status=true&cookie=true&xfbml=true";
-fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
 <div profile>
 	<header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header col-xs-6">
-              <a class="navbar-brand" href="#">drip8</a>
+              <a class="navbar-brand" to="/drip/">drip8</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ profile.name }} <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{::profile.name.split(" ")[0]}} <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Profile</a></li>
+                    <li class="dropdown-link" to="/drip/profile/" ng-click="passProfile( profile )"><a>Profiles</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">Logout</a></li>
+                    <li class="dropdown-link" ng-click="logout()"><a>Logout</a></li>
                   </ul>
                 </li>
               </ul>

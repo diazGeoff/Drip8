@@ -612,3 +612,8 @@ a.navbar-brand.whites {
     cursor: pointer !important;
     cursor: hand !important;
 }
+
+.dropdown-link{
+    cursor: pointer !important;
+    cursor: hand !important;
+}

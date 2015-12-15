@@ -5,16 +5,31 @@
 <link href="javascripts/carousel.js"/>
 <link href="stylesheets/carousel.css" rel="stylesheet"/>
 
-<script type="text/javascript">
-(function(d, s, id){
-var js, fjs = d.getElementsByTagName(s)[0];
-if (d.getElementById(id)) {return;}
-js = d.createElement(s); js.id = id;
-js.src = "https://connect.facebook.net/en_US/sdk.js#version=v1.0&appId=1490365664608851&status=true&cookie=true&xfbml=true";
-fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
-
+<div class="col-md-12 modal fade" id="welcomeHere" tabindex="-1" role="dialog" aria-labelledby="modallogin" aria-hidden="true">
+    <div class="modal-login" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+                </div>
+            <div class="modal-body">
+                <h3>Welcome!</h3>
+                <p>Hi, first of all thank you for taking notice of this little creation of mine and my friends.</p>
+ 
+<p> For the benefit of grabbing a better future for the next generation I made drip8. It exists purely to pull out the greatness in all of us.</p>
+ 
+<p> I have observed and I am quite alarmed of what is currently happening to social media. We and our future generations are implicitly dragged and conformed to the mindset that it is already okay to not have skills and talents as long as you only have a pretty face and a thousand likes and hearts.</p>
+ 
+<p> I am deeply concerned that no one is taking a stand to cure it. Why Drip8 exist is to change the reason why and what we post online. </p>
+ 
+<p> Wouldn’t it be better if what we post are the actual things we love doing, whether in sports, science, entertainment or any field in general which in turn makes us a living inspiration for others to also be better. Let Drip8 become the platform where you find your inspiration and realize that what you are now is not your best self, yet.</p> 
+<p> And so Go and FIND it.</p>
+                
+            </div> 
+        </div>
+    </div>
+</div>
 <nav class="navbar navbar-default" profile>
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -29,11 +44,11 @@ fjs.parentNode.insertBefore(js, fjs);
           <!-- <img ng-src="{{ profile.profile_picture }}" class="nav-avatar"> -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{::profile.name.split(" ")[0]}}<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a to="/drip/profile/" ng-click="passProfile( profile )">Profile</a></li>
+            <li class="dropdown-link" ><a to="/drip/profile/" ng-click="passProfile( profile )">Profile</a></li>
             <!-- <li><a href="#">Message</a></li>
             <li><a href="#">Privacy Settings</a></li> -->
             <li role="separator" class="divider"></li> 
-            <li><a href="#">Logout</a></li>
+            <li class="dropdown-link" ng-click="logout()"><a>Logout</a></li>
             <!-- <li role="separator" class="divider"></li> -->
           </ul>
         </li>
@@ -137,7 +152,7 @@ fjs.parentNode.insertBefore(js, fjs);
                             <div class="caption capt col-md-4">
                               <p ng-bind="dripBucketDetails.drip.description"></p>
                             </div>
-                            <p class="see"><a href="#" ng-if="dripBucketDetails.drip.description!=null">See more</a></p>
+                            <!-- <p class="see"><a href="#" ng-if="dripBucketDetails.drip.description!=null">See more</a></p> -->
                             <!-- <p class="col-md-4 publish">Published in January 1, 2015</p> -->
                             <ul class="col-md-4 status">
                                 <li ng-if=" dripBucketDetails.drip.dripbucket.drips.length > 1 ">{{ dripBucketDetails.drip.dripbucket.drips.length }} drips</li>

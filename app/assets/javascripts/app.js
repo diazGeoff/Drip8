@@ -1,13 +1,6 @@
 var drip8 = angular.module( "Drip8" , [ 'angular-flexslider' , 'infinite-scroll' ] );
 
-// window.fbAsyncInit = function ( ) {
-// 	FB.init( {
-// 		"appId"    	 : "1490365664608851",
-// 	    "status"     : true,
-// 	    "xfbml"      : true,
-// 	    "version"    : 'v2.1' // or v2.0, v2.1, v2.2, v2.3
-// 	} );
-// };
+
 drip8
 	.directive( "auth" , [		
 		function directive ( ) {
@@ -612,6 +605,21 @@ drip8
 
 						post: function post( scope , element , attributeSet ){
 							//console.log( "profile" );
+							scope.logout = function logout(){
+								var now = new Date();
+				                now.setMonth( now.getMonth() - 1 );
+				                cookievalue = escape(document.myform.customer.value) + ";"
+				               
+				                document.cookie="_Drip8_session=" + cookievalue;
+				                document.cookie = "expires=" + now.toUTCString() + ";"
+								console.log( "logout" );
+								// FB.logout(function(response) {
+								//   // user is now logged out
+								//   console.log( response );
+								// });
+								console.log( document.cookie )
+							};
+							$( "#welcomeHere" ).modal( "show" );
 							scope.profile = { };					
 							
 							scope.getUserInfo = function getUserInfo ( ) {

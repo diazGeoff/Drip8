@@ -30,6 +30,21 @@ drip8
 
 						post: function post( scope , element , attributeSet ){
 							//console.log( "profile" );
+							scope.logout = function logout(){
+								var now = new Date();
+				                now.setMonth( now.getMonth() - 1 );
+				                cookievalue = escape(document.myform.customer.value) + ";"
+				               
+				                document.cookie="_Drip8_session=" + cookievalue;
+				                document.cookie = "expires=" + now.toUTCString() + ";"
+								console.log( "logout" );
+								// FB.logout(function(response) {
+								//   // user is now logged out
+								//   console.log( response );
+								// });
+								console.log( document.cookie )
+							};
+							$( "#welcomeHere" ).modal( "show" );
 							scope.profile = { };					
 							
 							scope.getUserInfo = function getUserInfo ( ) {
