@@ -1,3 +1,32 @@
+<div id="fb-root"></div>
+<script>
+  var isLoaded = false;
+  window.fbAsyncInit = function() {
+    console.log("initialising");
+      FB.init({ 
+        appId: '1490365664608851',
+        status: true, 
+        cookie: true, 
+        xfbml: true,
+        version: 'v2.4'
+      });
+      isLoaded = true;
+  };
+  function checkIfLoaded() {
+    if(isLoaded) console.log("LOADED!");
+    else console.log("NOT YET!");
+
+    return false;
+  }
+  (function(d, s, id) {
+ console.log("Loading SDK!");
+ window.fbAsyncInit();
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=1490365664608851";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
 <link href="stylesheets/dripstyle.css" rel="stylesheet"/>
 
