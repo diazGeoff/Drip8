@@ -27,12 +27,10 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=1490365664608851";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
-<link href="stylesheets/dripstyle.css" rel="stylesheet"/>
 
 <link href="jquery.carouFredSel-6.0.4-packed.js"/>
 <link href="javascripts/carousel.js"/>
-<link href="stylesheets/carousel.css" rel="stylesheet"/>
+<%= stylesheet_link_tag "/carousel.css" %>
 
 <div class="col-md-12 modal fade" id="welcomeHere" tabindex="-1" role="dialog" aria-labelledby="modallogin" aria-hidden="true">
     <div class="modal-login" role="document">
@@ -53,7 +51,7 @@
 <p> I am deeply concerned that no one is taking a stand to cure it. Why Drip8 exist is to change the reason why and what we post online. </p>
  
 <p> Wouldn’t it be better if what we post are the actual things we love doing, whether in sports, science, entertainment or any field in general which in turn makes us a living inspiration for others to also be better. Let Drip8 become the platform where you find your inspiration and realize that what you are now is not your best self, yet.</p> 
-<p> And so Go and FIND it.</p>
+<p> And so Go and FIND it. Please enjoy drip8</p>
                 
             </div> 
         </div>
@@ -124,7 +122,7 @@
                                             <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment
                                         </button> -->
                                         <button data-toggle="modal" data-target="#myModal" ng-click="seeBucket( drip )" type="button" class="btn btn-default bucket col-md-2" aria-label="Left Align">
-                                            See Bucket
+                                            comments
                                         </button>
                                         <div class="social">
                                             <!-- Twitter -->
@@ -186,8 +184,8 @@
                             <ul class="col-md-4 status">
                                 <li ng-if=" dripBucketDetails.drip.dripbucket.drips.length > 1 ">{{ dripBucketDetails.drip.dripbucket.drips.length }} drips</li>
                                 <li ng-if=" dripBucketDetails.drip.dripbucket.drips.length <= 1 ">{{ dripBucketDetails.drip.dripbucket.drips.length }} drip</li>
-                                <li ng-if=" dripBucketDetails.drip.comments.length <= 1 ">{{ dripBucketDetails.drip.comments.length }} reaction</li>
-                                <li ng-if=" dripBucketDetails.drip.comments.length > 1 ">{{ dripBucketDetails.drip.comments.length }} reactions</li>
+                                <li ng-if=" dripBucketDetails.drip.comments.length <= 1 ">{{ dripBucketDetails.drip.comments.length }} comment</li>
+                                <li ng-if=" dripBucketDetails.drip.comments.length > 1 ">{{ dripBucketDetails.drip.comments.length }} comments</li>
                                 <!-- <li>4 shares</li> -->
                             </ul>
                             <ul class="nav nav-pills col-md-4">
@@ -202,9 +200,9 @@
                                     
                                 </div>
                                 <div class="videolist col-md-12">
-                                    <flex-slider slide="drip in dripBucketDetails.drip.dripbucket.drips track by $index" class="carousel" animation="slide" animation-loop="false" item-width="210" item-margin="5">
+                                    <!-- <flex-slider slide="drip in dripBucketDetails.drip.dripbucket.drips track by $index" class="carousel" animation="slide" animation-loop="false" item-width="210" item-margin="5">
                                         <li ng-click="changeVideo( drip )"><img ng-src="{{drip.thumb}}" alt="Owl Image"></li>
-                                    </flex-slider>
+                                    </flex-slider> -->
                                 </div>
                                 
                                 <div class="col-md-12">
@@ -215,8 +213,9 @@
                                 <div class="detailBox col-md-12">
                                 <div class="commentBox">
 
-                                    <p class="taskDescription" ng-if=" dripBucketDetails.drip.comments.length <= 1 ">{{ dripBucketDetails.drip.comments.length }} reaction</p >
-                                    <p class="taskDescription" ng-if=" dripBucketDetails.drip.comments.length > 1 ">{{ dripBucketDetails.drip.comments.length }} reactions</p >
+                                    <p class="taskDescription" ng-if=" dripBucketDetails.drip.comments.length < 1 ">no comment</p >
+                                    <p class="taskDescription" ng-if=" dripBucketDetails.drip.comments.length == 1 ">{{ dripBucketDetails.drip.comments.length }} comment</p >
+                                    <p class="taskDescription" ng-if=" dripBucketDetails.drip.comments.length > 1 ">{{ dripBucketDetails.drip.comments.length }} comments</p >
                                 </div>
                                 <div class="actionBox">
                                     <ul class="commentList" ng-repeat="comment in comments">

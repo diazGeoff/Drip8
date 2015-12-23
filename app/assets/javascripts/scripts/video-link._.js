@@ -18,6 +18,7 @@ drip8
 						} );
 					scope.exit = function exit(){
 						$("#videoLink").modal("hide");
+						console.log( 'exit' )
 					};
 					scope.$on( "video-source" , 
 						function ( evt , src , drip ) {							

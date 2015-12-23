@@ -119,6 +119,7 @@ drip8
 								console.log( id );
 								var dripList = dripListService.setDripList();
 								var list = dripList[ id ];
+								console.log( list )
 
 								var asyncTasks = createAsyncTask( list , setting );
 								async
@@ -193,7 +194,7 @@ drip8
 										console.log( "***************************deleted" , taskResponse[ index ].drip );
 										taskResponse.splice( index , 1 );
 									}
-									console.log( taskResponse[ index ].drip );
+									
 								}
 								scope.drips = taskResponse;
 								console.log( taskResponse );
@@ -731,6 +732,7 @@ drip8
 						} );
 					scope.exit = function exit(){
 						$("#videoLink").modal("hide");
+						console.log( 'exit' )
 					};
 					scope.$on( "video-source" , 
 						function ( evt , src , drip ) {							

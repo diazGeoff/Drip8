@@ -102,6 +102,7 @@ drip8
 								console.log( id );
 								var dripList = dripListService.setDripList();
 								var list = dripList[ id ];
+								console.log( list )
 
 								var asyncTasks = createAsyncTask( list , setting );
 								async

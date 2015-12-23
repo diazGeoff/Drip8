@@ -24,7 +24,7 @@ drip8
 										console.log( "***************************deleted" , taskResponse[ index ].drip );
 										taskResponse.splice( index , 1 );
 									}
-									console.log( taskResponse[ index ].drip );
+									
 								}
 								scope.drips = taskResponse;
 								console.log( taskResponse );
