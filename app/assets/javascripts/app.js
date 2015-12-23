@@ -29,7 +29,7 @@ drip8
 					scope.profileData = { };
 
 					scope.buckets = [ ];
-					//console.log( localStorage.userProfile );
+					////console.log( localStorage.userProfile );
 					scope.newDrip = function newDrip ( id , bucketName ) {
 						$rootScope.$broadcast( "drip-new" , id , bucketName );
 					};
@@ -40,7 +40,7 @@ drip8
 							"dripbucket_id": id
 						} )
 						.success( function ( response ) {
-							console.log( response );
+							//console.log( response );
 						} );
 					};
 
@@ -69,19 +69,19 @@ drip8
 							var profile = profileService.setProfile();
 							if( scope.profileData.id == '1' || profile.id == '1' ){
 								scope.buckets.splice( 0 , 3 );
-								console.log( scope.buckets );
+								//console.log( scope.buckets );
 							}
 						} );
 					};
 					scope.rename = function rename ( drip , target ) {						
-						//console.log( drip , target );
+						////console.log( drip , target );
 					};
 					
 					var createAsyncTask = function createAsyncTask ( taskArray , setting ) {
 						var tasks = [ ];
 
 						taskArray.forEach( function ( e ) {
-							console.log( e )
+							//console.log( e )
 							if( setting == 'public' ){
 								setting = e.state
 							}else{
@@ -101,7 +101,7 @@ drip8
 					};
 
 					scope.setting = function setting ( drips , setting , target , id ) {						
-						//console.log( drips , setting , target );
+						////console.log( drips , setting , target );
 
 						switch( target ){
 
@@ -111,27 +111,27 @@ drip8
 									"state": setting 
 								})
 								.success( function( response ){
-									console.log( "New" , response );
+									//console.log( "New" , response );
 									scope.$broadcast( "drips-reload" );
 								} )
 								break;
 							case 'bucket':
-								console.log( id );
+								//console.log( id );
 								var dripList = dripListService.setDripList();
 								var list = dripList[ id ];
-								console.log( list )
+								//console.log( list )
 
 								var asyncTasks = createAsyncTask( list , setting );
 								async
 									.parallel( asyncTasks , function ( err , taskResponse ) {
-										console.log( taskResponse );
+										//console.log( taskResponse );
 										scope.$broadcast( "drips-reload" );
 									} );
 						}
 						
 					};
 					scope.deleteDrip = function deleteDrip ( drip , target ) {						
-						console.log( drip , target );
+						//console.log( drip , target );
 					};				
 
 					scope.settingDropdown = function settingDropdown( name ){
@@ -160,8 +160,8 @@ drip8
 					scope.$on( "profile-data" , 
 						function ( evt , profile ) {
 							scope.profileData = JSON.parse( localStorage.userProfile );// visited profile 
-							console.log( "profile data below" )
-							console.log( scope.profileData )
+							//console.log( "profile data below" )
+							//console.log( scope.profileData )
 							scope.getAllBucket( );
 						} );						
 				}
@@ -191,13 +191,13 @@ drip8
 							.parallel( asyncTasks , function ( err , taskResponse ) {
 								for( var index = 0 ; index < taskResponse.length ; index++ ){
 									if( taskResponse[ index ].drip == null || taskResponse[ index ].drip.state != 'public' || taskResponse[ index ].drip.state == 'deleted' ){
-										console.log( "***************************deleted" , taskResponse[ index ].drip );
+										//console.log( "***************************deleted" , taskResponse[ index ].drip );
 										taskResponse.splice( index , 1 );
 									}
 									
 								}
 								scope.drips = taskResponse;
-								console.log( taskResponse );
+								//console.log( taskResponse );
 							} );
 					
 						
@@ -213,12 +213,12 @@ drip8
 						  href: link,
 						  caption: "www.drip8.com",
 						}, function(response){});
-						console.log( link );
+						//console.log( link );
 					};
 					var createAsyncTask = function createAsyncTask ( taskArray ) {
 						var tasks = [ ];
 						taskArray.forEach( function ( e ) {
-							console.log( e )
+							//console.log( e )
 							tasks.push( function ( callback ) {
 								$http.post( "/api/drip_each" , { "drip_id": e } )
 								.success( function ( response ) {
@@ -229,49 +229,49 @@ drip8
 						return tasks;
 					};
 					scope.seeBucket = function seeBucket( drip ){
-						console.log( "see Bucket" );
+						//console.log( "see Bucket" );
 						$rootScope.$broadcast( 'see-bucket' , drip );
 					};
 
 					scope.loadMore = function loadMore() {
-						console.log( " ***************  " )
-						console.log( scope.drips );
-						console.log( scope.drips[scope.drips.length - 1] );
+						//console.log( " ***************  " )
+						//console.log( scope.drips );
+						//console.log( scope.drips[scope.drips.length - 1] );
 					    var last = scope.drips[scope.drips.length - 1];
 					    if( last != null ){
 					    	var lastId = last.drip.id;
 						    var idLoad = lastId - 1;
 						    if( lastId >= 0 && scope.lastId != 'stop' ){
-						    	console.log( scope.lastId );
-						    	console.log( lastId );
+						    	//console.log( scope.lastId );
+						    	//console.log( lastId );
 						    	$http.post( "/api/drip_each" , { "drip_id": idLoad } )
 									.success( function ( response ) {
 										//callback( null , response );
-										console.log( response );
+										//console.log( response );
 										if( response.drip.state == 'deleted' ){
 											$http.post( "/api/drip_each" , { "drip_id": response.drip.id-1 } )
 												.success( function ( response ) {
 													//callback( null , response );
-													console.log( response );
+													//console.log( response );
 													if( response.drip != null && response.drip.state == 'public' ){
 														scope.drips.push( response );
-														console.log( "pushed" )
+														//console.log( "pushed" )
 													}
 													if( lastId == 0 ){
-														console.log( "stop na" )
+														//console.log( "stop na" )
 														scope.lastId = 'stop';
-														console.log( scope.lastId );
+														//console.log( scope.lastId );
 													}
 												} );
 										}
 										if( response.drip != null && response.drip.state == 'public' ){
 											scope.drips.push( response );
-											console.log( "pushed" )
+											//console.log( "pushed" )
 										}
 										if( lastId == 0 ){
-											console.log( "stop na" )
+											//console.log( "stop na" )
 											scope.lastId = 'stop';
-											console.log( scope.lastId );
+											//console.log( scope.lastId );
 										}
 									} );
 						    }
@@ -326,7 +326,7 @@ drip8
 				"link": function onLink ( scope , element , attributeSet ) {
 
 					var ids = attributeSet.dripList.split( "-" );
-					console.log( ids[ 2 ] );
+					//console.log( ids[ 2 ] );
 					scope.drips = [ ];
 
 					var dripFilter = function dripFilter ( array ){
@@ -393,21 +393,21 @@ drip8
 				"restrict": "A",
 				"scope": true,
 				"link": function onLink ( scope , element , atrributeSet ) {
-					console.log( "drip-modal-bucket" );
+					//console.log( "drip-modal-bucket" );
 					$rootScope.$on( 'see-bucket' , function( evt , data ){
-						console.log( data )
+						//console.log( data )
 						scope.directDrip = Video.videoSource( data.drip.link.split( "v=" )[1] );
 						scope.dripBucketDetails = data;
 						scope.comments = scope.dripBucketDetails.drip.comments;
 						for( var index = 0 ; index <= data.drip.dripbucket.drips.length-1 ; index++ ){
 							var video_id = scope.dripBucketDetails.drip.dripbucket.drips[ index ].link.split( "v=" )[1];
-							console.log( video_id );
+							//console.log( video_id );
 							scope.dripBucketDetails.drip.dripbucket.drips[ index ].thumb = Video.thumbnail( video_id );
-							console.log( scope.dripBucketDetails.drip.dripbucket.drips[ index ].thumb );
-							console.log( scope.dripBucketDetails.drip.dripbucket.drips[ index ].link );
+							//console.log( scope.dripBucketDetails.drip.dripbucket.drips[ index ].thumb );
+							//console.log( scope.dripBucketDetails.drip.dripbucket.drips[ index ].link );
 
 						}
-						console.log( scope.dripBucketDetails );
+						//console.log( scope.dripBucketDetails );
 						scope.drip = scope.dripBucketDetails.drip;
 					} );
 
@@ -421,7 +421,7 @@ drip8
 						  href: link,
 						  caption: "www.drip8.com",
 						}, function(response){});
-						console.log( link );
+						//console.log( link );
 					};
 					
 					scope.changeVideo = function changeVideo( data ){
@@ -432,7 +432,7 @@ drip8
 						scope.directDrip = Video.videoSource( data.link.split( "v=" )[1] );
 						scope.comments = data.comments;
 						scope.drip = data;
-						console.log( data );
+						//console.log( data );
 					} );
 
 					scope.passProfile = function passProfile( profile ){
@@ -442,8 +442,8 @@ drip8
 					scope.react = function react( comment ){
 						var user = profileService.setProfile();
 						var fbId = user.profile_picture.split( "/" )[3];
-						console.log( scope.dripBucketDetails );
-						console.log( user.profile_picture.split( "/" ) )
+						//console.log( scope.dripBucketDetails );
+						//console.log( user.profile_picture.split( "/" ) )
 						
 						$http.post( "/api/create_comment" , {
 								"comment":{
@@ -491,7 +491,7 @@ drip8
 						}
 						
 
-						console.log( scope.dripDetails.link.split( ":" ) )
+						//console.log( scope.dripDetails.link.split( ":" ) )
 						$http.post( "/api/add_drip" , {
 							"drip": scope.dripDetails
 						} )
@@ -501,7 +501,7 @@ drip8
 								"state": "public"
 							};
 						} );
-						console.log( link );			
+						//console.log( link );			
 					};
 					/**
 						 * JavaScript function to match (and return) the video Id 
@@ -594,8 +594,8 @@ drip8
 									scope.count += 1;
 									if( scope.count == 1 ){
 										var name = name.split( " " );
-										console.log( scope.count );
-										console.log( name );
+										//console.log( scope.count );
+										//console.log( name );
 										return name[ 0 ];
 									}
 									
@@ -605,7 +605,7 @@ drip8
 						},
 
 						post: function post( scope , element , attributeSet ){
-							//console.log( "profile" );
+							////console.log( "profile" );
 							scope.logout = function logout(){
 								var now = new Date();
 				                now.setMonth( now.getMonth() - 1 );
@@ -613,12 +613,12 @@ drip8
 				               
 				                document.cookie="_Drip8_session=" + cookievalue;
 				                document.cookie = "expires=" + now.toUTCString() + ";"
-								console.log( "logout" );
+								//console.log( "logout" );
 								// FB.logout(function(response) {
 								//   // user is now logged out
-								//   console.log( response );
+								//   //console.log( response );
 								// });
-								console.log( document.cookie )
+								//console.log( document.cookie )
 							};
 							$( "#welcomeHere" ).modal( "show" );
 							scope.profile = { };					
@@ -657,13 +657,13 @@ drip8
 							scope.$watch( 'profile' , function( newValue , oldValue ){
 								if( newValue != oldValue ){
 									scope.profile = newValue;
-									console.log( "Profile****" , scope.profile );
+									//console.log( "Profile****" , scope.profile );
 									profileService.setProfile( scope.profile );// own profile
 								}
 							} )
 							scope.getUserInfo( );	
 							scope.profileData = JSON.parse( localStorage.userProfile ); //visited profile
-							console.log( scope.profileData );
+							//console.log( scope.profileData );
 						}
 					}
 				}
@@ -732,16 +732,16 @@ drip8
 						} );
 					scope.exit = function exit(){
 						$("#videoLink").modal("hide");
-						console.log( 'exit' )
+						//console.log( 'exit' )
 					};
 					scope.$on( "video-source" , 
 						function ( evt , src , drip ) {							
 							scope.videoSource = src;
-							console.log( drip );
+							//console.log( drip );
 							scope.directDrip = Video.videoSource( drip.link.split( "v=" )[1] );
 							$http.post( "/api/drip_each" , { "drip_id": drip.id } )
 								.success( function ( response ) {
-									console.log( response );
+									//console.log( response );
 									scope.comments = response.drip.comments;
 									scope.drip = response.drip;
 									
@@ -753,13 +753,13 @@ drip8
 						  href: link,
 						  caption: "www.drip8.com",
 						}, function(response){});
-						console.log( link );
+						//console.log( link );
 					};
 					scope.react = function react( comment ){
 						var user = profileService.setProfile();
 						var fbId = user.profile_picture.split( "/" )[3];
-						console.log( scope.dripBucketDetails );
-						console.log( user.profile_picture.split( "/" ) )
+						//console.log( scope.dripBucketDetails );
+						//console.log( user.profile_picture.split( "/" ) )
 						
 						$http.post( "/api/create_comment" , {
 								"comment":{

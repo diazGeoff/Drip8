@@ -12,7 +12,7 @@ body{
     font-size: 60px;
 }
 .text-container p{
-    font-size: 25px;
+    font-size: 24px;
     color: #696969;
 }
 
@@ -453,7 +453,7 @@ img.img-responsive {
     margin-bottom: 80px;
 }
 a.btn.btn-block.btn-social.btn-facebook {
-    width: 72%;
+    width: 91%;
     text-align: center;
     font-weight: 600;
     margin: auto;
