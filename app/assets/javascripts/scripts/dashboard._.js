@@ -21,13 +21,13 @@ drip8
 							.parallel( asyncTasks , function ( err , taskResponse ) {
 								for( var index = 0 ; index < taskResponse.length ; index++ ){
 									if( taskResponse[ index ].drip == null || taskResponse[ index ].drip.state != 'public' || taskResponse[ index ].drip.state == 'deleted' ){
-										console.log( "***************************deleted" , taskResponse[ index ].drip );
+										//console.log( "***************************deleted" , taskResponse[ index ].drip );
 										taskResponse.splice( index , 1 );
 									}
 									
 								}
 								scope.drips = taskResponse;
-								console.log( taskResponse );
+								//console.log( taskResponse );
 							} );
 					
 						
@@ -43,12 +43,12 @@ drip8
 						  href: link,
 						  caption: "www.drip8.com",
 						}, function(response){});
-						console.log( link );
+						//console.log( link );
 					};
 					var createAsyncTask = function createAsyncTask ( taskArray ) {
 						var tasks = [ ];
 						taskArray.forEach( function ( e ) {
-							console.log( e )
+							//console.log( e )
 							tasks.push( function ( callback ) {
 								$http.post( "/api/drip_each" , { "drip_id": e } )
 								.success( function ( response ) {
@@ -59,49 +59,49 @@ drip8
 						return tasks;
 					};
 					scope.seeBucket = function seeBucket( drip ){
-						console.log( "see Bucket" );
+						//console.log( "see Bucket" );
 						$rootScope.$broadcast( 'see-bucket' , drip );
 					};
 
 					scope.loadMore = function loadMore() {
-						console.log( " ***************  " )
-						console.log( scope.drips );
-						console.log( scope.drips[scope.drips.length - 1] );
+						//console.log( " ***************  " )
+						//console.log( scope.drips );
+						//console.log( scope.drips[scope.drips.length - 1] );
 					    var last = scope.drips[scope.drips.length - 1];
 					    if( last != null ){
 					    	var lastId = last.drip.id;
 						    var idLoad = lastId - 1;
 						    if( lastId >= 0 && scope.lastId != 'stop' ){
-						    	console.log( scope.lastId );
-						    	console.log( lastId );
+						    	//console.log( scope.lastId );
+						    	//console.log( lastId );
 						    	$http.post( "/api/drip_each" , { "drip_id": idLoad } )
 									.success( function ( response ) {
 										//callback( null , response );
-										console.log( response );
+										//console.log( response );
 										if( response.drip.state == 'deleted' ){
 											$http.post( "/api/drip_each" , { "drip_id": response.drip.id-1 } )
 												.success( function ( response ) {
 													//callback( null , response );
-													console.log( response );
+													//console.log( response );
 													if( response.drip != null && response.drip.state == 'public' ){
 														scope.drips.push( response );
-														console.log( "pushed" )
+														//console.log( "pushed" )
 													}
 													if( lastId == 0 ){
-														console.log( "stop na" )
+														//console.log( "stop na" )
 														scope.lastId = 'stop';
-														console.log( scope.lastId );
+														//console.log( scope.lastId );
 													}
 												} );
 										}
 										if( response.drip != null && response.drip.state == 'public' ){
 											scope.drips.push( response );
-											console.log( "pushed" )
+											//console.log( "pushed" )
 										}
 										if( lastId == 0 ){
-											console.log( "stop na" )
+											//console.log( "stop na" )
 											scope.lastId = 'stop';
-											console.log( scope.lastId );
+											//console.log( scope.lastId );
 										}
 									} );
 						    }

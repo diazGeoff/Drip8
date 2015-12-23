@@ -18,8 +18,8 @@ drip8
 									scope.count += 1;
 									if( scope.count == 1 ){
 										var name = name.split( " " );
-										console.log( scope.count );
-										console.log( name );
+										//console.log( scope.count );
+										//console.log( name );
 										return name[ 0 ];
 									}
 									
@@ -29,7 +29,7 @@ drip8
 						},
 
 						post: function post( scope , element , attributeSet ){
-							//console.log( "profile" );
+							////console.log( "profile" );
 							scope.logout = function logout(){
 								var now = new Date();
 				                now.setMonth( now.getMonth() - 1 );
@@ -37,12 +37,12 @@ drip8
 				               
 				                document.cookie="_Drip8_session=" + cookievalue;
 				                document.cookie = "expires=" + now.toUTCString() + ";"
-								console.log( "logout" );
+								//console.log( "logout" );
 								// FB.logout(function(response) {
 								//   // user is now logged out
-								//   console.log( response );
+								//   //console.log( response );
 								// });
-								console.log( document.cookie )
+								//console.log( document.cookie )
 							};
 							$( "#welcomeHere" ).modal( "show" );
 							scope.profile = { };					
@@ -81,13 +81,13 @@ drip8
 							scope.$watch( 'profile' , function( newValue , oldValue ){
 								if( newValue != oldValue ){
 									scope.profile = newValue;
-									console.log( "Profile****" , scope.profile );
+									//console.log( "Profile****" , scope.profile );
 									profileService.setProfile( scope.profile );// own profile
 								}
 							} )
 							scope.getUserInfo( );	
 							scope.profileData = JSON.parse( localStorage.userProfile ); //visited profile
-							console.log( scope.profileData );
+							//console.log( scope.profileData );
 						}
 					}
 				}

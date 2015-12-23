@@ -12,7 +12,7 @@ drip8
 					scope.profileData = { };
 
 					scope.buckets = [ ];
-					//console.log( localStorage.userProfile );
+					////console.log( localStorage.userProfile );
 					scope.newDrip = function newDrip ( id , bucketName ) {
 						$rootScope.$broadcast( "drip-new" , id , bucketName );
 					};
@@ -23,7 +23,7 @@ drip8
 							"dripbucket_id": id
 						} )
 						.success( function ( response ) {
-							console.log( response );
+							//console.log( response );
 						} );
 					};
 
@@ -52,19 +52,19 @@ drip8
 							var profile = profileService.setProfile();
 							if( scope.profileData.id == '1' || profile.id == '1' ){
 								scope.buckets.splice( 0 , 3 );
-								console.log( scope.buckets );
+								//console.log( scope.buckets );
 							}
 						} );
 					};
 					scope.rename = function rename ( drip , target ) {						
-						//console.log( drip , target );
+						////console.log( drip , target );
 					};
 					
 					var createAsyncTask = function createAsyncTask ( taskArray , setting ) {
 						var tasks = [ ];
 
 						taskArray.forEach( function ( e ) {
-							console.log( e )
+							//console.log( e )
 							if( setting == 'public' ){
 								setting = e.state
 							}else{
@@ -84,7 +84,7 @@ drip8
 					};
 
 					scope.setting = function setting ( drips , setting , target , id ) {						
-						//console.log( drips , setting , target );
+						////console.log( drips , setting , target );
 
 						switch( target ){
 
@@ -94,27 +94,27 @@ drip8
 									"state": setting 
 								})
 								.success( function( response ){
-									console.log( "New" , response );
+									//console.log( "New" , response );
 									scope.$broadcast( "drips-reload" );
 								} )
 								break;
 							case 'bucket':
-								console.log( id );
+								//console.log( id );
 								var dripList = dripListService.setDripList();
 								var list = dripList[ id ];
-								console.log( list )
+								//console.log( list )
 
 								var asyncTasks = createAsyncTask( list , setting );
 								async
 									.parallel( asyncTasks , function ( err , taskResponse ) {
-										console.log( taskResponse );
+										//console.log( taskResponse );
 										scope.$broadcast( "drips-reload" );
 									} );
 						}
 						
 					};
 					scope.deleteDrip = function deleteDrip ( drip , target ) {						
-						console.log( drip , target );
+						//console.log( drip , target );
 					};				
 
 					scope.settingDropdown = function settingDropdown( name ){
@@ -143,8 +143,8 @@ drip8
 					scope.$on( "profile-data" , 
 						function ( evt , profile ) {
 							scope.profileData = JSON.parse( localStorage.userProfile );// visited profile 
-							console.log( "profile data below" )
-							console.log( scope.profileData )
+							//console.log( "profile data below" )
+							//console.log( scope.profileData )
 							scope.getAllBucket( );
 						} );						
 				}

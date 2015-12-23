@@ -29,7 +29,7 @@ drip8
 				"link": function onLink ( scope , element , attributeSet ) {
 
 					var ids = attributeSet.dripList.split( "-" );
-					console.log( ids[ 2 ] );
+					//console.log( ids[ 2 ] );
 					scope.drips = [ ];
 
 					var dripFilter = function dripFilter ( array ){

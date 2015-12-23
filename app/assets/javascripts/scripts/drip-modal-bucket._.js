@@ -9,21 +9,21 @@ drip8
 				"restrict": "A",
 				"scope": true,
 				"link": function onLink ( scope , element , atrributeSet ) {
-					console.log( "drip-modal-bucket" );
+					//console.log( "drip-modal-bucket" );
 					$rootScope.$on( 'see-bucket' , function( evt , data ){
-						console.log( data )
+						//console.log( data )
 						scope.directDrip = Video.videoSource( data.drip.link.split( "v=" )[1] );
 						scope.dripBucketDetails = data;
 						scope.comments = scope.dripBucketDetails.drip.comments;
 						for( var index = 0 ; index <= data.drip.dripbucket.drips.length-1 ; index++ ){
 							var video_id = scope.dripBucketDetails.drip.dripbucket.drips[ index ].link.split( "v=" )[1];
-							console.log( video_id );
+							//console.log( video_id );
 							scope.dripBucketDetails.drip.dripbucket.drips[ index ].thumb = Video.thumbnail( video_id );
-							console.log( scope.dripBucketDetails.drip.dripbucket.drips[ index ].thumb );
-							console.log( scope.dripBucketDetails.drip.dripbucket.drips[ index ].link );
+							//console.log( scope.dripBucketDetails.drip.dripbucket.drips[ index ].thumb );
+							//console.log( scope.dripBucketDetails.drip.dripbucket.drips[ index ].link );
 
 						}
-						console.log( scope.dripBucketDetails );
+						//console.log( scope.dripBucketDetails );
 						scope.drip = scope.dripBucketDetails.drip;
 					} );
 
@@ -37,7 +37,7 @@ drip8
 						  href: link,
 						  caption: "www.drip8.com",
 						}, function(response){});
-						console.log( link );
+						//console.log( link );
 					};
 					
 					scope.changeVideo = function changeVideo( data ){
@@ -48,7 +48,7 @@ drip8
 						scope.directDrip = Video.videoSource( data.link.split( "v=" )[1] );
 						scope.comments = data.comments;
 						scope.drip = data;
-						console.log( data );
+						//console.log( data );
 					} );
 
 					scope.passProfile = function passProfile( profile ){
@@ -58,8 +58,8 @@ drip8
 					scope.react = function react( comment ){
 						var user = profileService.setProfile();
 						var fbId = user.profile_picture.split( "/" )[3];
-						console.log( scope.dripBucketDetails );
-						console.log( user.profile_picture.split( "/" ) )
+						//console.log( scope.dripBucketDetails );
+						//console.log( user.profile_picture.split( "/" ) )
 						
 						$http.post( "/api/create_comment" , {
 								"comment":{

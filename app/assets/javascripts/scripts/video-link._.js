@@ -18,16 +18,16 @@ drip8
 						} );
 					scope.exit = function exit(){
 						$("#videoLink").modal("hide");
-						console.log( 'exit' )
+						//console.log( 'exit' )
 					};
 					scope.$on( "video-source" , 
 						function ( evt , src , drip ) {							
 							scope.videoSource = src;
-							console.log( drip );
+							//console.log( drip );
 							scope.directDrip = Video.videoSource( drip.link.split( "v=" )[1] );
 							$http.post( "/api/drip_each" , { "drip_id": drip.id } )
 								.success( function ( response ) {
-									console.log( response );
+									//console.log( response );
 									scope.comments = response.drip.comments;
 									scope.drip = response.drip;
 									
@@ -39,13 +39,13 @@ drip8
 						  href: link,
 						  caption: "www.drip8.com",
 						}, function(response){});
-						console.log( link );
+						//console.log( link );
 					};
 					scope.react = function react( comment ){
 						var user = profileService.setProfile();
 						var fbId = user.profile_picture.split( "/" )[3];
-						console.log( scope.dripBucketDetails );
-						console.log( user.profile_picture.split( "/" ) )
+						//console.log( scope.dripBucketDetails );
+						//console.log( user.profile_picture.split( "/" ) )
 						
 						$http.post( "/api/create_comment" , {
 								"comment":{

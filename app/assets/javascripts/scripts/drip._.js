@@ -23,7 +23,7 @@ drip8
 						}
 						
 
-						console.log( scope.dripDetails.link.split( ":" ) )
+						//console.log( scope.dripDetails.link.split( ":" ) )
 						$http.post( "/api/add_drip" , {
 							"drip": scope.dripDetails
 						} )
@@ -33,7 +33,7 @@ drip8
 								"state": "public"
 							};
 						} );
-						console.log( link );			
+						//console.log( link );			
 					};
 					/**
 						 * JavaScript function to match (and return) the video Id 
