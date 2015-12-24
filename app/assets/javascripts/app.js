@@ -67,9 +67,13 @@ drip8
 						.success( function ( response ) {							
 							scope.buckets = response.buckets;
 							var profile = profileService.setProfile();
-							if( scope.profileData.id == '1' || profile.id == '1' ){
-								scope.buckets.splice( 0 , 3 );
-								//console.log( scope.buckets );
+							if( profile.id == '1' ){
+
+								if( scope.profileData.id == '1' ){
+									scope.buckets.splice( 0 , 3 );
+									//console.log( scope.buckets );
+								}
+								
 							}
 						} );
 					};
