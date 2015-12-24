@@ -172,6 +172,21 @@ drip8
 			}
 		}
 	] );
+
+drip8
+	.directive( "ifBucket" , [
+		"$http",
+		function directive ( $http ) {
+			return {
+				"restrict": "A",
+				"scope": true,
+				"link": function onLink ( scope , element , attributeSet ) {					
+
+					console.log( scope.$parent.bucketName );
+				}
+			}
+		}
+	] );
 drip8
 	.directive( "dripDashboard" , [
 		"$http",
