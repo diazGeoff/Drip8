@@ -43,7 +43,13 @@ drip8
 						 ng-pattern
 						 /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
 					*/
-
+					scope.dripState = function dripState(){
+						if( scope.bucketName == 'who I am' || scope.bucketName == 'what I do' || scope.bucketName == 'what I am proud of' ){
+							return false;
+						}else{
+							return true;
+						}
+					}
 					scope.$on( "drip-new" , 
 						function ( evt , bucketId , bucketName ) {							
 							scope.dripDetails.dripbucket_id = bucketId;
