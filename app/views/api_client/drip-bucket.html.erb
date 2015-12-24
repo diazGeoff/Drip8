@@ -32,7 +32,7 @@
 				                        <h4 class="float">{{drip.title | limitTo:"20"}}{{drip.title.length > 20 ? ' ...' : ''}}</h4>
 							            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							                <ul class="nav navbar-nav righty">
-							                	<li  class="dropdown">
+							                	<li ng-if="profileData.id == profile.id" class="dropdown">
 							                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon caret" aria-hidden="true"></span></a>
 							                  		<ul class="dropdown-menu">
 									                    <li><a ng-click="setting( drip , 'public' , 'drip' , $index )">set to public</a></li>
