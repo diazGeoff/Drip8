@@ -13,9 +13,9 @@
                 <input class="addinput col-md-12" type="text" name="title" placeholder="Title" ng-model="dripDetails.title" required>
                 <input class="addinput col-md-12" type="text" name="link" ng-pattern="/^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/"  placeholder="Youtube(only) link here..." ng-model="dripDetails.link" required>
                 <textarea class="addinput col-md-12" type="text" placeholder="say something..." style="width: 100%; height: 50px; font-size: 14px; line-height: 18px; border: 1px solid rgb(169, 169, 169); padding: 10px;" ng-model="dripDetails.description"></textarea>
-                <select name="state" class="form-control" ng-model="dripDetails.state">
-					<option value="public" if-bucket ng-if="dripState()">Public</option>
-					<option value="profile only" selected>Profile Only</option>
+                <select type="hidden" name="state" class="form-control" ng-model="dripDetails.state">
+					<option value="public" selected>Public</option><!--  if-bucket ng-if="dripState()" -->
+					<!-- <option value="profile only" selected>Profile Only</option> -->
 				</select>
                 <button type="button" class="btn btn-default bucket right" aria-label="Left Align" ng-click="addDrip( )" ng-disabled="dripDetail.$invalid">
                         add
