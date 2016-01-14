@@ -86,7 +86,7 @@
                     <p> Wouldn’t it be better if what we post are the actual things we love doing, whether in sports, science, entertainment or any field in general which in turn makes us a living inspiration for others to also be better. Let Drip8 become the platform where you find your inspiration and realize that what you are now is not your best self, yet.</p> 
                     <p> And so Go and FIND it. Please enjoy drip8</p>
                     <p>email me: julesarielmercado@gmail.com</p></br>
-                    <input type="checkbox" name="hideMe" ng-model="hideMe"> dont show me again</br>
+                    <label><input type="checkbox" onchange="toggleCheckbox(this)" name="hideMe" ng-model="hideMe"> dont show me again</label></br>
                     
                 </div> 
             </div>
@@ -267,6 +267,11 @@
     $(document).ready(function () {
         if( localStorage.getItem( "hideMessage" ) == "true" ){
             $( "#welcomeHere" ).modal( "hide" );
+        }
+
+        function toggleCheckbox(element)    {
+           element.checked = !element.checked;
+           console.log( element.checked );
         }
         drip8
             .directive( "welcomeMe" , [
