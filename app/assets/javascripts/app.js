@@ -308,7 +308,6 @@ drip8
 			return {
 				"restrict": "A",
 				"scope": true,
-				"transclude": true,
 				"link": function onLink ( scope , element , attributeSet ) {
 					console.log( "hide initialize" );
 					scope.immediate = "relax";

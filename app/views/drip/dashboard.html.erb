@@ -37,7 +37,34 @@
   ga('send', 'pageview');
 
 </script>
-<section welcome-me ng-transclude>
+
+<nav class="navbar navbar-default" profile>
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a to="/drip" class="navbar-brand">drip8</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <!-- <img ng-src="{{ profile.profile_picture }}" class="nav-avatar"> -->
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{::profile.name.split(" ")[0]}}<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-link" ><a to="/drip/profile/" ng-click="passProfile( profile )">Profile</a></li>
+            <!-- <li><a href="#">Message</a></li>
+            <li><a href="#">Privacy Settings</a></li> -->
+            <li role="separator" class="divider"></li> 
+            <li class="dropdown-link" to="/logout"><a>Logout</a></li>
+            <!-- <li role="separator" class="divider"></li> -->
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<section welcome-me>
     <div class="col-md-12 modal fade"  id="welcomeHere" tabindex="-1" role="dialog" aria-labelledby="modallogin" aria-hidden="true">
         <div class="modal-login" role="document">
             <div class="modal-content">
@@ -66,33 +93,6 @@
         </div>
     </div>
 </section>
-
-<nav class="navbar navbar-default" profile>
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <a to="/drip" class="navbar-brand">drip8</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <!-- <img ng-src="{{ profile.profile_picture }}" class="nav-avatar"> -->
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{::profile.name.split(" ")[0]}}<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li class="dropdown-link" ><a to="/drip/profile/" ng-click="passProfile( profile )">Profile</a></li>
-            <!-- <li><a href="#">Message</a></li>
-            <li><a href="#">Privacy Settings</a></li> -->
-            <li role="separator" class="divider"></li> 
-            <li class="dropdown-link" to="/logout"><a>Logout</a></li>
-            <!-- <li role="separator" class="divider"></li> -->
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
 <section class="intro-callaction" id="join" drip-dashboard>
         <div class="container">  
             <div class="row" infinite-scroll='loadMore()'>
