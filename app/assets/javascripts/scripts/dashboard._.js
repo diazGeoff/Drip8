@@ -113,33 +113,7 @@ drip8
 		}
 	] );
 
-drip8
-	.directive( "welcomeMe" , [
-		function directive ( ) {
-			return {
-				"restrict": "A",
-				"scope": true,
-				"link": function onLink ( scope , element , attributeSet ) {
-					console.log( "hide initialize" );
-					scope.immediate = "relax";
-					scope.$watch( 'hideMe',
-						function hideMessage( newValue , oldValue ){
-							if( newValue != oldValue ){
-								console.log( "clicked" )
-								if( newValue == true ){
-									localStorage.setItem( "hideMessage", true );
 
-								}else{
-									localStorage.setItem( "hideMessage", false );
-								}
-							}
-						}
-					);
-
-				}
-			}
-		}
-	] );
 // async
 // 	.parallel( [
 // 		function ( callback ) {
