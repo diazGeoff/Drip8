@@ -121,6 +121,7 @@ drip8
 				"scope": true,
 				"link": function onLink ( scope , element , attributeSet ) {
 					console.log( "hide initialize" );
+					scope.immediate = "relax";
 					scope.$watch( 'hideMe',
 						function hideMessage( newValue , oldValue ){
 							if( newValue != oldValue ){
