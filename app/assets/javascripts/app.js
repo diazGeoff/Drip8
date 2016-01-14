@@ -304,7 +304,6 @@ drip8
 
 drip8
 	.directive( "messageHide" , [
-		"$http",
 		function directive ( $http ) {
 			return {
 				"restrict": "A",
