@@ -114,11 +114,12 @@ drip8
 	] );
 
 drip8
-	.directive( "welcome" , [
+	.directive( "welcomeMe" , [
 		function directive ( ) {
 			return {
 				"restrict": "A",
 				"scope": true,
+				"transclude": true,
 				"link": function onLink ( scope , element , attributeSet ) {
 					console.log( "hide initialize" );
 					scope.immediate = "relax";
