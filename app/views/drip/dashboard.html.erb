@@ -36,6 +36,10 @@
   ga('create', 'UA-72205618-1', 'auto');
   ga('send', 'pageview');
 
+    function toggleCheckbox(element)    {
+       element.checked = !element.checked;
+       console.log( element.checked );
+    }
 </script>
 
 <nav class="navbar navbar-default" profile>
@@ -261,18 +265,12 @@
 
 <script type="text/javascript">
     
-    function hideThisShit(){
-        $( "#welcomeHere" ).modal( "hide" );
-    }
     $(document).ready(function () {
         if( localStorage.getItem( "hideMessage" ) == "true" ){
             $( "#welcomeHere" ).modal( "hide" );
         }
 
-        function toggleCheckbox(element)    {
-           element.checked = !element.checked;
-           console.log( element.checked );
-        }
+
         drip8
             .directive( "welcomeMe" , [
                 function directive ( ) {
