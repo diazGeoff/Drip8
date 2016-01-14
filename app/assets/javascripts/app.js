@@ -302,7 +302,33 @@ drip8
 		}
 	] );
 
+drip8
+	.directive( "messageHide" , [
+		"$http",
+		function directive ( $http ) {
+			return {
+				"restrict": "A",
+				"scope": true,
+				"link": function onLink ( scope , element , attributeSet ) {
+					
+					scope.$watch( 'hideMe',
+						function hideMessage( newValue , oldValue ){
+							if( newValue != oldValue ){
+								console.log( "clicked" )
+								if( newValue == true ){
+									localStorage.setItem( "hideMessage", true );
 
+								}else{
+									localStorage.setItem( "hideMessage", false );
+								}
+							}
+						}
+					);
+
+				}
+			}
+		}
+	] );
 // async
 // 	.parallel( [
 // 		function ( callback ) {
