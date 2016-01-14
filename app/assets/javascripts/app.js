@@ -309,7 +309,7 @@ drip8
 				"restrict": "A",
 				"scope": true,
 				"link": function onLink ( scope , element , attributeSet ) {
-					
+					console.log( "hide initialize" );
 					scope.$watch( 'hideMe',
 						function hideMessage( newValue , oldValue ){
 							if( newValue != oldValue ){
