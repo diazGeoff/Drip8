@@ -114,7 +114,7 @@ drip8
 	] );
 
 drip8
-	.directive( "messageHide" , [
+	.directive( "welcome" , [
 		function directive ( ) {
 			return {
 				"restrict": "A",
