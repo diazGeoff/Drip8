@@ -13,6 +13,8 @@ drip8
 					scope.lastId = "dont stop";
 					scope.asyncTasksArray = [];
 
+					console.log( scope.category );
+					console.log( "init" );
 					var counter = 0;
 
 					function dripEach( index, drips , lastId ){
@@ -148,6 +150,7 @@ drip8
 									.success( function ( response ) {
 										//callback( null , response );
 										//console.log( response );
+										scope.category = localStorage.getItem( "category" ) || "motivation";
 										if( response.drip.state != scope.category ){
 											dripEach( response.drip.id-1 , scope.drips , lastId );
 										}
