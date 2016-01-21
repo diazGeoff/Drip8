@@ -86,7 +86,7 @@ header .navbar-default .navbar-nav > .open > a:focus {
     -o-transition: all .3s ease;
     transition: all .3s ease;
 }
-a.navbar-brand {
+a.navbar-brand-motivation {
     margin-left: 9px;
     color: #323940 !important;
     font-weight: 700;
