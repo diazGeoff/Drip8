@@ -75,19 +75,19 @@ header .navbar-default .navbar-nav > .open > a:focus {
     -o-transition: all .3s ease;
     transition: all .3s ease;
 }
-a.navbar-brand {
-    margin-left: 9px;
+a.motivation{
+    margin-left: 9px !important;
     color: #323940 !important;
     font-weight: 700;
     padding-left: 55px;
 }
-a.navbar-brand-music-arts {
+a.music-arts {
     margin-left: 167px !important;
     color: #323940 !important;
     font-weight: 700;
     padding-left: 0px;
 }
-a.navbar-brand-esports {
+a.esports {
     margin-left: 306px !important;
     color: #323940 !important;
     font-weight: 700;
