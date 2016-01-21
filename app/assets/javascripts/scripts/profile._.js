@@ -30,6 +30,10 @@ drip8
 
 						post: function post( scope , element , attributeSet ){
 							////console.log( "profile" );
+							scope.setCategory = function setCategory( category ){
+								localStorage.setItem( "category", category );
+								console.log( category );
+							};
 							scope.logout = function logout(){
 								var now = new Date();
 				                now.setMonth( now.getMonth() - 1 );
@@ -56,11 +60,6 @@ drip8
 							};
 							scope.passProfile = function passProfile( profile ){
 								localStorage.setItem("userProfile", JSON.stringify( profile ) );
-							};
-
-							scope.setCategory = function setCategory( category ){
-								localStorage.setItem( "category", category );
-								console.log( category );
 							};
 							
 							scope.trustUrl = function trustUrl ( ) {
