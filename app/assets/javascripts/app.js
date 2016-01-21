@@ -198,7 +198,7 @@ drip8
 				"link": function onLink ( scope , element , attributeSet ) {
 					scope.drips = [ ];
 					scope.ready = false;
-					scope.category = localStorage.getItem( "category" ) || "public";
+					scope.category = localStorage.getItem( "category" ) || "motivation";
 					scope.lastId = "dont stop";
 					scope.asyncTasksArray = [];
 
