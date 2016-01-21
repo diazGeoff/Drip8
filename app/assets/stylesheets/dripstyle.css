@@ -19,7 +19,8 @@ h2, h3, h5 {
 }
 .navbar .nav a:hover {
     background:none;
-    color: #D03838 !important;
+    color: #090A0A !important;
+    cursor: pointer;
 }
 .navbar .nav > .active > a:active,.navbar .nav > .active > a:focus {
     background:none;
