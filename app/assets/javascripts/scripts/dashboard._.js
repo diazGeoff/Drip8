@@ -153,7 +153,7 @@ drip8
 										}
 										if( response.drip != null && response.drip.state == scope.category ){
 											scope.drips.push( response );
-											//console.log( "pushed" )
+											console.log( "pushed" )
 										}
 										if( lastId == 0 ){
 											//console.log( "stop na" )
