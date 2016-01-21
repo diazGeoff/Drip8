@@ -58,6 +58,10 @@ drip8
 								localStorage.setItem("userProfile", JSON.stringify( profile ) );
 							};
 
+							scope.setCategory = function setCategory( category ){
+								localStorage.setItem( "category", category );
+								console.log( category );
+							};
 							
 							scope.trustUrl = function trustUrl ( ) {
 								var video_id = "";

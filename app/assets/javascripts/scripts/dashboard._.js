@@ -8,31 +8,100 @@ drip8
 				"scope": true,
 				"link": function onLink ( scope , element , attributeSet ) {
 					scope.drips = [ ];
+					scope.ready = false;
+					scope.category = localStorage.getItem( "category" ) || "public";
 					scope.lastId = "dont stop";
+					scope.asyncTasksArray = [];
+
+					var counter = 0;
+
+					function dripEach( index, drips , lastId ){
+						$http.post( "/api/drip_each" , { "drip_id": index } )
+								.success( function ( responseEach ){
+									if( responseEach.drip.state != scope.category ){
+											dripEach( index-1 , drips );
+									}
+									if( responseEach.drip != null && responseEach.drip.state == scope.category ){
+										drips.push( responseEach );
+										//console.log( "pushed" )
+									}
+									if( lastId == 0 ){
+										//console.log( "stop na" )
+										scope.lastId = 'stop';
+										//console.log( scope.lastId );
+									}
+									return responseEach;
+								} );
+					}
+
+					function asyncArray( index, array , lastId ){
+						$http.post( "/api/drip_each" , { "drip_id": index } )
+								.success( function ( responseEach ){
+									console.log( responseEach );
+									if( responseEach.drip.state != scope.category ){
+											console.log( "dili parehas" , index-1 );
+											console.log( "dili parehas" , array );
+											asyncArray( index-1 , array );
+									}
+									if( responseEach.drip != null && responseEach.drip.state == scope.category ){
+										array.push( responseEach.drip.id );
+										console.log( "parehas mi YEAH" )
+										console.log( "pushed" , responseEach.drip.id )
+										if( array.length < 3 ){
+											asyncArray( index-1 , array );
+										}else{
+											$rootScope.$broadcast( "async-yeah" , array )
+										}
+									}
+									if( lastId == 0 ){
+										//console.log( "stop na" )
+										scope.lastId = 'stop';
+										//console.log( scope.lastId );
+									}
+								} );
+					}
+
+
+					$rootScope.$on( "async-yeah" , function( evt , data ){
+						
+							console.log( data )
+							console.log( "asynctasks", scope.asyncTasksArray );
+							var asyncTasks = createAsyncTask( data );
+							async
+								.parallel( asyncTasks , function ( err , taskResponse ) {
+									for( var index = 0 ; index < taskResponse.length ; index++ ){
+										if( taskResponse[ index ].drip == null || taskResponse[ index ].drip.state != scope.category ){
+											console.log( "***************************deleted" , taskResponse[ index ].drip );
+											taskResponse.splice( index , 1 );
+										}
+										
+									}
+									scope.drips = taskResponse;
+									//console.log( taskResponse );
+								} );
+						
+					} )
+
+					$rootScope.$on( "on-length-finish" , function( evt , data ){
+					
+						scope.index = data;
+						scope.drip_length = data;
+						console.log( data );
+
+						asyncArray( scope.index , scope.asyncTasksArray );
+						
+						console.log( "ASYNC GAGO" , scope.asyncTasksArray );
+					} )
+
+
 					$http.get( "/api/drip_length" )
 					.success( function ( response ) {
-						var taskArray = [ ];
-						
-						for ( var index = response.count  ; index >= ( response.count - 3 ) ; index -- ) {
-							taskArray.push( index );
-						}
-						var asyncTasks = createAsyncTask( taskArray );
-						async
-							.parallel( asyncTasks , function ( err , taskResponse ) {
-								for( var index = 0 ; index < taskResponse.length ; index++ ){
-									if( taskResponse[ index ].drip == null || taskResponse[ index ].drip.state != 'public' || taskResponse[ index ].drip.state == 'deleted' ){
-										//console.log( "***************************deleted" , taskResponse[ index ].drip );
-										taskResponse.splice( index , 1 );
-									}
-									
-								}
-								scope.drips = taskResponse;
-								//console.log( taskResponse );
-							} );
-					
-						
+
+						$rootScope.$broadcast( "on-length-finish" , response.count );
 						
 					} );
+					
+
 					scope.passProfile = function passProfile( profile ){
 						localStorage.setItem("userProfile", JSON.stringify( profile ) );
 					};
@@ -78,23 +147,10 @@ drip8
 									.success( function ( response ) {
 										//callback( null , response );
 										//console.log( response );
-										if( response.drip.state == 'deleted' ){
-											$http.post( "/api/drip_each" , { "drip_id": response.drip.id-1 } )
-												.success( function ( response ) {
-													//callback( null , response );
-													//console.log( response );
-													if( response.drip != null && response.drip.state == 'public' ){
-														scope.drips.push( response );
-														//console.log( "pushed" )
-													}
-													if( lastId == 0 ){
-														//console.log( "stop na" )
-														scope.lastId = 'stop';
-														//console.log( scope.lastId );
-													}
-												} );
+										if( response.drip.state != scope.category ){
+											dripEach( response.drip.id-1 , scope.drips , lastId );
 										}
-										if( response.drip != null && response.drip.state == 'public' ){
+										if( response.drip != null && response.drip.state == scope.category ){
 											scope.drips.push( response );
 											//console.log( "pushed" )
 										}
