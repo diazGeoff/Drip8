@@ -1,8 +1,8 @@
 body {
     font-family:'helvetica','Open Sans', Arial, sans-serif;
-	font-size:15px;
-	font-weight:500;
-	line-height:1.6em;
+    font-size:15px;
+    font-weight:500;
+    line-height:1.6em;
     color: #414a53;
     background-color: #fcfcfc;
 }
@@ -18,16 +18,16 @@ h2, h3, h5 {
     font-weight: bold;
 }
 .navbar .nav a:hover {
-	background:none;
-	color: #D03838 !important;
+    background:none;
+    color: #D03838 !important;
 }
 .navbar .nav > .active > a:active,.navbar .nav > .active > a:focus {
-	background:none;
-	outline:0;
-	font-weight:700;
+    background:none;
+    outline:0;
+    font-weight:700;
 }
 .navbar .nav li .dropdown-menu {
-	z-index:2000;
+    z-index:2000;
     left:-53px;
 }
 header .navbar {
@@ -76,9 +76,21 @@ header .navbar-default .navbar-nav > .open > a:focus {
 }
 a.navbar-brand {
     margin-left: 9px;
-    color: #222 !important;
+    color: #323940 !important;
     font-weight: 700;
     padding-left: 55px;
+}
+a.navbar-brand-music-arts {
+    margin-left: 167px !important;
+    color: #323940 !important;
+    font-weight: 700;
+    padding-left: 0px;
+}
+a.navbar-brand-esports {
+    margin-left: 306px !important;
+    color: #323940 !important;
+    font-weight: 700;
+    padding-left: 0px;
 }
 .modal-header {
     padding-top: 11px;
