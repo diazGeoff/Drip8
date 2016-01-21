@@ -38,6 +38,7 @@ drip8
 						$http.post( "/api/drip_each" , { "drip_id": index } )
 								.success( function ( responseEach ){
 									console.log( responseEach );
+									scope.category = localStorage.getItem( "category" ) || "motivation";
 									if( responseEach.drip.state != scope.category ){
 											console.log( "dili parehas" , index-1 );
 											console.log( "dili parehas" , array );
