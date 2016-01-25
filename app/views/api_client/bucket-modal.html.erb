@@ -10,7 +10,7 @@
             	<form name="bucketDetail" novalidate>
                 <h3>{{bucket.name}}</h3>
                 <input type="text" ng-model="bucket.name" class="addinput col-md-12" type="text" name="title" placeholder="Name your bucket" maxlength="50" required><br />
-				<input class="addinput col-md-12" type="hidden" name="state" value="public"  ng-model="bucket.state" required>
+				<input class="addinput col-md-12" type="hidden" value="public" name="state" value="public"  ng-model="bucket.state" required>
 					
 				<input type="button" value="add" class="btn btn-primary pull-right" ng-click="newBucket( bucket )" ng-disabled="bucketDetail.$invalid"/>
             	</form>
