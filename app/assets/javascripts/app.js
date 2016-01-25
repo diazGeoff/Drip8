@@ -207,7 +207,7 @@ drip8
 					console.log( "init" );
 					var counter = 0;
 
-					console.log( "LS" , $window.localStorage.getItem( "category" ) );
+					console.log( "localStorage" , $window.localStorage.getItem( "category" ) );
 					function dripEach( index, drips , lastId ){
 						$http.post( "/api/drip_each" , { "drip_id": index } )
 								.success( function ( responseEach ){

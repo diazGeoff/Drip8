@@ -1,5 +1,5 @@
 drip8
-	.directive( "dripDashboard" , [
+	.directive( "dripDashboards" , [
 		"$http",
 		'$rootScope',
 		"$window",
