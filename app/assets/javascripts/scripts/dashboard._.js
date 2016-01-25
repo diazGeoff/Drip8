@@ -2,14 +2,15 @@ drip8
 	.directive( "dripDashboard" , [
 		"$http",
 		'$rootScope',
-		function directive ( $http , $rootScope ) {
+		"$window",
+		function directive ( $http , $rootScope , $window ) {
 			return {
 				"restrict": "A",
 				"scope": true,
 				"link": function onLink ( scope , element , attributeSet ) {
 					scope.drips = [ ];
 					scope.ready = false;
-					scope.category = localStorage.getItem( "category" ) || "motivation";
+					scope.category = $window.localStorage.getItem( "category" ) || "motivation";
 					scope.lastId = "dont stop";
 					scope.asyncTasksArray = [];
 
@@ -17,6 +18,7 @@ drip8
 					console.log( "init" );
 					var counter = 0;
 
+					console.log( "LS" , $window.localStorage.getItem( "category" ) );
 					function dripEach( index, drips , lastId ){
 						$http.post( "/api/drip_each" , { "drip_id": index } )
 								.success( function ( responseEach ){
@@ -40,7 +42,7 @@ drip8
 						$http.post( "/api/drip_each" , { "drip_id": index } )
 								.success( function ( responseEach ){
 									console.log( responseEach );
-									scope.category = localStorage.getItem( "category" ) || "motivation";
+									scope.category = $window.localStorage.getItem( "category" ) || "motivation";
 									if( responseEach.drip.state != scope.category ){
 											console.log( "dili parehas" , index-1 );
 											console.log( "dili parehas" , array );
@@ -150,7 +152,7 @@ drip8
 									.success( function ( response ) {
 										//callback( null , response );
 										//console.log( response );
-										scope.category = localStorage.getItem( "category" ) || "motivation";
+										scope.category = $window.localStorage.getItem( "category" ) || "motivation";
 										if( response.drip.state != scope.category ){
 											dripEach( response.drip.id-1 , scope.drips , lastId );
 										}
