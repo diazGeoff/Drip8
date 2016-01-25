@@ -258,8 +258,8 @@ drip8
 
 					$rootScope.$on( "async-yeah" , function( evt , data ){
 						
-							console.log( data )
-							console.log( "asynctasks", scope.asyncTasksArray );
+							//console.log( data )
+							//console.log( "asynctasks", scope.asyncTasksArray );
 							var asyncTasks = createAsyncTask( data );
 							async
 								.parallel( asyncTasks , function ( err , taskResponse ) {
