@@ -109,7 +109,7 @@
 <section class="intro-callaction" id="join" drip-dashboard>
         <div class="container">  
             <div class="row" infinite-scroll='loadMore()'>
-                <div class="col-sm-6 col-md-9 basket" ng-repeat="drip in drips">
+                <div class="col-sm-6 col-md-9 basket" ng-repeat="drip in drips track by $index">
                         <div class="thumbnail">
                             <div class="panel-body">
                                 <div class="col-lg-4 col-md-4 col-sm-12 theader">
