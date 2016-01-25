@@ -233,14 +233,14 @@ drip8
 									console.log( responseEach );
 									scope.category = $window.localStorage.getItem( "category" ) || "motivation";
 									if( responseEach.drip.state != scope.category ){
-											console.log( "dili parehas" , index-1 );
-											console.log( "dili parehas" , array );
+											//console.log( "dili parehas" , index-1 );
+											//console.log( "dili parehas" , array );
 											asyncArray( index-1 , array );
 									}
 									if( responseEach.drip != null && responseEach.drip.state == scope.category ){
 										array.push( responseEach.drip.id );
-										console.log( "parehas mi YEAH" )
-										console.log( "pushed" , responseEach.drip.id )
+										//console.log( "parehas mi YEAH" )
+										//console.log( "pushed" , responseEach.drip.id )
 										if( array.length < 3 ){
 											asyncArray( index-1 , array );
 										}else{
@@ -265,7 +265,7 @@ drip8
 								.parallel( asyncTasks , function ( err , taskResponse ) {
 									for( var index = 0 ; index < taskResponse.length ; index++ ){
 										if( taskResponse[ index ].drip == null || taskResponse[ index ].drip.state != scope.category ){
-											console.log( "***************************deleted" , taskResponse[ index ].drip );
+											//console.log( "***************************deleted" , taskResponse[ index ].drip );
 											taskResponse.splice( index , 1 );
 										}
 										
@@ -280,11 +280,11 @@ drip8
 					
 						scope.index = data;
 						scope.drip_length = data;
-						console.log( data );
+						//console.log( data );
 
 						asyncArray( scope.index , scope.asyncTasksArray );
 						
-						console.log( "ASYNC GAGO" , scope.asyncTasksArray );
+						//console.log( "ASYNC GAGO" , scope.asyncTasksArray );
 					} )
 
 

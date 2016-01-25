@@ -80,18 +80,21 @@ a.motivation{
     color: #323940 !important;
     font-weight: 700;
     padding-left: 55px;
+    cursor: pointer;
 }
 a.music-arts {
-    margin-left: 167px !important;
+    margin-left: 32px !important;
     color: #323940 !important;
     font-weight: 700;
     padding-left: 0px;
+    cursor: pointer;
 }
 a.esports {
-    margin-left: 306px !important;
+    margin-left: 32px !important;
     color: #323940 !important;
     font-weight: 700;
     padding-left: 0px;
+    cursor: pointer;
 }
 .modal-header {
     padding-top: 11px;
