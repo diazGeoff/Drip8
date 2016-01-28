@@ -203,11 +203,32 @@ drip8
 					scope.lastId = "dont stop";
 					scope.asyncTasksArray = [];
 
-					console.log( scope.category );
-					console.log( "init" );
+					//console.log( scope.category );
+					//console.log( "init" );
 					var counter = 0;
 
-					console.log( "localStorage" , $window.localStorage.getItem( "category" ) );
+					//console.log( "localStorage" , $window.localStorage.getItem( "category" ) );
+					function category(  ){
+
+						switch( scope.category ){
+
+							case "motivation":
+								scope.tab = 1;
+								break;
+							case "thisMatter":
+								scope.tab = 2;
+								break;
+							case "music&arts":
+								scope.tab = 3;
+								break;
+							case "esports":
+								scope.tab = 4;
+								break;
+							case "science&Technology":
+								scope.tab = 5;
+								break;
+						}
+					}
 					function dripEach( index, drips , lastId ){
 						$http.post( "/api/drip_each" , { "drip_id": index } )
 								.success( function ( responseEach ){
@@ -230,7 +251,7 @@ drip8
 					function asyncArray( index, array , lastId ){
 						$http.post( "/api/drip_each" , { "drip_id": index } )
 								.success( function ( responseEach ){
-									console.log( responseEach );
+									//console.log( responseEach );
 									scope.category = $window.localStorage.getItem( "category" ) || "motivation";
 									if( responseEach.drip.state != scope.category ){
 											//console.log( "dili parehas" , index-1 );
@@ -347,7 +368,7 @@ drip8
 										}
 										if( response.drip != null && response.drip.state == scope.category ){
 											scope.drips.push( response );
-											console.log( "pushed" )
+											//console.log( "pushed" )
 										}
 										if( lastId == 0 ){
 											//console.log( "stop na" )
