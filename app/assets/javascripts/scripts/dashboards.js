@@ -13,6 +13,7 @@ drip8
 					scope.category = $window.localStorage.getItem( "category" ) || "motivation";
 					scope.lastId = "dont stop";
 					scope.asyncTasksArray = [];
+					scope.tab = 1;
 
 					//console.log( scope.category );
 					//console.log( "init" );

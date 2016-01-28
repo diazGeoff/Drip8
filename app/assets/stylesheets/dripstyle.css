@@ -96,6 +96,20 @@ a.esports {
     padding-left: 0px;
     cursor: pointer;
 }
+a.this-matter {
+    margin-left: 32px !important;
+    color: #323940 !important;
+    font-weight: 700;
+    padding-left: 0px;
+    cursor: pointer;
+}
+a.science-Technology {
+    margin-left: 32px !important;
+    color: #323940 !important;
+    font-weight: 700;
+    padding-left: 0px;
+    cursor: pointer;
+}
 .modal-header {
     padding-top: 11px;
     padding-right: 12px;
