@@ -15,8 +15,10 @@
                 <textarea class="addinput col-md-12" type="text" placeholder="say something..." style="width: 100%; height: 50px; font-size: 14px; line-height: 18px; border: 1px solid rgb(169, 169, 169); padding: 10px;" ng-model="dripDetails.description"></textarea>
                 <select type="hidden" name="state" class="form-control" ng-model="dripDetails.state" required>
                     <option value="motivation" selected>motivation</option><!--  if-bucket ng-if="dripState()" -->
+                    <option value="thisMatter" selected>this matter</option>
                     <option value="music&arts" selected>music and arts</option>
                     <option value="esports" selected>esports</option>
+                    <option value="science&Technology" selected>science and tech</option>
                     <!-- <option value="profile only" selected>Profile Only</option> -->
                 </select>
                 <button type="button" class="btn btn-default bucket right" aria-label="Left Align" ng-click="addDrip( )" ng-disabled="dripDetail.$invalid">
