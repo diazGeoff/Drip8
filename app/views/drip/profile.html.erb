@@ -46,9 +46,11 @@
             <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header col-xs-6">
-              <a to="/drip" class="motivation" onclick="setCategory( 'motivation' )">Motivation &nbsp; &nbsp;</a>
-              <a to="/drip" class="music-arts" onclick="setCategory( 'music&arts' )">Music&Arts &nbsp; &nbsp;</a>
-              <a to="/drip" class="esports" onclick="setCategory( 'esports' )">E-Sports &nbsp; &nbsp;</a>
+              <a to="/drip" ng-class="{'active':checkThis(1)}" class="motivation" onclick="setCategory( 'motivation' )">Motivation</a>
+              <a to="/drip" ng-class="{'active':checkThis(2)}" class="this-matter" onclick="setCategory( 'thisMatter' )">this Matters</a>
+              <a to="/drip" ng-class="{'active':checkThis(3)}" class="music-arts" onclick="setCategory( 'music&arts' )">Music&Arts</a>
+              <a to="/drip" ng-class="{'active':checkThis(4)}" class="esports" onclick="setCategory( 'esports' )">E-Sports</a>
+              <a to="/drip" ng-class="{'active':checkThis(5)}" class="science-Technology" onclick="setCategory( 'science&Technology' )">Science&Tech</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="dropdown">
