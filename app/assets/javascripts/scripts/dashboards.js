@@ -14,8 +14,8 @@ drip8
 					scope.lastId = "dont stop";
 					scope.asyncTasksArray = [];
 
-					console.log( scope.category );
-					console.log( "init" );
+					//console.log( scope.category );
+					//console.log( "init" );
 					var counter = 0;
 
 					console.log( "localStorage" , $window.localStorage.getItem( "category" ) );
@@ -41,7 +41,7 @@ drip8
 					function asyncArray( index, array , lastId ){
 						$http.post( "/api/drip_each" , { "drip_id": index } )
 								.success( function ( responseEach ){
-									console.log( responseEach );
+									//console.log( responseEach );
 									scope.category = $window.localStorage.getItem( "category" ) || "motivation";
 									if( responseEach.drip.state != scope.category ){
 											console.log( "dili parehas" , index-1 );
@@ -50,8 +50,8 @@ drip8
 									}
 									if( responseEach.drip != null && responseEach.drip.state == scope.category ){
 										array.push( responseEach.drip.id );
-										console.log( "parehas mi YEAH" )
-										console.log( "pushed" , responseEach.drip.id )
+										//console.log( "parehas mi YEAH" )
+										//console.log( "pushed" , responseEach.drip.id )
 										if( array.length < 3 ){
 											asyncArray( index-1 , array );
 										}else{
@@ -69,14 +69,14 @@ drip8
 
 					$rootScope.$on( "async-yeah" , function( evt , data ){
 						
-							console.log( data )
-							console.log( "asynctasks", scope.asyncTasksArray );
+							//console.log( data )
+							//console.log( "asynctasks", scope.asyncTasksArray );
 							var asyncTasks = createAsyncTask( data );
 							async
 								.parallel( asyncTasks , function ( err , taskResponse ) {
 									for( var index = 0 ; index < taskResponse.length ; index++ ){
 										if( taskResponse[ index ].drip == null || taskResponse[ index ].drip.state != scope.category ){
-											console.log( "***************************deleted" , taskResponse[ index ].drip );
+											//console.log( "***************************deleted" , taskResponse[ index ].drip );
 											taskResponse.splice( index , 1 );
 										}
 										
@@ -91,11 +91,11 @@ drip8
 					
 						scope.index = data;
 						scope.drip_length = data;
-						console.log( data );
+						//console.log( data );
 
 						asyncArray( scope.index , scope.asyncTasksArray );
 						
-						console.log( "ASYNC GAGO" , scope.asyncTasksArray );
+						//console.log( "ASYNC GAGO" , scope.asyncTasksArray );
 					} )
 
 
@@ -111,6 +111,17 @@ drip8
 						localStorage.setItem("userProfile", JSON.stringify( profile ) );
 					};
 					
+					scope.checkThis = function checkThis( num ){
+						if( scope.tab == num ){
+							//console.log( "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&" )
+							return true;
+						}else{
+							//console.log( "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIII" )
+							return false;
+						}
+						
+					};
+
 					scope.fbShare = function fbShare( link ){
 						FB.ui({
 						  method: 'share',
@@ -158,7 +169,7 @@ drip8
 										}
 										if( response.drip != null && response.drip.state == scope.category ){
 											scope.drips.push( response );
-											console.log( "pushed" )
+											//console.log( "pushed" )
 										}
 										if( lastId == 0 ){
 											//console.log( "stop na" )
