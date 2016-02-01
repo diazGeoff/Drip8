@@ -72,6 +72,34 @@ drip8
 								if( scope.profileData.id == '1' ){
 									scope.buckets.splice( 0 , 3 );
 									//console.log( scope.buckets );
+
+									for( var index = 0; index < scope.buckets.length; index++ ){
+										switch( scope.buckets[ index ].name ){
+
+											case "Dota 2":
+												scope.buckets.splice( index , 1 );
+												break;
+											case "EG Dota 2":
+												scope.buckets.splice( index , 1 );
+												break;
+											case "Secret Dota 2":
+												scope.buckets.splice( index , 1 );
+												break;
+											case "Alliance Dota 2":
+												scope.buckets.splice( index , 1 );
+												break;
+											case "Na'Vi Dota 2":
+												scope.buckets.splice( index , 1 );
+												break;
+											case "Sumail Dota 2":
+												scope.buckets.splice( index , 1 );
+												break;
+											case "Miracle Doto":
+												scope.buckets.splice( index , 1 );
+												break;
+											
+										}
+									}
 								}
 								
 							}
