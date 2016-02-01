@@ -59,6 +59,7 @@ drip8
 									for( var index = 0; index < scope.buckets.length; index++ ){
 										if( scope.buckets[ index ].name == "Dota 2" || scope.buckets[ index ].name ==  "EG Dota 2" || scope.buckets[ index ].name == "Secret Dota 2" || scope.buckets[ index ].name == "Alliance Dota 2" || scope.buckets[ index ].name == "Na'Vi Dota 2" || scope.buckets[ index ].name == "Sumail Dota 2" ){
 											scope.buckets.splice( index , 1 );
+											index--;
 										}
 									}
 								}
